@@ -2,7 +2,7 @@ import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
-import currentUserReducer from "../reducers/currentuser";
+import currentUserReducer from "../reducers/currentUser";
 
 const persistConfig = {
   key: "root",
@@ -10,7 +10,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  currentUser: currentUserReducer,
+  currentUser: currentUserReducer
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
