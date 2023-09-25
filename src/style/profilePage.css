@@ -57,3 +57,10 @@
     right: -80px;
   }
 }
+
+.nav-underline .nav-link.active {
+  color: green;
+}
+.nav-link {
+  color: rgb(0, 157, 255);
+}
