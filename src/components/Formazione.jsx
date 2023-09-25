@@ -3,8 +3,8 @@ import { PlusLg, PencilFill } from "react-bootstrap-icons";
 
 const Formazione = () => {
   return (
-    <div className="border border-1 rounded mt-3 p-2">
-      <Row className="mt-3">
+    <div className="border border-1 rounded mt-2 p-2">
+      <Row>
         <Col xs={8}>
           <div>
             <h4>Formazione</h4>

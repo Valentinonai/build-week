@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const Resources = () => {
   return (
-    <div className="border border-1 rounded ">
-      <Row className="my-3 px-2">
+    <div className="border border-1 rounded mt-2">
+      <Row className="p-2">
         <Col xs={8}>
           <h4 className="mb-0">Attività</h4>
           <Link
