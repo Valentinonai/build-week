@@ -6,18 +6,18 @@ import currentUserReducer from "../reducers/currentUser";
 
 const persistConfig = {
   key: "root",
-  storage: storage,
+  storage: storage
 };
 
 const rootReducer = combineReducers({
-  currentUser: currentUserReducer,
+  currentUser: currentUserReducer
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducers,
-  middleware: getDefaultMiddleware({ serializableCheck: false }),
+  middleware: getDefaultMiddleware({ serializableCheck: false })
 });
 
 export const persiStore = persistStore(store);
