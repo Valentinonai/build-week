@@ -13,118 +13,114 @@ import imgPromosso3 from "./img/promosso3.png";
 
 const Sidebar = () => {
   return (
-    <Container className='bg-secondary'>
-      <Row>
-        <Col className='col-4 offset-8' id='sidebar'>
-          <div className='card-setting p-3 rounded-2'>
-            <div className='d-flex justify-content-between'>
-              <div className='d-flex flex-column align-items-start'>
-                <span>Lingua del profilo</span>
-                <p>italiano</p>
-              </div>
-              <BsPencil />
-            </div>
-
-            <hr className='p-0' />
-
-            <div className='d-flex justify-content-between '>
-              <div className='d-flex flex-column align-items-start'>
-                <span>Public profile & URL</span>
-                <p>www.linkedin.com</p>
-              </div>
-              <BsPencil />
-            </div>
+    <>
+      <div className="card-setting p-3 rounded-2">
+        <div className="d-flex justify-content-between">
+          <div className="d-flex flex-column align-items-start">
+            <span>Lingua del profilo</span>
+            <p>italiano</p>
           </div>
+          <BsPencil />
+        </div>
 
-          <div className='card p-3'>
-            <div className='d-flex align-items-center justify-content-end'>
-              <span className='me-2'>annuncio</span>
-              <BsThreeDots />
-            </div>
-            <div>
-              <span>scopri le ultime offerte di lavoro e notizie</span>
-              <div className='d-flex promo-header justify-content-center gap-3 my-2'>
-                <img src={user} alt='user img' className='img-fluid object-fit-cover' />
-                <img src={logoCompany} alt='company img' className='img-fluid object-fit-cover' />
-              </div>
-              <p className='mb-2'>Vasil, scopri le opportunità offerte da Wyser</p>
-              <Button variant='outline-primary' className='rounded-4 py-1'>
-                Segui
-              </Button>
-            </div>
-          </div>
+        <hr className="p-0" />
 
-          <div className='card-users p-3 text-start'>
-            <p className='mb-2'>Persone che potresti conoscere</p>
+        <div className="d-flex justify-content-between ">
+          <div className="d-flex flex-column align-items-start">
+            <span>Public profile & URL</span>
+            <p>www.linkedin.com</p>
+          </div>
+          <BsPencil />
+        </div>
+      </div>
 
-            <UserCards />
-            <div className='d-flex justify-content-center '>
-              <a href='as' className='text-secondary'>
-                Mostra tutto
-              </a>
-            </div>
+      <div className="card p-3">
+        <div className="d-flex align-items-center justify-content-end">
+          <span className="me-2">annuncio</span>
+          <BsThreeDots />
+        </div>
+        <div>
+          <span>scopri le ultime offerte di lavoro e notizie</span>
+          <div className="d-flex promo-header justify-content-center gap-3 my-2">
+            <img src={user} alt="user img" className="img-fluid object-fit-cover" />
+            <img src={logoCompany} alt="company img" className="img-fluid object-fit-cover" />
           </div>
+          <p className="mb-2">Vasil, scopri le opportunità offerte da Wyser</p>
+          <Button variant="outline-primary" className="rounded-4 py-1">
+            Segui
+          </Button>
+        </div>
+      </div>
 
-          <div className='card p-3 text-start'>
-            <div className='d-flex align-items-center'>
-              <img src={linkedinLogo} alt='linkedin-logo' width={20} />
-              <span className='text-secondary ms-1'>LEARNING</span>
-            </div>
-            <p> Aggiungi nuove competenze con questi corsi, gratuiti per 24 ore.</p>
-            <div className='d-flex mt-2 mb-1 video-card'>
-              <img src={imgVideo1} className='img-fluid me-1' alt='video' width={100} height={70} />
-              <div className='p-1'>Outlook: gestione efficiente della posta</div>
-            </div>{" "}
-            <div className='d-flex mt-2 video-card'>
-              <img src={imgVideo2} className='img-fluid me-1' alt='video' width={100} height={70} />
-              <div className='p-1'>Imparare python</div>
-            </div>{" "}
-            <div className='d-flex mt-2 video-card'>
-              <img src={imgVideo3} className='img-fluid me-1' alt='video' width={100} height={70} />
-              <div className='p-1'>Formazione esenziale su javascript</div>
-            </div>
-            <div className='d-flex justify-content-center pt-2'>
-              <a href='as' className='text-secondary'>
-                Mostra tutto
-              </a>
-            </div>
+      <div className="card-users p-3 text-start">
+        <p className="mb-2">Persone che potresti conoscere</p>
+
+        <UserCards />
+        <div className="d-flex justify-content-center ">
+          <a href="as" className="text-secondary">
+            Mostra tutto
+          </a>
+        </div>
+      </div>
+
+      <div className="card p-3 text-start">
+        <div className="d-flex align-items-center">
+          <img src={linkedinLogo} alt="linkedin-logo" width={20} />
+          <span className="text-secondary ms-1">LEARNING</span>
+        </div>
+        <p> Aggiungi nuove competenze con questi corsi, gratuiti per 24 ore.</p>
+        <div className="d-flex mt-2 mb-1 video-card">
+          <img src={imgVideo1} className="img-fluid me-1" alt="video" width={100} height={70} />
+          <div className="p-1">Outlook: gestione efficiente della posta</div>
+        </div>{" "}
+        <div className="d-flex mt-2 video-card">
+          <img src={imgVideo2} className="img-fluid me-1" alt="video" width={100} height={70} />
+          <div className="p-1">Imparare python</div>
+        </div>{" "}
+        <div className="d-flex mt-2 video-card">
+          <img src={imgVideo3} className="img-fluid me-1" alt="video" width={100} height={70} />
+          <div className="p-1">Formazione esenziale su javascript</div>
+        </div>
+        <div className="d-flex justify-content-center pt-2">
+          <a href="as" className="text-secondary">
+            Mostra tutto
+          </a>
+        </div>
+      </div>
+      <div className="card  mt-3 p-3 text-start">
+        <div className="d-flex justify-content-between align-items-center">
+          <p>Promosso</p>
+          <BsThreeDots />
+        </div>
+        <div className="d-flex mt-2">
+          <img src={imgPromosso1} className="img-fluid me-1" alt="video" width={70} height={70} />
+          <div className="p-1">
+            <a href="asa" className="d-block text-black">
+              L'Ai per il bussines
+            </a>
+            <span>sfrutta il potenziale della Generative AI per la tua azienda.</span>
           </div>
-          <div className='card  mt-3 p-3 text-start'>
-            <div className='d-flex justify-content-between align-items-center'>
-              <p>Promosso</p>
-              <BsThreeDots />
-            </div>
-            <div className='d-flex mt-2'>
-              <img src={imgPromosso1} className='img-fluid me-1' alt='video' width={70} height={70} />
-              <div className='p-1'>
-                <a href='asa' className='d-block text-black'>
-                  L'Ai per il bussines
-                </a>
-                <span>sfrutta il potenziale della Generative AI per la tua azienda.</span>
-              </div>
-            </div>
-            <div className='d-flex mt-2'>
-              <img src={imgPromosso2} className='img-fluid me-1' alt='video' width={70} height={70} />
-              <div className='p-1'>
-                <a href='as' className='d-block text-black'>
-                  Start automating today
-                </a>
-                <span>Zapier connects the apps you use every day. Try it free.</span>
-              </div>
-            </div>
-            <div className='d-flex mt-2'>
-              <img src={imgPromosso3} className='img-fluid me-1' alt='video' width={70} height={70} />
-              <div className='p-1'>
-                <a href='as' className='d-block text-black'>
-                  X500 - Testing Powerhouse
-                </a>
-                <span>Time-correlated captures of Bluetooth (BR/EDR/LE) WiFi (5/6/6E) in one box!</span>
-              </div>
-            </div>
+        </div>
+        <div className="d-flex mt-2">
+          <img src={imgPromosso2} className="img-fluid me-1" alt="video" width={70} height={70} />
+          <div className="p-1">
+            <a href="as" className="d-block text-black">
+              Start automating today
+            </a>
+            <span>Zapier connects the apps you use every day. Try it free.</span>
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+        <div className="d-flex mt-2">
+          <img src={imgPromosso3} className="img-fluid me-1" alt="video" width={70} height={70} />
+          <div className="p-1">
+            <a href="as" className="d-block text-black">
+              X500 - Testing Powerhouse
+            </a>
+            <span>Time-correlated captures of Bluetooth (BR/EDR/LE) WiFi (5/6/6E) in one box!</span>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
