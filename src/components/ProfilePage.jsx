@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfileData } from "../redux/action";
 import { useParams } from "react-router-dom";
+import Sidebar from "../SideBar/Sidebar";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -11,16 +12,17 @@ const ProfilePage = () => {
   const params = useParams();
   useEffect(() => {
     if (params.id === "me") dispatch(fetchProfileData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     currentUser && (
-      <Container fluid="lg">
+      <Container fluid='lg'>
         <Row>
           <Col xs={12} md={9}>
             <MainProfile />
           </Col>
           <Col xs={12} md={3}>
-            <h1>Titolo</h1>
+            <Sidebar />
           </Col>
         </Row>
       </Container>
