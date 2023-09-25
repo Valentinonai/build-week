@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ProfilePage />} />
+          <Route path="/:id" element={<ProfilePage />} />
         </Routes>
         <Message />
         <Footer></Footer>

@@ -3,12 +3,14 @@ import MainProfile from "./MainProfile";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProfileData } from "../redux/action";
+import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.userData);
+  const params = useParams();
   useEffect(() => {
-    dispatch(fetchProfileData());
+    if (params.id === "me") dispatch(fetchProfileData());
   }, []);
   return (
     currentUser && (

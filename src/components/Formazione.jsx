@@ -7,7 +7,7 @@ const Formazione = () => {
       <Row>
         <Col xs={8}>
           <div>
-            <h4>Formazione</h4>
+            <h4>Experiencies</h4>
             <p>Nessun dato disponibile al momento</p>
           </div>
         </Col>
