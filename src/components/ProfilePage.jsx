@@ -12,7 +12,7 @@ const ProfilePage = () => {
   }, []);
   return (
     currentUser && (
-      <Container>
+      <Container fluid="lg">
         <Row>
           <Col xs={12} md={9}>
             <MainProfile />
