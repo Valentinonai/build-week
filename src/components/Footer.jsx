@@ -6,8 +6,8 @@ import "../style/footer.css";
 const Footer = () => {
   return (
     <Container
-      fluid
-      className="position-relative Footer-container ">
+      fluid="lg"
+      className="Footer-container ">
       <Row className="Footer">
         <Col
           sm={3}
