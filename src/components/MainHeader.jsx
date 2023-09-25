@@ -78,7 +78,7 @@ const MainHeader = () => {
             </Col>
           </Row>
         </Card.Body>
-        <Carousel className="mb-3 mx-3" indicators={false}>
+        <Carousel className="mb-3 mx-3" indicators={false} interval={null}>
           <Carousel.Item>
             <div className="d-flex justify-content-between">
               <div style={{ backgroundColor: "#006effba", position: "relative" }} className=" me-2 p-2 rounded w-50">
