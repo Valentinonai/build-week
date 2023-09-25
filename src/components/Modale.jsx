@@ -2,10 +2,13 @@ import { useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { handleClose, handleShow } from "../redux/action";
+import { fetchEditUser, handleClose, handleShow } from "../redux/action";
 
 const Modale = () => {
   const show = useSelector(state => state.modal.isShowing);
+  const user = useSelector(state => state.currentUser.userData);
+  const [nome, setNome] = useState(user.name);
+  const [cognome, setCognome] = useState(user.surname);
 
   const dispatch = useDispatch();
 
@@ -18,14 +21,23 @@ const Modale = () => {
         <Modal.Header closeButton>
           <Modal.Title>Modifica Presentazione</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form
+          onSubmit={e => {
+            e.preventDefault();
+            dispatch(fetchEditUser({ name: nome, surname: cognome }));
+          }}>
+          <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Nome:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Scrivi qui"
                 autoFocus
+                required
+                value={nome}
+                onChange={e => {
+                  setNome(e.target.value);
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -34,6 +46,11 @@ const Modale = () => {
                 type="text"
                 rows={1}
                 placeholder="Scrivi qui"
+                required
+                value={cognome}
+                onChange={e => {
+                  setCognome(e.target.value);
+                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -55,21 +72,21 @@ const Modale = () => {
                 placeholder="Scrivi qui"
               />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            type="submit"
-            onClick={() => handleClose(dispatch)}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => handleClose(dispatch)}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => handleClose(dispatch)}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );

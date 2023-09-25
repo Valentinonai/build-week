@@ -19,8 +19,9 @@ const currentUserReducer = (state = initialstate, action) => {
     case ADD_CURRENT_USER_DATA:
       return {
         ...state,
-        userData: action.payload
+        userData: { ...state.userData, ...action.payload }
       };
+
     case IS_LOADING_TRUE:
       return {
         ...state,

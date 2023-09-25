@@ -76,160 +76,28 @@ export const fetchProfileData = () => {
     }
   };
 };
-
-export const getExperiencesAction = userID => {
+export const fetchEditUser = objChanges => {
   return async dispatch => {
     try {
-      const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userID + "/experiences", {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-        }
-      });
-      if (response.ok) {
-        const allExperiences = await response.json();
-        dispatch({ type: ALL_EXPERIENCES, payload: allExperiences });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const searchJobAction = search => {
-  return async dispatch => {
-    try {
-      const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=${search}", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-        }
-      });
-      if (response.ok) {
-        const jobs = await response.json();
-        dispatch({ type: JOBS, payload: jobs.data });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const putExperienceAction = (newData, userID, expID) => {
-  return async dispatch => {
-    try {
-      const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/" + userID + "/experiences/" + expID,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-          },
-          body: JSON.stringify(newData)
-        }
-      );
-      if (response.ok) {
-        const newExpData = await response.json();
-        dispatch({ type: CHANGE_EXP, payload: newExpData });
-        dispatch(getExperiencesAction(userID));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const deleteExperiencesAction = (userID, expID) => {
-  return async dispatch => {
-    try {
-      const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/" + userID + "/experiences/" + expID,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-          }
-        }
-      );
-      if (response.ok) {
-        alert("Esperienza eliminata!");
-        dispatch(getExperiencesAction(userID));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const postExperiencesAction = (newExp, userID) => {
-  return async dispatch => {
-    try {
-      const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userID + "/experiences/", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-        },
-        body: JSON.stringify(newExp)
-      });
-      if (response.ok) {
-        const newExperience = await response.json();
-        dispatch({ type: POST_EXPERIENCES, payload: newExperience });
-        dispatch(getExperiencesAction(userID));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const getFormAction = content => ({ type: GET_FORM_DATA, payload: content });
-
-export const editProfileAction = newData => {
-  return async dispatch => {
-    try {
-      const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
+      const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/  ", {
         method: "PUT",
+        body: JSON.stringify(objChanges),
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-        },
-        body: JSON.stringify(newData)
+        }
       });
-      if (response.ok) {
-        const newProfileData = await response.json();
-        dispatch({ type: PROFILE, payload: newProfileData });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
-export const editProfileImageAction = (dataImage, userID) => {
-  return async dispatch => {
-    try {
-      const response = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userID + "/picture", {
-        method: "POST",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
-        },
-        body: dataImage
-      });
-      if (response.ok) {
-        const newProfileImageData = await response.json();
-        dispatch({ type: PROFILE, payload: newProfileImageData });
+      if (resp.ok) {
+        console.log(resp);
+        const dataChanges = await resp.json();
+        dispatch(addCurrentUserDataAction(dataChanges));
+      } else {
+        throw new Error(resp.status);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 };
