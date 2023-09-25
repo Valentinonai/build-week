@@ -5,7 +5,7 @@ import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "root",
-  storage: storage,
+  storage: storage
 };
 
 const rootReducer = combineReducers({});
@@ -14,7 +14,7 @@ const persistedReducers = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducers,
-  middleware: getDefaultMiddleware({ serializableCheck: false }),
+  middleware: getDefaultMiddleware({ serializableCheck: false })
 });
 
 export const persiStore = persistStore(store);
