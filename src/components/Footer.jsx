@@ -1,5 +1,5 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { QuestionCircle, Gear, ShieldShaded } from "react-bootstrap-icons";
+import { QuestionCircleFill, Gear, ShieldShaded } from "react-bootstrap-icons";
 import "../style/footer.css";
 //import { Link } from "react-router-dom";
 
@@ -71,7 +71,7 @@ const Footer = () => {
             <Col
               sm={12}
               className="d-flex">
-              <QuestionCircle className="mt-1" />
+              <QuestionCircleFill className="mt-1" />
               <Col className="ms-3">
                 <p style={{ fontWeight: "bold" }}>Domande?</p>
                 <p>Visita il nostro centro assistenza</p>
