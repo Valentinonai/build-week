@@ -25,18 +25,18 @@ export const hasErrorFalseAction = () => ({
   payload: false,
 });
 
-export const addErrorMessageAction = string => ({
+export const addErrorMessageAction = (string) => ({
   type: ADD_ERROR_MESSAGE,
   payload: string,
 });
 
-export const addCurrentUserDataAction = dataUser => ({
+export const addCurrentUserDataAction = (dataUser) => ({
   type: ADD_CURRENT_USER_DATA,
   payload: dataUser,
 });
 
 export const fetchProfileData = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
       const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
@@ -47,7 +47,7 @@ export const fetchProfileData = () => {
       });
       if (resp.ok) {
         const data = await resp.json();
-        dispatch(addCurrentUserDataAction(data));
+        console.log(data);
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(resp.status);

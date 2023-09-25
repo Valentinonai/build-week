@@ -7,10 +7,10 @@ import Message from "./components/Message";
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path="/:id" element={<ProfilePage />} />
+          <Route path='/:id' element={<ProfilePage />} />
         </Routes>
         <Message />
         <Footer></Footer>
