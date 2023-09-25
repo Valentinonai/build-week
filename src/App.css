@@ -1,14 +1,1 @@
-.offcanvas-bottom {
-  position: fixed;
-  height: 100% !important;
-  top: 15% !important;
-  left: 78% !important;
-}
-.offcanvas-backdrop {
-  position: static;
-}
-.in-basso {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-}
+

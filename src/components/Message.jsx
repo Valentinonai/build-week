@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Badge, Button, Form, Image, Offcanvas } from "react-bootstrap";
+import { Button, Form, Image, Offcanvas } from "react-bootstrap";
 import { ChevronCompactUp, ChevronCompactDown, ThreeDots, PencilSquare } from "react-bootstrap-icons";
+import "../style/message.css";
 const Message = () => {
   const [show, setShow] = useState(false);
 
