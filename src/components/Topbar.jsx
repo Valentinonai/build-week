@@ -25,7 +25,7 @@ const Topbar = () => {
       <Container fluid className="px-5">
         <Container className="d-flex px-1 align-items-center">
           <Link to={"/"}>
-            <Navbar.Brand href="#">
+            <Navbar.Brand>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="34"
