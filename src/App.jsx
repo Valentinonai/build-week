@@ -4,13 +4,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProfilePage from "./components/ProfilePage";
 import Footer from "./components/Footer";
 import Message from "./components/Message";
+import Topbar from "./components/Topbar";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
+        <Topbar />
         <Routes>
-          <Route path='/:id' element={<ProfilePage />} />
+          <Route path="/:id" element={<ProfilePage />} />
         </Routes>
         <Message />
         <Footer></Footer>
