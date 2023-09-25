@@ -2,7 +2,6 @@ import { Button, Card, Carousel, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { CameraFill, Pencil, PencilFill, XLg } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import "../style/profilePage.css";
 
 const MainHeader = () => {
   const currentUser = useSelector((state) => state.currentUser.userData);
