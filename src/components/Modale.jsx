@@ -14,10 +14,11 @@ const Modale = () => {
   const [image, setImage] = useState(user.image);
   const dispatch = useDispatch();
   const handleImage = x => {
+    console.log(x);
     if (x) {
       const formImg = new FormData();
 
-      setImage(formImg.append("image", x.target.elements[3].files[0], "image.png"));
+      formImg.append("image", x, "image.png");
       dispatch(fetchEditUser(image));
     }
   };
@@ -76,18 +77,18 @@ const Modale = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Curriculm</Form.Label>
-              {/* 
+
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
                   <>
+                    {handleImage(acceptedFiles[0])}
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       <p>Trascina il una immagina oppure clicca per inserirla.</p>
                     </div>
                   </>
                 )}
-              </Dropzone> */}
-              <Form.Control type="file"></Form.Control>
+              </Dropzone>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>

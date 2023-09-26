@@ -91,7 +91,7 @@ export const fetchProfileData = param => {
 export const fetchEditUser = objChanges => {
   return async dispatch => {
     try {
-      const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/  ", {
+      const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
         method: "PUT",
         body: objChanges,
         headers: {
