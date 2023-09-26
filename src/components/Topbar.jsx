@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Col, Container, Form, Nav, NavDropdown, Navbar, Row } from "react-bootstrap";
+import { Col, Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
@@ -143,7 +143,7 @@ const Topbar = () => {
             </div>
 
             <div className="d-flex flex-column align-items-center px-0">
-              <Col className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center">
                 <img
                   src={
                     profile
@@ -155,7 +155,7 @@ const Topbar = () => {
                   width="24"
                   height="24"
                 />
-              </Col>
+              </div>
               <NavDropdown>
                 <DropdownItem className="p-0">
                   <ProfileTopbar />
