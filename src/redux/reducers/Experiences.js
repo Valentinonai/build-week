@@ -1,5 +1,5 @@
 import { ADD_EXPERIENCES, IS_DELETED } from "../action";
-import { ADD_EXPERIENCES, EDIT_EXP } from "../action";
+import { EDIT_EXP } from "../action";
 
 const initialState = {
   data: [],
