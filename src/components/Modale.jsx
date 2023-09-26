@@ -34,11 +34,11 @@ const Modale = () => {
           }}
         >
           <Modal.Body>
-            <Form.Group className='mb-3'>
+            <Form.Group className="mb-3">
               <Form.Label>Nome:</Form.Label>
               <Form.Control
-                type='text'
-                placeholder='Scrivi qui...'
+                type="text"
+                placeholder="Scrivi qui..."
                 autoFocus
                 required
                 value={nome}
@@ -47,12 +47,12 @@ const Modale = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
+            <Form.Group className="mb-3">
               <Form.Label>Cognome: </Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 rows={1}
-                placeholder='Scrivi qui...'
+                placeholder="Scrivi qui..."
                 required
                 value={cognome}
                 onChange={(e) => {
@@ -60,31 +60,19 @@ const Modale = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
+            <Form.Group className="mb-3">
               <Form.Label>Posizione</Form.Label>
               <Form.Control
-                type='text'
+                type="text"
                 rows={1}
                 value={area}
-                placeholder='Scrivi qui...'
+                placeholder="Scrivi qui..."
                 onChange={(e) => {
                   setArea(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Posizione</Form.Label>
-              <Form.Control
-                type='text'
-                rows={1}
-                value={area}
-                placeholder='Scrivi qui...'
-                onChange={(e) => {
-                  setArea(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className='mb-3'>
+            <Form.Group className="mb-3">
               <Form.Label>Curriculm</Form.Label>
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -105,10 +93,10 @@ const Modale = () => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' onClick={() => handleClose(dispatch)}>
+            <Button variant="secondary" onClick={() => handleClose(dispatch)}>
               Close
             </Button>
-            <Button variant='primary' type='submit' onClick={() => handleClose(dispatch)}>
+            <Button variant="primary" type="submit" onClick={() => handleClose(dispatch)}>
               Save Changes
             </Button>
           </Modal.Footer>
