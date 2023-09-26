@@ -18,7 +18,8 @@ const ExperiencesModal = () => {
   const [EndDate, setEndDate] = useState(Date);
   const [Industry, setIndustry] = useState("");
   const [Description, setDescription] = useState("");
-  const formImg = new FormData();
+  const userId = useSelector(state => state.currentUser.userData._id);
+
   const dispatch = useDispatch();
   return (
     <>
