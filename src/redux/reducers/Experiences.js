@@ -3,7 +3,6 @@ import { EDIT_EXP } from "../action";
 
 const initialState = {
   data: [],
-  deleteResp: "",
 };
 const addExp = (state = initialState, action) => {
   switch (action.type) {
@@ -15,7 +14,7 @@ const addExp = (state = initialState, action) => {
     case IS_DELETED:
       return {
         ...state,
-        deleteResp: action.payload,
+        data: [...state.data.filter((elem) => elem._id !== action.payload._id)],
       };
     case EDIT_EXP: {
       let app = null;
@@ -26,7 +25,7 @@ const addExp = (state = initialState, action) => {
       }
       return {
         ...state,
-        data: { ...state.data.filter((elem) => elem._id !== action.payload.id), ...app },
+        data: [...state.data.filter((elem) => elem._id !== action.payload.id), ...app],
       };
     }
     default:
