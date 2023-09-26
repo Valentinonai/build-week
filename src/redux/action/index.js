@@ -218,7 +218,7 @@ export const fetchDelete = (idUser, idExp) => {
         }
       });
       if (risp.ok) {
-        dispatch(isDeletedAction(risp.status));
+        dispatch(isDeletedAction(risp));
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);

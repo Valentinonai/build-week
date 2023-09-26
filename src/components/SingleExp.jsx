@@ -1,7 +1,7 @@
-import { Card, Col, Image, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 
-const SingleExp = (props) => {
+const SingleExp = props => {
   return (
     <Card className="p-2">
       <Row>
@@ -19,6 +19,7 @@ const SingleExp = (props) => {
           <h6>{props.elem.role}</h6>
           <p>{props.elem.description}</p>
         </Col>
+        {console.log(props.elem, "GUARDAME")}
         <Col xs={2}>
           <div className="d-flex justify-content-end">
             <Pencil className="mx-2" />
