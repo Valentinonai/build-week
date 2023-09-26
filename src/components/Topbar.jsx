@@ -1,24 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Col, Container, Form, Nav, NavDropdown, Navbar, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { fetchProfileData, searchJobAction } from "../redux/action";
+
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import ProfileTopbar from "./ProfileTopbar";
 
 const Topbar = () => {
   const [search, setSearch] = useState("");
   const profile = useSelector((state) => state.currentUser.userData);
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch(searchJobAction(search));
   };
-
-  useEffect(() => {
-    dispatch(fetchProfileData());
-  }, []);
 
   return (
     <Navbar sticky="top" bg="light" expand="lg">
@@ -139,7 +134,11 @@ const Topbar = () => {
             <div className="d-flex flex-column align-items-center px-0">
               <Col className="d-flex justify-content-center">
                 <img
-                  src={profile.image}
+                  src={
+                    profile
+                      ? profile.image
+                      : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                  }
                   alt="profile-img"
                   className="img-profile-nav rounded-circle"
                   width="24"

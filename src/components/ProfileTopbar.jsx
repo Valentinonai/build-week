@@ -1,32 +1,28 @@
-import { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProfileData } from "../redux/action";
 
 const ProfileTopbar = () => {
   const profile = useSelector((state) => state.currentUser.userData);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProfileData());
-  }, []);
 
   return (
     <Container fluid className="px-2">
       <Col className="bg-white rounded-3 border">
         <Row className="d-flex">
           <Col xs={4} className="mt-2 ms-2">
-            <img src={profile.image} alt="profile-img" className="img-profile-dropnav img-fluid rounded-circle  " />
+            <img
+              src={
+                profile ? profile.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+              }
+              alt="profile-img"
+              className="img-profile-dropnav img-fluid rounded-circle  "
+            />
           </Col>
           <Col className=" d-flex justify-content-start flex-column ps-0 pt-2">
-            <Col className="fw-bold">
-              {profile.name} {profile.surname}
-            </Col>
-            <Col className="pb-2 smallP"> {profile.bio}</Col>
+            <Col className="fw-bold">{profile ? `${profile.name} ${profile.surname}` : "nome cognome"}</Col>
           </Col>
         </Row>
-        <Link className="text-decoration-none" to={"profile/me"}>
+        <Link className="text-decoration-none" to={profile ? `profile/${profile._id}` : "profile/me"}>
           <Row className="px-4">
             {" "}
             <Button variant="outlined" className="btn-blue-custom border-primary rounded-pill py-1 my-2">

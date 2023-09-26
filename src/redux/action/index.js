@@ -16,11 +16,17 @@ export const GET_FORM_DATA = "GET_FORM_DATA";
 export const MODAL_OFF = "MODAL_OFF";
 export const MODAL_ON = "MODAL_ON";
 
+export const ADD_POSTS = "ADD_POSTS";
+export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
+
 export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
 export const handleClose = (dispatch) => dispatch(modalOffAction());
 export const handleShow = (dispatch) => dispatch(modalOnAction());
+export const addPosts = (data) => ({ type: ADD_POSTS, payload: data });
+export const addExperiences = (data) => ({ type: ADD_EXPERIENCES, payload: data });
 
+//-------------------------PAYLOAD CREATORS-----------------------------
 export const isLoadingTrueAction = () => ({
   type: IS_LOADING_TRUE,
   payload: true,
@@ -51,10 +57,14 @@ export const addCurrentUserDataAction = (dataUser) => ({
   payload: dataUser,
 });
 
+//------------------FETCH SECTION------------------------
+
+//!---------------FETCH PROFILi---------------------
 export const fetchProfileData = (param) => {
   return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
+      console.log(param);
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${param}`, {
         headers: {
           Authorization:
@@ -63,7 +73,7 @@ export const fetchProfileData = (param) => {
       });
       if (resp.ok) {
         const data = await resp.json();
-        console.log(data);
+        dispatch(addCurrentUserDataAction(data));
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(resp.status);
@@ -76,6 +86,8 @@ export const fetchProfileData = (param) => {
     }
   };
 };
+
+//!-------------------FETCH MODIFICA USER DATA-----------------------------
 export const fetchEditUser = (objChanges) => {
   return async (dispatch) => {
     try {
@@ -98,6 +110,62 @@ export const fetchEditUser = (objChanges) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+//!----------------------------FETCH EXPERIENCES------------------------
+export const fetchExperiencies = (id) => {
+  return async (dispatch) => {
+    dispatch(isLoadingTrueAction());
+    try {
+      console.log(id);
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`, {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        dispatch(addExperiences(data));
+      } else {
+        dispatch(hasErrorTrueAction());
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      dispatch(addErrorMessageAction(error.message));
+      console.log("si e' verificato un errore", error.message);
+    } finally {
+      dispatch(isLoadingFalseAction());
+    }
+  };
+};
+
+//!------------------FETCH POST HOME-------------------------------------
+export const fetchPost = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(isLoadingTrueAction());
+      const risp = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (risp.ok) {
+        const data = await risp.json();
+        dispatch(addPosts(data));
+      } else {
+        dispatch(hasErrorTrueAction());
+        throw new Error(risp.status);
+      }
+    } catch (error) {
+      dispatch(addErrorMessageAction(error.message));
+      console.log("si e' verificato un errore", error.message);
+    } finally {
+      dispatch(isLoadingFalseAction());
     }
   };
 };

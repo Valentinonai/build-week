@@ -6,8 +6,8 @@ import { fetchEditUser, handleClose } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const Modale = () => {
-  const show = useSelector(state => state.modal.isShowing);
-  const user = useSelector(state => state.currentUser.userData);
+  const show = useSelector((state) => state.modal.isShowing);
+  const user = useSelector((state) => state.currentUser.userData);
   const [nome, setNome] = useState(user.name);
   const [cognome, setCognome] = useState(user.surname);
   const [area, setArea] = useState(user.area);
@@ -16,18 +16,24 @@ const Modale = () => {
 
   return (
     <>
-      <Modal
-        show={show}
-        onHide={() => handleClose(dispatch)}>
+      <Modal show={show} onHide={() => handleClose(dispatch)}>
         <Modal.Header closeButton>
           <Modal.Title>Modifica Presentazione</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             console.log(formImg.get("file"), "leggi quest"); //QUI DISPATCHFILE
-            dispatch(fetchEditUser({ name: nome, surname: cognome, area: user.area }));
-          }}>
+            dispatch(
+              fetchEditUser({
+                name: nome,
+                surname: cognome,
+                area: user.area,
+                image: JSON.stringify(formImg),
+              })
+            );
+          }}
+        >
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Nome:</Form.Label>
@@ -37,7 +43,7 @@ const Modale = () => {
                 autoFocus
                 required
                 value={nome}
-                onChange={e => {
+                onChange={(e) => {
                   setNome(e.target.value);
                 }}
               />
@@ -50,7 +56,7 @@ const Modale = () => {
                 placeholder="Scrivi qui..."
                 required
                 value={cognome}
-                onChange={e => {
+                onChange={(e) => {
                   setCognome(e.target.value);
                 }}
               />
@@ -62,7 +68,7 @@ const Modale = () => {
                 rows={1}
                 value={area}
                 placeholder="Scrivi qui..."
-                onChange={e => {
+                onChange={(e) => {
                   setArea(e.target.value);
                 }}
               />
@@ -84,15 +90,10 @@ const Modale = () => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => handleClose(dispatch)}>
+            <Button variant="secondary" onClick={() => handleClose(dispatch)}>
               Close
             </Button>
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={() => handleClose(dispatch)}>
+            <Button variant="primary" type="submit" onClick={() => handleClose(dispatch)}>
               Save Changes
             </Button>
           </Modal.Footer>
