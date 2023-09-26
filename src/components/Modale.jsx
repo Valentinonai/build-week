@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEditUser, handleClose } from "../redux/action";
+import { fetchEditImage, fetchEditUser, handleClose } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const Modale = () => {
@@ -14,11 +14,10 @@ const Modale = () => {
   const [image, setImage] = useState(user.image);
   const dispatch = useDispatch();
   const handleImage = x => {
-    console.log(x);
     if (x) {
       const formImg = new FormData();
-      formImg.append("image", x, "image.png");
-      dispatch(fetchEditUser(image));
+      formImg.append("profile", x);
+      dispatch(fetchEditImage(formImg, user._id));
     }
   };
   return (
@@ -32,8 +31,8 @@ const Modale = () => {
         <Form
           onSubmit={e => {
             e.preventDefault();
-            handleImage(e);
-            //console.log(e.target.files[0]); //QUI DISPATCHFILE
+            handleImage(image);
+            dispatch(fetchEditUser({ name: nome, surname: cognome, area: area }, user._id));
           }}>
           <Modal.Body>
             <Form.Group className="mb-3">
@@ -76,14 +75,18 @@ const Modale = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Curriculm</Form.Label>
-
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
                   <>
                     {handleImage(acceptedFiles[0])}
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      <p>Trascina il una immagina oppure clicca per inserirla.</p>
+                      <p>
+                        {acceptedFiles[0]
+                          ? acceptedFiles[0].path
+                          : "Trascina il una immagina oppure clicca per inserirla."}
+                      </p>
+                      {setImage(acceptedFiles[0])}
                     </div>
                   </>
                 )}

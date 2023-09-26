@@ -6,8 +6,8 @@ import { handleClose, handleShow } from "../redux/action";
 import Modale from "./Modale";
 
 const MainHeader = () => {
-  const show = useSelector(state => state.modal.isShowing);
-  const currentUser = useSelector(state => state.currentUser.userData);
+  const show = useSelector((state) => state.modal.isShowing);
+  const currentUser = useSelector((state) => state.currentUser.userData);
   const dispatch = useDispatch();
 
   return (
@@ -21,19 +21,24 @@ const MainHeader = () => {
             height="250px"
             style={{ objectFit: "cover" }}
           />
-          <div
+
+          <img
+            src={currentUser.image}
+            alt="imgProfile"
+            width="120px"
+            height="120px"
+            className="rounded-circle"
             style={{
-              width: "120px",
-              height: "120px",
+              objectPosition: "center",
+              objectPosition: "center",
               position: "absolute",
               bottom: "-40px",
               left: "15px",
               borderRadius: "60px",
               overflow: "hidden",
             }}
-          >
-            <img src={currentUser.image} alt="imgProfile" width="100%" />
-          </div>
+          />
+
           <div
             style={{
               width: "40px",

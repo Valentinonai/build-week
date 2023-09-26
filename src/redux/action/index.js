@@ -96,13 +96,40 @@ export const fetchProfileData = param => {
 };
 
 //!-------------------FETCH MODIFICA USER DATA-----------------------------
-export const fetchEditUser = objChanges => {
+export const fetchEditImage = (objChanges, id) => {
   return async dispatch => {
     try {
-      const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
-        method: "PUT",
+      console.log("here");
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/picture`, {
+        method: "POST",
         body: objChanges,
         headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+        }
+      });
+
+      if (resp.ok) {
+        const dataChanges = await resp.json();
+        console.log(dataChanges, "datachanges");
+        dispatch(addCurrentUserDataAction(dataChanges));
+      } else {
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const fetchEditUser = (objChanges, id) => {
+  return async dispatch => {
+    try {
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile`, {
+        method: "PUT",
+        body: JSON.stringify(objChanges),
+        headers: {
+          "content-type": "application/json",
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
         }
@@ -121,7 +148,6 @@ export const fetchEditUser = objChanges => {
     }
   };
 };
-
 //!----------------------------FETCH EXPERIENCES------------------------
 export const fetchExperiencies = id => {
   return async dispatch => {
