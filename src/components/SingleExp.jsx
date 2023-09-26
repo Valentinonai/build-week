@@ -1,7 +1,10 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
+import { useDispatch } from "react-redux";
+import { fetchDelete } from "../redux/action";
 
 const SingleExp = props => {
+  const dispatch = useDispatch();
   return (
     <Card className="p-2">
       <Row>
@@ -23,7 +26,12 @@ const SingleExp = props => {
         <Col xs={2}>
           <div className="d-flex justify-content-end">
             <Pencil className="mx-2" />
-            <Trash className="mx-2" />
+            <Trash
+              className="mx-2"
+              onClick={() => {
+                dispatch(fetchDelete(props.elem.user, props.elem._id));
+              }}
+            />
           </div>
         </Col>
       </Row>

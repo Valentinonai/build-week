@@ -22,24 +22,18 @@ const ExperiencesModal = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <Modal show={experiencesShow} onHide={() => experiencesHandleClose(dispatch)}>
+      <Modal
+        show={experiencesShow}
+        onHide={() => experiencesHandleClose(dispatch)}>
         <Modal.Header closeButton>
           <Modal.Title>Aggiungi Esperienza</Modal.Title>
         </Modal.Header>
         <Form
           onSubmit={e => {
             e.preventDefault();
-            console.log(formImg.get("file"), "leggi quest"); //QUI DISPATCHFILE
-            /* dispatch(
-              fetchEditUser({
-                name: nome,
-                surname: cognome,
-                area: user.area,
-                image: JSON.stringify(formImg), 
-            })
-            );*/
-          }}
-        >
+
+            dispatch();
+          }}>
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Titolo</Form.Label>
@@ -126,10 +120,16 @@ const ExperiencesModal = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label={`termina l'impiego corrente`} />
+              <Form.Check
+                type="checkbox"
+                label={`termina l'impiego corrente`}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label={`termina la posizione corrente`} />
+              <Form.Check
+                type="checkbox"
+                label={`termina la posizione corrente`}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Settore</Form.Label>
@@ -153,7 +153,10 @@ const ExperiencesModal = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Headlines del profilo</Form.Label>
-              <Form.Control placeholder="qui appariranno le tue headline" disabled />
+              <Form.Control
+                placeholder="qui appariranno le tue headline"
+                disabled
+              />
               <Form.Text className="text-muted">Appariranno sotto il tuo nome in cima al tuo profilo</Form.Text>
             </Form.Group>
             <h4 className="fw-bold">Skills</h4>
@@ -171,10 +174,15 @@ const ExperiencesModal = () => {
             </Button>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => experiencesHandleClose(dispatch)}>
+            <Button
+              variant="secondary"
+              onClick={() => experiencesHandleClose(dispatch)}>
               Close
             </Button>
-            <Button variant="primary" type="submit" onClick={() => experiencesHandleClose(dispatch)}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => experiencesHandleClose(dispatch)}>
               Save Changes
             </Button>
           </Modal.Footer>

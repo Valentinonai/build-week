@@ -123,7 +123,7 @@ export const fetchEditImage = (objChanges, id) => {
   };
 };
 
-export const fetchEditUser = (objChanges, id) => {
+export const fetchEditUser = objChanges => {
   return async dispatch => {
     try {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile`, {

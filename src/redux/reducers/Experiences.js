@@ -14,7 +14,7 @@ const addExp = (state = initialState, action) => {
     case IS_DELETED:
       return {
         ...state,
-        deleteResp: action.payload
+        data: [state.data.filter(elem => elem !== action.payload)]
       };
     default:
       return state;
