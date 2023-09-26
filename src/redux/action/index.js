@@ -15,6 +15,8 @@ export const GET_FORM_DATA = "GET_FORM_DATA";
 
 export const MODAL_OFF = "MODAL_OFF";
 export const MODAL_ON = "MODAL_ON";
+export const EXPERIENCES_MODAL_ON = "EXPERIENCES_MODAL_ON";
+export const EXPERIENCES_MODAL_OFF = "EXPERIENCES_MODAL_OFF";
 
 export const ADD_POSTS = "ADD_POSTS";
 export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
@@ -23,6 +25,12 @@ export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
 export const handleClose = dispatch => dispatch(modalOffAction());
 export const handleShow = dispatch => dispatch(modalOnAction());
+
+export const experiencesModalOnAction = () => ({ type: EXPERIENCES_MODAL_ON, payload: true });
+export const experiencesModalOffAction = () => ({ type: EXPERIENCES_MODAL_OFF, payload: false });
+export const experiencesHandleClose = dispatch => dispatch(experiencesModalOffAction());
+export const experiencesHandleShow = dispatch => dispatch(experiencesModalOnAction());
+
 export const addPosts = data => ({ type: ADD_POSTS, payload: data });
 export const addExperiences = data => ({ type: ADD_EXPERIENCES, payload: data });
 
