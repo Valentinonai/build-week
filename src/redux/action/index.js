@@ -20,6 +20,7 @@ export const EXPERIENCES_MODAL_OFF = "EXPERIENCES_MODAL_OFF";
 
 export const ADD_POSTS = "ADD_POSTS";
 export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
+export const ADD_EXPERIENCES_NEW = "ADD_EXPERIENCES_NEW";
 export const IS_DELETED = "IS_DELETED";
 export const EDIT_EXP = "EDIT_EXP";
 
@@ -35,6 +36,7 @@ export const experiencesHandleShow = dispatch => dispatch(experiencesModalOnActi
 
 export const addPosts = data => ({ type: ADD_POSTS, payload: data });
 export const addExperiences = data => ({ type: ADD_EXPERIENCES, payload: data });
+export const addExperiencesAction = data => ({ type: ADD_EXPERIENCES_NEW, payload: data });
 export const isDeletedAction = risposta => ({ type: IS_DELETED, payload: risposta });
 export const editExp = (data, id) => ({ type: EDIT_EXP, payload: { data: data, id: id } });
 
@@ -182,6 +184,7 @@ export const fetchExperiencies = id => {
 
 export const fetchAddExp = (expObj, userId) => {
   return async dispatch => {
+    dispatch(isLoadingTrueAction());
     try {
       const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userId + "/experiences", {
         method: "POST",
@@ -194,12 +197,18 @@ export const fetchAddExp = (expObj, userId) => {
       });
 
       if (resp.ok) {
-        console.log(resp);
+        const data = await resp.json();
+        console.log(data, "LEGGGIIiii");
+        dispatch(addExperiencesAction(data));
       } else {
+        dispatch(hasErrorTrueAction());
         throw new Error(resp.status);
       }
     } catch (error) {
-      console.log(error.message);
+      dispatch(addErrorMessageAction(error.message));
+      console.log("si e' verificato un errore", error.message);
+    } finally {
+      dispatch(isLoadingFalseAction());
     }
   };
 };
@@ -245,7 +254,7 @@ export const fetchDelete = (idUser, idExp) => {
         }
       });
       if (risp.ok) {
-        dispatch(isDeletedAction(risp.status));
+        dispatch(isDeletedAction(idExp));
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);
