@@ -34,6 +34,7 @@ const MainHeader = () => {
               position: "absolute",
               bottom: "-40px",
               left: "15px",
+              borderRadius: "60px",
               overflow: "hidden",
             }}
           />
