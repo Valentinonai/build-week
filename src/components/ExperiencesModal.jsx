@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { experiencesHandleClose } from "../redux/action";
+import { experiencesHandleClose, fetchAddExp } from "../redux/action";
 
 import { Plus } from "react-bootstrap-icons";
 
@@ -32,7 +32,19 @@ const ExperiencesModal = () => {
           onSubmit={e => {
             e.preventDefault();
 
-            dispatch();
+            dispatch(
+              fetchAddExp(
+                {
+                  role: Employment,
+                  company: CompanyName,
+                  startDate: StartDate,
+                  endDate: EndDate, // could be null
+                  description: Description,
+                  area: Location
+                },
+                userId
+              )
+            );
           }}>
           <Modal.Body>
             <Form.Group className="mb-3">
