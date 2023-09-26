@@ -12,10 +12,15 @@ function App() {
       <BrowserRouter>
         <Topbar />
         <Routes>
+<<<<<<< Updated upstream
           <Route
             path="/:id"
             element={<ProfilePage />}
           />
+=======
+          {/* <Route path="/" element={<News />} /> */}
+          <Route path="profile/:id" element={<ProfilePage />} />
+>>>>>>> Stashed changes
         </Routes>
         <Message />
         <Footer></Footer>

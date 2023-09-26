@@ -26,7 +26,7 @@ const ProfileTopbar = () => {
             <Col className="pb-2 smallP"> {profile.bio}</Col>
           </Col>
         </Row>
-        <Link className="text-decoration-none" to={"/profile/"}>
+        <Link className="text-decoration-none" to={"profile/me"}>
           <Row className="px-4">
             {" "}
             <Button variant="outlined" className="btn-blue-custom border-primary rounded-pill py-1 my-2">
