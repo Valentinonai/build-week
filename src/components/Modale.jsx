@@ -17,7 +17,6 @@ const Modale = () => {
     console.log(x);
     if (x) {
       const formImg = new FormData();
-
       formImg.append("image", x, "image.png");
       dispatch(fetchEditUser(image));
     }
