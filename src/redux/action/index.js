@@ -23,16 +23,16 @@ export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
 
 export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
-export const handleClose = dispatch => dispatch(modalOffAction());
-export const handleShow = dispatch => dispatch(modalOnAction());
+export const handleClose = (dispatch) => dispatch(modalOffAction());
+export const handleShow = (dispatch) => dispatch(modalOnAction());
 
 export const experiencesModalOnAction = () => ({ type: EXPERIENCES_MODAL_ON, payload: true });
 export const experiencesModalOffAction = () => ({ type: EXPERIENCES_MODAL_OFF, payload: false });
-export const experiencesHandleClose = dispatch => dispatch(experiencesModalOffAction());
-export const experiencesHandleShow = dispatch => dispatch(experiencesModalOnAction());
+export const experiencesHandleClose = (dispatch) => dispatch(experiencesModalOffAction());
+export const experiencesHandleShow = (dispatch) => dispatch(experiencesModalOnAction());
 
-export const addPosts = data => ({ type: ADD_POSTS, payload: data });
-export const addExperiences = data => ({ type: ADD_EXPERIENCES, payload: data });
+export const addPosts = (data) => ({ type: ADD_POSTS, payload: data });
+export const addExperiences = (data) => ({ type: ADD_EXPERIENCES, payload: data });
 
 //-------------------------PAYLOAD CREATORS-----------------------------
 export const isLoadingTrueAction = () => ({
@@ -55,12 +55,12 @@ export const hasErrorFalseAction = () => ({
   payload: false,
 });
 
-export const addErrorMessageAction = string => ({
+export const addErrorMessageAction = (string) => ({
   type: ADD_ERROR_MESSAGE,
   payload: string,
 });
 
-export const addCurrentUserDataAction = dataUser => ({
+export const addCurrentUserDataAction = (dataUser) => ({
   type: ADD_CURRENT_USER_DATA,
   payload: dataUser,
 });
@@ -68,8 +68,8 @@ export const addCurrentUserDataAction = dataUser => ({
 //------------------FETCH SECTION------------------------
 
 //!---------------FETCH PROFILi---------------------
-export const fetchProfileData = param => {
-  return async dispatch => {
+export const fetchProfileData = (param) => {
+  return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
       console.log(param);
@@ -96,8 +96,8 @@ export const fetchProfileData = param => {
 };
 
 //!-------------------FETCH MODIFICA USER DATA-----------------------------
-export const fetchEditUser = objChanges => {
-  return async dispatch => {
+export const fetchEditUser = (objChanges) => {
+  return async (dispatch) => {
     try {
       const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/  ", {
         method: "PUT",
@@ -123,8 +123,8 @@ export const fetchEditUser = objChanges => {
 };
 
 //!----------------------------FETCH EXPERIENCES------------------------
-export const fetchExperiencies = id => {
-  return async dispatch => {
+export const fetchExperiencies = (id) => {
+  return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
       console.log(id);
@@ -150,9 +150,33 @@ export const fetchExperiencies = id => {
   };
 };
 
+export const fetchAddExp = (expObj, userId) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userId + "/experiences", {
+        method: "POST",
+        body: JSON.stringify(expObj),
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+
+      if (resp.ok) {
+        console.log(resp);
+      } else {
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 //!------------------FETCH POST HOME-------------------------------------
 export const fetchPost = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(isLoadingTrueAction());
       const risp = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {

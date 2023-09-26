@@ -2,14 +2,16 @@ import { useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { experiencesHandleClose, fetchEditUser } from "../redux/action";
+import { experiencesHandleClose, fetchAddExp } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const ExperiencesModal = () => {
-  const experiencesShow = useSelector(state => state.modal.experiencesIsShowing);
+  const experiencesShow = useSelector((state) => state.modal.experiencesIsShowing);
   const [Title, setTitle] = useState("");
   const [Employment, setEmployment] = useState("");
+
   const [CompanyName, setCompanyName] = useState("");
+
   const [Location, setLocation] = useState("");
   const [LocationType, setLocationType] = useState("");
   const [Currentlyworking, setCurrentlyWorking] = useState(false);
@@ -19,6 +21,8 @@ const ExperiencesModal = () => {
   const [Description, setDescription] = useState("");
   const formImg = new FormData();
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.currentUser.userData._id);
+
   return (
     <>
       <Modal show={experiencesShow} onHide={() => experiencesHandleClose(dispatch)}>
@@ -26,77 +30,82 @@ const ExperiencesModal = () => {
           <Modal.Title>Aggiungi Esperienza</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             console.log(formImg.get("file"), "leggi quest"); //QUI DISPATCHFILE
-            /* dispatch(
-              fetchEditUser({
-                name: nome,
-                surname: cognome,
-                area: user.area,
-                image: JSON.stringify(formImg), 
-            })
-            );*/
+            dispatch(
+              fetchAddExp(
+                {
+                  role: Employment,
+                  company: CompanyName,
+                  startDate: StartDate,
+                  endDate: EndDate, // could be null
+                  description: Description,
+                  area: Location,
+                },
+                userId
+              )
+            );
           }}
         >
           <Modal.Body>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Titolo</Form.Label>
               <Form.Control
-                type="text"
+                type='text'
                 placeholder="Titolo dell' esperienza"
                 autoFocus
-                onChange={e => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Tipo di Esperienza </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="es. full-time"
-                onChange={e => {
+                onChange={(e) => {
                   setEmployment(e.target.value);
                 }}
               />
-              <Form.Text className="text-muted">
-                Apprendi di piu' sui <span variant="primary">tipi di lavoro</span>
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Tipo di Esperienza </Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='es. full-time'
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+              <Form.Text className='text-muted'>
+                Apprendi di piu' sui <span variant='primary'>tipi di lavoro</span>
               </Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Nome dell' azienda</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="es. EPICODE"
-                onChange={e => {
+                type='text'
+                placeholder='es. EPICODE'
+                onChange={(e) => {
                   setCompanyName(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Posizione</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="es. Milano"
-                onChange={e => {
+                type='text'
+                placeholder='es. Milano'
+                onChange={(e) => {
                   setLocation(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Tipo di Lavoro</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="es. remoto, in ufficio"
-                onChange={e => {
+                type='text'
+                placeholder='es. remoto, in ufficio'
+                onChange={(e) => {
                   setLocationType(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Check
-                type="checkbox"
+                type='checkbox'
                 label={`in questo momento e' il mio impiego`}
                 onChange={() => {
                   if (Currentlyworking === true) setCurrentlyWorking(false);
@@ -106,31 +115,31 @@ const ExperiencesModal = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Data di inizio</Form.Label>
               <Form.Control
-                type="date"
-                onChange={e => {
+                type='date'
+                onChange={(e) => {
                   setStartDate(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Data di termine</Form.Label>
               <Form.Control
-                type="date"
-                onChange={e => {
+                type='date'
+                onChange={(e) => {
                   setEndDate(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label={`termina l'impiego corrente`} />
+            <Form.Group className='mb-3'>
+              <Form.Check type='checkbox' label={`termina l'impiego corrente`} />
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label={`termina la posizione corrente`} />
+            <Form.Group className='mb-3'>
+              <Form.Check type='checkbox' label={`termina la posizione corrente`} />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Curriculm</Form.Label>
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -147,10 +156,10 @@ const ExperiencesModal = () => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => experiencesHandleClose(dispatch)}>
+            <Button variant='secondary' onClick={() => experiencesHandleClose(dispatch)}>
               Close
             </Button>
-            <Button variant="primary" type="submit" onClick={() => experiencesHandleClose(dispatch)}>
+            <Button variant='primary' type='submit' onClick={() => experiencesHandleClose(dispatch)}>
               Save Changes
             </Button>
           </Modal.Footer>
