@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEditUser, handleClose } from "../redux/action";
+import { fetchEditImage, fetchEditUser, handleClose } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const Modale = () => {
@@ -11,9 +11,15 @@ const Modale = () => {
   const [nome, setNome] = useState(user.name);
   const [cognome, setCognome] = useState(user.surname);
   const [area, setArea] = useState(user.area);
-  const formImg = new FormData();
+  const [image, setImage] = useState(user.image);
   const dispatch = useDispatch();
-
+  const handleImage = (x) => {
+    if (x) {
+      const formImg = new FormData();
+      formImg.append("profile", x);
+      dispatch(fetchEditImage(formImg, user._id));
+    }
+  };
   return (
     <>
       <Modal show={show} onHide={() => handleClose(dispatch)}>
@@ -23,15 +29,8 @@ const Modale = () => {
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(formImg.get("file"), "leggi quest"); //QUI DISPATCHFILE
-            dispatch(
-              fetchEditUser({
-                name: nome,
-                surname: cognome,
-                area: user.area,
-                image: JSON.stringify(formImg),
-              })
-            );
+            handleImage(image);
+            dispatch(fetchEditUser({ name: nome, surname: cognome, area: area }, user._id));
           }}
         >
           <Modal.Body>
@@ -78,11 +77,14 @@ const Modale = () => {
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
                   <>
-                    {formImg.append("file", acceptedFiles[0])}
-                    {console.log(formImg)}
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      <p>Trascina il tuo Curriculm oppure clicca per inserirlo.</p>
+                      <p>
+                        {acceptedFiles[0]
+                          ? acceptedFiles[0].path
+                          : "Trascina il una immagina oppure clicca per inserirla."}
+                      </p>
+                      {setImage(acceptedFiles[0])}
                     </div>
                   </>
                 )}
