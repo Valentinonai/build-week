@@ -12,7 +12,10 @@ function App() {
       <BrowserRouter>
         <Topbar />
         <Routes>
-          <Route path="/:id" element={<ProfilePage />} />
+          <Route
+            path="/:id"
+            element={<ProfilePage />}
+          />
         </Routes>
         <Message />
         <Footer></Footer>
