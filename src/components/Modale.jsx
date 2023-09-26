@@ -77,7 +77,6 @@ const Modale = () => {
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
                   <>
-                    {handleImage(acceptedFiles[0])}
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       <p>
