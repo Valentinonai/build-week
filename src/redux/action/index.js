@@ -180,6 +180,30 @@ export const fetchExperiencies = (id) => {
   };
 };
 
+export const fetchAddExp = (expObj, userId) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userId + "/experiences", {
+        method: "POST",
+        body: JSON.stringify(expObj),
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+
+      if (resp.ok) {
+        console.log(resp);
+      } else {
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 //!------------------FETCH POST HOME-------------------------------------
 export const fetchPost = () => {
   return async (dispatch) => {

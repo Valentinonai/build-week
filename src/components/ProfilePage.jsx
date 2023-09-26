@@ -1,4 +1,4 @@
-import { Col, Container, Modal, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import MainProfile from "./MainProfile";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,12 +17,12 @@ const ProfilePage = () => {
   }, []);
   return (
     currentUser && (
-      <Container fluid="lg">
+      <Container fluid='lg'>
         <Row>
           <Col xs={12} xl={9}>
             <MainProfile />
           </Col>
-          <Col xs={12} xl={3} id="sidebar">
+          <Col xs={12} xl={3} id='sidebar'>
             <Sidebar />
           </Col>
         </Row>
