@@ -36,7 +36,7 @@ const Message = () => {
                     height={30}
                     roundedCircle
                   />
-                  Messagistica
+                  Messaggistica
                   <ThreeDots />
                   <PencilSquare />
                   <ChevronCompactDown />
