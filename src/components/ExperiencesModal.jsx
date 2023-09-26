@@ -2,8 +2,9 @@ import { useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { experiencesHandleClose, fetchEditUser } from "../redux/action";
-import Dropzone from "react-dropzone";
+import { experiencesHandleClose } from "../redux/action";
+
+import { Plus } from "react-bootstrap-icons";
 
 const ExperiencesModal = () => {
   const experiencesShow = useSelector(state => state.modal.experiencesIsShowing);
@@ -131,20 +132,43 @@ const ExperiencesModal = () => {
               <Form.Check type="checkbox" label={`termina la posizione corrente`} />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Curriculm</Form.Label>
-              <Dropzone>
-                {({ getRootProps, getInputProps, acceptedFiles }) => (
-                  <>
-                    {formImg.append("file", acceptedFiles[0])}
-                    {console.log(formImg)}
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <p>Trascina il tuo Curriculm oppure clicca per inserirlo.</p>
-                    </div>
-                  </>
-                )}
-              </Dropzone>
+              <Form.Label>Settore</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="es. Software Development"
+                onChange={e => {
+                  setIndustry(e.target.value);
+                }}
+              />
             </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Descrizione</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="..."
+                onChange={e => {
+                  setDescription(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Headlines del profilo</Form.Label>
+              <Form.Control placeholder="qui appariranno le tue headline" disabled />
+              <Form.Text className="text-muted">Appariranno sotto il tuo nome in cima al tuo profilo</Form.Text>
+            </Form.Group>
+            <h4 className="fw-bold">Skills</h4>
+            <p>Ti consigliamo di aggiungere le tue 5 skill principali qui, appariranno nella skills section</p>
+            <Button className="btn btn-light text-primary border-3 border-primary fw-bold rounded-pill fs-5">
+              <Plus /> Add skill
+            </Button>
+            <h4 className="fw-bold mt-3">Media</h4>
+            <p>
+              Aggiungi media come immagini, documenti, siti o presentazioni, apprendi di piu' in merito ai{" "}
+              <span variant="primary">media supportati</span>
+            </p>
+            <Button className="btn btn-light text-primary border-3 border-primary fw-bold rounded-pill fs-5">
+              <Plus /> Add media
+            </Button>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => experiencesHandleClose(dispatch)}>
