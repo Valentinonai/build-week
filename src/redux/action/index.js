@@ -21,6 +21,8 @@ export const EXPERIENCES_MODAL_OFF = "EXPERIENCES_MODAL_OFF";
 export const ADD_POSTS = "ADD_POSTS";
 export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
 export const IS_DELETED = "IS_DELETED";
+export const EDIT_EXP = "EDIT_EXP";
+
 export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
 export const handleClose = dispatch => dispatch(modalOffAction());
@@ -34,6 +36,7 @@ export const experiencesHandleShow = dispatch => dispatch(experiencesModalOnActi
 export const addPosts = data => ({ type: ADD_POSTS, payload: data });
 export const addExperiences = data => ({ type: ADD_EXPERIENCES, payload: data });
 export const isDeletedAction = risposta => ({ type: IS_DELETED, payload: risposta });
+export const editExp = (data, id) => ({ type: EDIT_EXP, payload: { data: data, id: id } });
 
 //-------------------------PAYLOAD CREATORS-----------------------------
 export const isLoadingTrueAction = () => ({
@@ -219,6 +222,23 @@ export const fetchDelete = (idUser, idExp) => {
       });
       if (risp.ok) {
         dispatch(isDeletedAction(risp.status));
+
+//!------------Modifica experience----------------------
+
+export const editExperience = (obj, id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(isLoadingTrueAction());
+      const risp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/${id}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (risp.ok) {
+        const data = await risp.json();
+        dispatch(editExp(data));
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);
