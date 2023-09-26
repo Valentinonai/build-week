@@ -60,18 +60,7 @@ const Modale = () => {
                 }}
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Posizione</Form.Label>
-              <Form.Control
-                type='text'
-                rows={1}
-                value={area}
-                placeholder='Scrivi qui...'
-                onChange={(e) => {
-                  setArea(e.target.value);
-                }}
-              />
-            </Form.Group>
+
             <Form.Group className='mb-3'>
               <Form.Label>Posizione</Form.Label>
               <Form.Control
@@ -89,7 +78,6 @@ const Modale = () => {
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
                   <>
-                    {handleImage(acceptedFiles[0])}
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       <p>
