@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Modal, Row } from "react-bootstrap";
 import MainProfile from "./MainProfile";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,7 @@ const ProfilePage = () => {
   const currentUser = useSelector((state) => state.currentUser.userData);
   const params = useParams();
   useEffect(() => {
-    if (params.id === "me") dispatch(fetchProfileData());
+    dispatch(fetchProfileData(params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

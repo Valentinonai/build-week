@@ -31,26 +31,26 @@ const UserCards = () => {
 
   return (
     users &&
-    users.map((user) => (
-      <div className='user-card'>
+    users.map((user, i) => (
+      <div className="user-card" key={`user${i}`}>
         <Row>
-          <Col xs='auto'>
+          <Col xs="auto">
             <img
               src={
                 user.image ? user.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
               }
-              alt='user img'
-              className='img-fluid object-fit-cover rounded-circle'
+              alt="user img"
+              className="img-fluid object-fit-cover rounded-circle"
               width={50}
             />
           </Col>
-          <Col className='p-0 text-start'>
+          <Col className="p-0 text-start">
             <p>
               {user.name} {user.surname}
             </p>
-            <span className='d-block'>{user.title}</span>
+            <span className="d-block">{user.title}</span>
 
-            <Button variant='outline-secondary' className='rounded-4 py-1 mt-2 '>
+            <Button variant="outline-secondary" className="rounded-4 py-1 mt-2 ">
               <BsPersonAdd /> Segui
             </Button>
           </Col>

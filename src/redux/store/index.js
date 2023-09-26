@@ -4,15 +4,22 @@ import persistStore from "redux-persist/es/persistStore";
 import storage from "redux-persist/lib/storage";
 import currentUserReducer from "../reducers/currentUser";
 import profileReducer from "../reducers/profileReducer";
+import modalReducer from "../reducers/modalReducer";
+import postReducers from "../reducers/postReducers";
+import addExp from "../reducers/Experiences";
 
 const persistConfig = {
   key: "root",
   storage: storage,
+  whitelist: ["currenUser"],
 };
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
   profile: profileReducer,
+  modal: modalReducer,
+  post: postReducers,
+  addExps: addExp,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
