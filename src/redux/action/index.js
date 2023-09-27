@@ -268,7 +268,7 @@ export const fetchDelete = (idUser, idExp) => {
 
 //!------------Modifica experience----------------------
 
-export const editExperience = (obj, userId, id) => {
+export const editExperience = (obj, userId, id, fn) => {
   return async dispatch => {
     try {
       dispatch(isLoadingTrueAction());
@@ -285,6 +285,7 @@ export const editExperience = (obj, userId, id) => {
         const data = await risp.json();
         console.log(data);
         dispatch(editExp(obj, id));
+        fn(data);
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);

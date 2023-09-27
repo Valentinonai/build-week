@@ -3,6 +3,14 @@ import { EDIT_EXP } from "../action";
 
 const initialState = {
   data: [],
+  edit: {
+    name: "Diego",
+    surname: "Banovaz",
+    email: "diego@strive.school",
+    bio: "SW ENG",
+    title: "COO @ Strive School",
+    area: "Berlin",
+  },
 };
 const addExp = (state = initialState, action) => {
   switch (action.type) {

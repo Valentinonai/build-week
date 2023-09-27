@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,14 +23,9 @@ const ExperiencesModal = () => {
 
   const dispatch = useDispatch();
   const userId = useSelector(state => state.currentUser.userData._id);
+  const experiences = useSelector(state => state.addExps.data);
 
   const handleObj = e => {
-    setEmployment(e.target[0].value);
-    setCompanyName(e.target[2].value);
-    setStartDate(e.target[6].value);
-    setEndDate(e.target[7].value);
-    setDescription(e.target[11].value);
-    setLocation(e.target[3].value);
     dispatch(
       editExperience(
         {
@@ -42,9 +37,19 @@ const ExperiencesModal = () => {
           area: Location,
         },
         userId,
-        propExp._id
+        propExp._id,
+        reRender
       )
     );
+  };
+
+  const reRender = data => {
+    setEmployment(data.role);
+    setCompanyName(data.company);
+    setStartDate(data.startDate);
+    setEndDate(data.endDate);
+    setDescription(data.description);
+    setLocation(data.area);
   };
 
   return (
@@ -64,6 +69,7 @@ const ExperiencesModal = () => {
             e.preventDefault();
             if (propExp) {
               console.log(e);
+
               handleObj(e);
             } else {
               dispatch(
