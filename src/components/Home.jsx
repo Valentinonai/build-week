@@ -16,6 +16,9 @@ const Home = () => {
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const dispatch = useDispatch();
   const [profile, setProfile] = useState(null);
+  const [postText, setPostText] = useState();
+  const [modifica, setModifica] = useState(false);
+  const [idPost, setIdPost] = useState("");
 
   const fetchUser = async () => {
     try {
@@ -69,7 +72,9 @@ const Home = () => {
     dispatch(fetchPost());
     fetchUser();
   }, []);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return isLoading ? (
     <Spinner animation="border" role="status">
       <span className="visually-hidden">Loading...</span>
@@ -79,14 +84,49 @@ const Home = () => {
       <Row>
         <Col xs={2}></Col>
         <Col xs={8}>
-          <FormHome profile={profile} />
+          <FormHome
+            profile={profile}
+            handleClose={handleClose}
+            handleShow={handleShow}
+            show={show}
+            setPostText={setPostText}
+            postText={postText}
+            modifica={modifica}
+            setModifica={setModifica}
+            idPost={idPost}
+          />
           {posts
             .filter((elem) => elem.user._id === profile._id)
             .map((elem, i) => (
-              <SinglePost elem={elem} key={`post${i}`} cancella={delPost} profile={profile} />
+              <SinglePost
+                elem={elem}
+                key={`post${i}`}
+                cancella={delPost}
+                profile={profile}
+                handleClose={handleClose}
+                handleShow={handleShow}
+                show={show}
+                setPostText={setPostText}
+                setModifica={setModifica}
+                setIdPost={setIdPost}
+              />
             ))}
           {posts.map(
-            (elem, i) => i < 5 && <SinglePost elem={elem} key={`post${i}`} cancella={delPost} profile={profile} />
+            (elem, i) =>
+              i < 5 && (
+                <SinglePost
+                  elem={elem}
+                  key={`post${i}`}
+                  cancella={delPost}
+                  profile={profile}
+                  handleClose={handleClose}
+                  handleShow={handleShow}
+                  show={show}
+                  setPostText={setPostText}
+                  setModifica={setModifica}
+                  setIdPost={setIdPost}
+                />
+              )
           )}
         </Col>
         <Col xs={2}></Col>

@@ -10,9 +10,8 @@ import {
 } from "../redux/action";
 import { useState } from "react";
 
-const ModaleAddPost = ({ handleClose, show, profile }) => {
+const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modifica, idPost }) => {
   const dispatch = useDispatch();
-  const [postText, setPostText] = useState();
 
   const fetchNewPost = async () => {
     try {
@@ -29,6 +28,33 @@ const ModaleAddPost = ({ handleClose, show, profile }) => {
       if (risp.ok) {
         setPostText("");
         dispatch(fetchPost());
+      } else {
+        dispatch(hasErrorTrueAction());
+        throw new Error(risp.status);
+      }
+    } catch (error) {
+      dispatch(addErrorMessageAction(error.message));
+      console.log("si e' verificato un errore", error.message);
+    } finally {
+      dispatch(isLoadingFalseAction());
+    }
+  };
+  const fetchEditPost = async () => {
+    try {
+      dispatch(isLoadingTrueAction());
+      const risp = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${idPost}`, {
+        method: "PUT",
+        body: JSON.stringify({ text: postText }),
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (risp.ok) {
+        setPostText("");
+        dispatch(fetchPost());
+        handleClose(false);
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);
@@ -86,8 +112,12 @@ const ModaleAddPost = ({ handleClose, show, profile }) => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button className="text-secondary rounded-5" variant="light" onClick={(handleClose, fetchNewPost)}>
-              Pubblica
+            <Button
+              className="text-secondary rounded-5"
+              variant="light"
+              onClick={(handleClose, modifica ? fetchEditPost : fetchNewPost)}
+            >
+              {modifica ? "Modifica" : "Pubblica"}
             </Button>
           </Modal.Footer>
         </Modal>

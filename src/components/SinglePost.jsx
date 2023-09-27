@@ -1,8 +1,19 @@
 import { Card, Col, Image, Row } from "react-bootstrap";
-import { PlusLg, Trash } from "react-bootstrap-icons";
+import { PlusLg, Trash, PencilFill } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
+import { handleShow } from "../redux/action";
 
-const SinglePost = ({ elem, cancella, profile }) => {
+const SinglePost = ({
+  elem,
+  cancella,
+  profile,
+  handleShow,
+  handleClose,
+  show,
+  setPostText,
+  setModifica,
+  setIdPost,
+}) => {
   const calcolaData = () => {
     const createdate = new Date(elem.createdAt);
     const createMin = createdate.getMinutes();
@@ -66,12 +77,22 @@ const SinglePost = ({ elem, cancella, profile }) => {
               </>
             )}
             {profile._id === elem.user._id && (
-              <Trash
-                className="text-danger ms-2"
-                onClick={() => {
-                  cancella(elem._id);
-                }}
-              />
+              <>
+                <PencilFill
+                  onClick={() => {
+                    setIdPost(elem._id);
+                    handleShow();
+                    setModifica(true);
+                    setPostText(elem.text);
+                  }}
+                />
+                <Trash
+                  className="text-danger ms-2"
+                  onClick={() => {
+                    cancella(elem._id);
+                  }}
+                />
+              </>
             )}
           </Col>
         </Row>

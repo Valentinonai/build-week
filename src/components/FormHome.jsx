@@ -3,11 +3,7 @@ import { ImageFill, Calendar3, BlockquoteLeft } from "react-bootstrap-icons";
 import ModaleAddPost from "./ModaleAddPost";
 import { useState } from "react";
 
-const FormHome = ({ profile }) => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postText, modifica, setModifica, idPost }) => {
   return (
     <>
       <Container>
@@ -33,6 +29,7 @@ const FormHome = ({ profile }) => {
                   style={{ width: "100%", height: "60px ", borderRadius: "30px", textAlign: "left" }}
                   className="ps-2 ps-lg-4 "
                   onClick={() => {
+                    setModifica(false);
                     handleShow();
                   }}
                 >
@@ -72,7 +69,15 @@ const FormHome = ({ profile }) => {
         </Row>
         <hr />
 
-        <ModaleAddPost handleClose={handleClose} show={show} profile={profile} />
+        <ModaleAddPost
+          handleClose={handleClose}
+          show={show}
+          profile={profile}
+          setPostText={setPostText}
+          postText={postText}
+          modifica={modifica}
+          idPost={idPost}
+        />
       </Container>
     </>
   );
