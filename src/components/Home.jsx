@@ -11,6 +11,8 @@ import {
 import SinglePost from "./SinglePost";
 import FormHome from "./FormHome";
 import NewsSidebar from "../SideBar/NewsSidebar";
+import PromoCard from "../SideBar/PromoCard";
+import SidebarFooter from "../SideBar/SidebarFooter";
 
 const Home = () => {
   const posts = useSelector((state) => state.post.data);
@@ -83,8 +85,8 @@ const Home = () => {
   ) : (
     <Container fluid="lg">
       <Row>
-        <Col xs={2}></Col>
-        <Col xs={7}>
+        <Col xs={12} md={2} lg={2}></Col>
+        <Col xs={12} md={10} lg={7}>
           <FormHome
             profile={profile}
             handleClose={handleClose}
@@ -131,8 +133,12 @@ const Home = () => {
               )
           )}
         </Col>
-        <Col xs={3}>
+        <Col xs={12} lg={3}>
           <NewsSidebar />
+          <div style={{ position: "sticky", top: "100px" }}>
+            <PromoCard />
+            <SidebarFooter />
+          </div>
         </Col>
       </Row>
     </Container>

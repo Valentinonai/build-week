@@ -5,7 +5,7 @@ import ModaleAddPost from "./ModaleAddPost";
 const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postText, modifica, setModifica, idPost }) => {
   return (
     <>
-      <Container>
+      <Container fluid="lg">
         <Row className="border rounded-3 border-1 shadow my-3  gy-3">
           <Col className="">
             <Row>
