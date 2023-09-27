@@ -13,12 +13,13 @@ import FormHome from "./FormHome";
 import NewsSidebar from "../SideBar/NewsSidebar";
 import PromoCard from "../SideBar/PromoCard";
 import SidebarFooter from "../SideBar/SidebarFooter";
+import Sidebar from "./Sidebar";
 
 const Home = () => {
   const posts = useSelector((state) => state.post.data);
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const dispatch = useDispatch();
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState("");
   const [postText, setPostText] = useState();
   const [modifica, setModifica] = useState(false);
   const [idPost, setIdPost] = useState("");
