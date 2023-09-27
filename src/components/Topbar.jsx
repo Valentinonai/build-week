@@ -178,7 +178,7 @@ const Topbar = () => {
               </svg>
               <NavDropdown
                 title="Lavoro"
-                className="link-nav"></NavDropdown>
+                className=""></NavDropdown>
             </div>
             <Link
               to={"/"}
