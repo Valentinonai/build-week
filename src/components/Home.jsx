@@ -98,23 +98,25 @@ const Home = () => {
             setModifica={setModifica}
             idPost={idPost}
           />
-          {posts
-            .filter((elem) => elem.user._id === profile._id)
-            .reverse()
-            .map((elem, i) => (
-              <SinglePost
-                elem={elem}
-                key={`post${i}`}
-                cancella={delPost}
-                profile={profile}
-                handleClose={handleClose}
-                handleShow={handleShow}
-                show={show}
-                setPostText={setPostText}
-                setModifica={setModifica}
-                setIdPost={setIdPost}
-              />
-            ))}
+          {posts &&
+            profile &&
+            posts
+              .filter((elem) => elem.user._id === profile._id)
+              .reverse()
+              .map((elem, i) => (
+                <SinglePost
+                  elem={elem}
+                  key={`post${i}`}
+                  cancella={delPost}
+                  profile={profile}
+                  handleClose={handleClose}
+                  handleShow={handleShow}
+                  show={show}
+                  setPostText={setPostText}
+                  setModifica={setModifica}
+                  setIdPost={setIdPost}
+                />
+              ))}
           {posts.map(
             (elem, i) =>
               i < 5 && (

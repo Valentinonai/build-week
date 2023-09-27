@@ -172,7 +172,7 @@ const Topbar = () => {
               </div>
               <div className="d-flex align-items-baseline ">
                 <p className="mb-0">Tu</p>
-                <NavDropdown className="" align={{ sx: "start", paddingBlock: "0" }}>
+                <NavDropdown className="" align={{ sx: "start", paddingBlock: "0" }} collapseOnSelect="false">
                   <ProfileTopbar profile={profile} />
                 </NavDropdown>
               </div>
