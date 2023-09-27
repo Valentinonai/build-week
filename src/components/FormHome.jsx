@@ -1,7 +1,6 @@
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { ImageFill, Calendar3, BlockquoteLeft } from "react-bootstrap-icons";
 import ModaleAddPost from "./ModaleAddPost";
-import { useState } from "react";
 
 const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postText, modifica, setModifica, idPost }) => {
   return (

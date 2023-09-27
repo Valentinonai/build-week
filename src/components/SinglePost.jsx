@@ -1,7 +1,5 @@
-import { Card, Col, Image, Row } from "react-bootstrap";
+import { Col, Image, Row } from "react-bootstrap";
 import { PlusLg, Trash, PencilFill } from "react-bootstrap-icons";
-import { useSelector } from "react-redux";
-import { handleShow } from "../redux/action";
 
 const SinglePost = ({
   elem,

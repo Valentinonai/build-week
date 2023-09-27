@@ -8,7 +8,6 @@ import {
   isLoadingFalseAction,
   isLoadingTrueAction,
 } from "../redux/action";
-import { useState } from "react";
 
 const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modifica, idPost }) => {
   const dispatch = useDispatch();
