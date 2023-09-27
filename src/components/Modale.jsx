@@ -6,14 +6,14 @@ import { fetchEditImage, fetchEditUser, handleClose } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const Modale = () => {
-  const show = useSelector(state => state.modal.isShowing);
-  const user = useSelector(state => state.currentUser.userData);
+  const show = useSelector((state) => state.modal.isShowing);
+  const user = useSelector((state) => state.currentUser.userData);
   const [nome, setNome] = useState(user.name);
   const [cognome, setCognome] = useState(user.surname);
   const [area, setArea] = useState(user.area);
   const [image, setImage] = useState(user.image);
   const dispatch = useDispatch();
-  const handleImage = x => {
+  const handleImage = (x) => {
     if (x) {
       const formImg = new FormData();
       formImg.append("profile", x);
@@ -27,7 +27,7 @@ const Modale = () => {
           <Modal.Title>Modifica Presentazione</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             handleImage(image);
             dispatch(fetchEditUser({ name: nome, surname: cognome, area: area }, user._id));
@@ -42,7 +42,7 @@ const Modale = () => {
                 autoFocus
                 required
                 value={nome}
-                onChange={e => {
+                onChange={(e) => {
                   setNome(e.target.value);
                 }}
               />
@@ -55,11 +55,12 @@ const Modale = () => {
                 placeholder="Scrivi qui..."
                 required
                 value={cognome}
-                onChange={e => {
+                onChange={(e) => {
                   setCognome(e.target.value);
                 }}
               />
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Posizione</Form.Label>
               <Form.Control
@@ -67,12 +68,11 @@ const Modale = () => {
                 rows={1}
                 value={area}
                 placeholder="Scrivi qui..."
-                onChange={e => {
+                onChange={(e) => {
                   setArea(e.target.value);
                 }}
               />
             </Form.Group>
-
             <Form.Group className="mb-3">
               <Form.Label>Curriculm</Form.Label>
               <Dropzone>

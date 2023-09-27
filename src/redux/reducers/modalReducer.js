@@ -1,8 +1,16 @@
-import { EXPERIENCES_MODAL_OFF, EXPERIENCES_MODAL_ON, MODAL_OFF, MODAL_ON } from "../action";
+import {
+  EXPERIENCES_MODAL_OFF,
+  EXPERIENCES_MODAL_ON,
+  EXPERIENCES_PROPS,
+  EXPERIENCES_RESET_PROPS,
+  MODAL_OFF,
+  MODAL_ON,
+} from "../action";
 
 const initialState = {
   isShowing: false,
   experiencesIsShowing: false,
+  propelem: null,
 };
 
 const modalReducer = (state = initialState, action) => {
@@ -26,6 +34,17 @@ const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         experiencesIsShowing: action.payload,
+      };
+    case EXPERIENCES_PROPS:
+      return {
+        ...state,
+        propelem: action.payload,
+      };
+
+    case EXPERIENCES_RESET_PROPS:
+      return {
+        ...state,
+        propelem: action.payload,
       };
 
     default:

@@ -7,12 +7,37 @@ import linkedinLogo from "./img/linkedin-logo.png";
 import imgVideo1 from "./img/vid1.png";
 import imgVideo2 from "./img/vid2.png";
 import imgVideo3 from "./img/vid3.png";
-import imgPromosso1 from "./img/promosso1.png";
-import imgPromosso2 from "./img/promosso2.png";
-import imgPromosso3 from "./img/promosso3.png";
+
 import { Link } from "react-bootstrap-icons";
+import PromoCard from "./PromoCard";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
+  const [userImg, setUserImg] = useState("");
+
+  const fetchUser = async () => {
+    try {
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        setUserImg(data.image);
+      } else {
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <>
       <div className='card-setting p-3 rounded-2'>
@@ -43,10 +68,10 @@ const Sidebar = () => {
         <div>
           <span>scopri le ultime offerte di lavoro e notizie</span>
           <div className='d-flex promo-header justify-content-center gap-3 my-2'>
-            <img src={user} alt='user img' className='img-fluid object-fit-cover' />
-            <img src={logoCompany} alt='company img' className='img-fluid object-fit-cover' />
+            <img src={userImg ? userImg : user} alt='user img' className='img-fluid object-fit-cover rounded-circle' />
+            <img src={logoCompany} alt='company img' className='img-fluid object-fit-cover w-100' />
           </div>
-          <p className='mb-2'>Vasil, scopri le opportunità offerte da Wyser</p>
+          <p className='mb-2'>Vasil, scopri le opportunità offerte da Wyser!</p>
           <Button variant='outline-primary' className='rounded-4 py-1'>
             Segui
           </Button>
@@ -88,39 +113,7 @@ const Sidebar = () => {
           </Link>
         </div>
       </div>
-      <div className='card  mt-3 p-3 text-start'>
-        <div className='d-flex justify-content-between align-items-center'>
-          <p>Promosso</p>
-          <BsThreeDots />
-        </div>
-        <div className='d-flex mt-2'>
-          <img src={imgPromosso1} className='img-fluid me-1' alt='video' width={70} height={70} />
-          <div className='p-1'>
-            <Link to={"/"} className='d-block text-black'>
-              L'Ai per il business
-            </Link>
-            <span>sfrutta il potenziale della Generative AI per la tua azienda.</span>
-          </div>
-        </div>
-        <div className='d-flex mt-2'>
-          <img src={imgPromosso2} className='img-fluid me-1' alt='video' width={70} height={70} />
-          <div className='p-1'>
-            <Link to={"/"} className='d-block text-black'>
-              Start automating today
-            </Link>
-            <span>Zapier connects the apps you use every day. Try it free.</span>
-          </div>
-        </div>
-        <div className='d-flex mt-2'>
-          <img src={imgPromosso3} className='img-fluid me-1' alt='video' width={70} height={70} />
-          <div className='p-1'>
-            <Link to={"/"} className='d-block text-black'>
-              X500 - Testing Powerhouse
-            </Link>
-            <span>Time-correlated captures of Bluetooth (BR/EDR/LE) WiFi (5/6/6E) in one box!</span>
-          </div>
-        </div>
-      </div>
+      <PromoCard />
     </>
   );
 };
