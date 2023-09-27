@@ -70,7 +70,7 @@ const SinglePost = ({
           <Col xs={12} sm={3} className="text-primary text-end ">
             {profile._id !== elem.user._id && (
               <>
-                <PlusLg className="me-2" />
+                <PlusLg className="me-2" style={{ cursor: "pointer" }} />
                 <span className="d-none d-sm-inline-block">SEGUI</span>
               </>
             )}
@@ -83,12 +83,14 @@ const SinglePost = ({
                     setModifica(true);
                     setPostText(elem.text);
                   }}
+                  style={{ cursor: "pointer" }}
                 />
                 <Trash
                   className="text-danger ms-2"
                   onClick={() => {
                     cancella(elem._id);
                   }}
+                  style={{ cursor: "pointer" }}
                 />
               </>
             )}
