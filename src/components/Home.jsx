@@ -13,12 +13,13 @@ import FormHome from "./FormHome";
 import NewsSidebar from "../SideBar/NewsSidebar";
 import PromoCard from "../SideBar/PromoCard";
 import SidebarFooter from "../SideBar/SidebarFooter";
+import Sidebar from "./Sidebar";
 
 const Home = () => {
   const posts = useSelector((state) => state.post.data);
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const dispatch = useDispatch();
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState("");
   const [postText, setPostText] = useState();
   const [modifica, setModifica] = useState(false);
   const [idPost, setIdPost] = useState("");
@@ -85,7 +86,9 @@ const Home = () => {
   ) : (
     <Container fluid="lg">
       <Row>
-        <Col xs={12} md={2} lg={2}></Col>
+        <Col xs={12} md={2} lg={2}>
+          <Sidebar profile={profile} />
+        </Col>
         <Col xs={12} md={10} lg={7}>
           <FormHome
             profile={profile}
