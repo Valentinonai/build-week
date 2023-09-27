@@ -1,5 +1,5 @@
 import { Accordion } from "react-bootstrap";
-import { BsChevronDown, BsFillInfoSquareFill } from "react-icons/bs";
+import { BsFillInfoSquareFill } from "react-icons/bs";
 
 import PromoCard from "./PromoCard";
 import SidebarFooter from "./SidebarFooter";
