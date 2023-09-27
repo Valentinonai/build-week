@@ -28,20 +28,20 @@ export const EDIT_EXP = "EDIT_EXP";
 
 export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
-export const handleClose = dispatch => dispatch(modalOffAction());
-export const handleShow = dispatch => dispatch(modalOnAction());
+export const handleClose = (dispatch) => dispatch(modalOffAction());
+export const handleShow = (dispatch) => dispatch(modalOnAction());
 
 export const experiencesModalOnAction = () => ({ type: EXPERIENCES_MODAL_ON, payload: true });
 export const experiencesModalOffAction = () => ({ type: EXPERIENCES_MODAL_OFF, payload: false });
-export const experiencesHandleClose = dispatch => dispatch(experiencesModalOffAction());
-export const experiencesHandleShow = dispatch => dispatch(experiencesModalOnAction());
-export const experiencesPropAction = elem => ({ type: EXPERIENCES_PROPS, payload: elem });
+export const experiencesHandleClose = (dispatch) => dispatch(experiencesModalOffAction());
+export const experiencesHandleShow = (dispatch) => dispatch(experiencesModalOnAction());
+export const experiencesPropAction = (elem) => ({ type: EXPERIENCES_PROPS, payload: elem });
 export const experiencesResetPropAction = () => ({ type: EXPERIENCES_RESET_PROPS, payload: null });
 
-export const addPosts = data => ({ type: ADD_POSTS, payload: data });
-export const addExperiences = data => ({ type: ADD_EXPERIENCES, payload: data });
-export const addExperiencesAction = data => ({ type: ADD_EXPERIENCES_NEW, payload: data });
-export const isDeletedAction = risposta => ({ type: IS_DELETED, payload: risposta });
+export const addPosts = (data) => ({ type: ADD_POSTS, payload: data });
+export const addExperiences = (data) => ({ type: ADD_EXPERIENCES, payload: data });
+export const addExperiencesAction = (data) => ({ type: ADD_EXPERIENCES_NEW, payload: data });
+export const isDeletedAction = (risposta) => ({ type: IS_DELETED, payload: risposta });
 export const editExp = (data, id) => ({ type: EDIT_EXP, payload: { data: data, id: id } });
 
 //-------------------------PAYLOAD CREATORS-----------------------------
@@ -65,12 +65,12 @@ export const hasErrorFalseAction = () => ({
   payload: false,
 });
 
-export const addErrorMessageAction = string => ({
+export const addErrorMessageAction = (string) => ({
   type: ADD_ERROR_MESSAGE,
   payload: string,
 });
 
-export const addCurrentUserDataAction = dataUser => ({
+export const addCurrentUserDataAction = (dataUser) => ({
   type: ADD_CURRENT_USER_DATA,
   payload: dataUser,
 });
@@ -78,8 +78,8 @@ export const addCurrentUserDataAction = dataUser => ({
 //------------------FETCH SECTION------------------------
 
 //!---------------FETCH PROFILi---------------------
-export const fetchProfileData = param => {
-  return async dispatch => {
+export const fetchProfileData = (param) => {
+  return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${param}`, {
@@ -106,7 +106,7 @@ export const fetchProfileData = param => {
 
 //!-------------------FETCH MODIFICA USER DATA-----------------------------
 export const fetchEditImage = (objChanges, id) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/picture`, {
         method: "POST",
@@ -130,7 +130,7 @@ export const fetchEditImage = (objChanges, id) => {
 };
 
 export const fetchEditUser = (objChanges, id) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile`, {
         method: "PUT",
@@ -155,8 +155,8 @@ export const fetchEditUser = (objChanges, id) => {
   };
 };
 //!----------------------------FETCH EXPERIENCES------------------------
-export const fetchExperiencies = id => {
-  return async dispatch => {
+export const fetchExperiencies = (id) => {
+  return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`, {
@@ -182,7 +182,7 @@ export const fetchExperiencies = id => {
 };
 
 export const fetchAddExp = (expObj, userId) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
       const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/" + userId + "/experiences", {
@@ -213,7 +213,7 @@ export const fetchAddExp = (expObj, userId) => {
 
 //!------------------FETCH POST HOME-------------------------------------
 export const fetchPost = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(isLoadingTrueAction());
       const risp = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
@@ -240,7 +240,7 @@ export const fetchPost = () => {
 };
 //!------------------FETCH POST HOME-------------------------------------
 export const fetchDelete = (idUser, idExp) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(isLoadingTrueAction());
       const risp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${idUser}/experiences/${idExp}`, {
@@ -269,7 +269,7 @@ export const fetchDelete = (idUser, idExp) => {
 //!------------Modifica experience----------------------
 
 export const editExperience = (obj, userId, id, fn) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(isLoadingTrueAction());
       const risp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${id}`, {

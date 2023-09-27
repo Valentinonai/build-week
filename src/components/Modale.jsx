@@ -6,14 +6,14 @@ import { fetchEditImage, fetchEditUser, handleClose } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const Modale = () => {
-  const show = useSelector(state => state.modal.isShowing);
-  const user = useSelector(state => state.currentUser.userData);
+  const show = useSelector((state) => state.modal.isShowing);
+  const user = useSelector((state) => state.currentUser.userData);
   const [nome, setNome] = useState(user.name);
   const [cognome, setCognome] = useState(user.surname);
   const [area, setArea] = useState(user.area);
   const [image, setImage] = useState(user.image);
   const dispatch = useDispatch();
-  const handleImage = x => {
+  const handleImage = (x) => {
     if (x) {
       const formImg = new FormData();
       formImg.append("profile", x);
@@ -27,53 +27,53 @@ const Modale = () => {
           <Modal.Title>Modifica Presentazione</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             handleImage(image);
             dispatch(fetchEditUser({ name: nome, surname: cognome, area: area }, user._id));
           }}
         >
           <Modal.Body>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Nome:</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Scrivi qui..."
+                type='text'
+                placeholder='Scrivi qui...'
                 autoFocus
                 required
                 value={nome}
-                onChange={e => {
+                onChange={(e) => {
                   setNome(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Cognome: </Form.Label>
               <Form.Control
-                type="text"
+                type='text'
                 rows={1}
-                placeholder="Scrivi qui..."
+                placeholder='Scrivi qui...'
                 required
                 value={cognome}
-                onChange={e => {
+                onChange={(e) => {
                   setCognome(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+
+            <Form.Group className='mb-3'>
               <Form.Label>Posizione</Form.Label>
               <Form.Control
-                type="text"
+                type='text'
                 rows={1}
                 value={area}
-                placeholder="Scrivi qui..."
-                onChange={e => {
+                placeholder='Scrivi qui...'
+                onChange={(e) => {
                   setArea(e.target.value);
                 }}
               />
             </Form.Group>
-
-            <Form.Group className="mb-3">
+            <Form.Group className='mb-3'>
               <Form.Label>Curriculm</Form.Label>
               <Dropzone>
                 {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -93,10 +93,10 @@ const Modale = () => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => handleClose(dispatch)}>
+            <Button variant='secondary' onClick={() => handleClose(dispatch)}>
               Close
             </Button>
-            <Button variant="primary" type="submit" onClick={() => handleClose(dispatch)}>
+            <Button variant='primary' type='submit' onClick={() => handleClose(dispatch)}>
               Save Changes
             </Button>
           </Modal.Footer>
