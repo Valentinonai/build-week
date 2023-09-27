@@ -11,7 +11,7 @@ import addExp from "../reducers/Experiences";
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["currenUser"]
+  whitelist: ["currenUser"],
 };
 
 const rootReducer = combineReducers({
@@ -19,14 +19,14 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   modal: modalReducer,
   post: postReducers,
-  addExps: addExp
+  addExps: addExp,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducers,
-  middleware: getDefaultMiddleware({ serializableCheck: false, immutubleCheck: false })
+  middleware: getDefaultMiddleware({ serializableCheck: false, immutableCheck: false }),
 });
 
 export const persiStore = persistStore(store);
