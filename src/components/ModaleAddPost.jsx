@@ -28,6 +28,7 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
       if (risp.ok) {
         setPostText("");
         dispatch(fetchPost());
+        handleClose(false);
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);

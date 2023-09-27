@@ -97,6 +97,7 @@ const Home = () => {
           />
           {posts
             .filter((elem) => elem.user._id === profile._id)
+            .reverse()
             .map((elem, i) => (
               <SinglePost
                 elem={elem}
