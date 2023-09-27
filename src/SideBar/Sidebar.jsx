@@ -10,8 +10,34 @@ import imgVideo3 from "./img/vid3.png";
 
 import { Link } from "react-bootstrap-icons";
 import PromoCard from "./PromoCard";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
+  const [userImg, setUserImg] = useState("");
+
+  const fetchUser = async () => {
+    try {
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        setUserImg(data.image);
+      } else {
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <>
       <div className='card-setting p-3 rounded-2'>
@@ -42,8 +68,8 @@ const Sidebar = () => {
         <div>
           <span>scopri le ultime offerte di lavoro e notizie</span>
           <div className='d-flex promo-header justify-content-center gap-3 my-2'>
-            <img src={user} alt='user img' className='img-fluid object-fit-cover' />
-            <img src={logoCompany} alt='company img' className='img-fluid object-fit-cover' />
+            <img src={userImg ? userImg : user} alt='user img' className='img-fluid object-fit-cover rounded-circle' />
+            <img src={logoCompany} alt='company img' className='img-fluid object-fit-cover w-100' />
           </div>
           <p className='mb-2'>Vasil, scopri le opportunità offerte da Wyser</p>
           <Button variant='outline-primary' className='rounded-4 py-1'>
