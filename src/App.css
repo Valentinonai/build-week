@@ -1,0 +1,20 @@
+.dropdown-item:active {
+  background-color: white !important;
+  color: black;
+}
+
+#dropZoneBtn {
+  width: 50px;
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border: none;
+  caret-color: transparent;
+  cursor: pointer;
+}
+
+#dropZoneBtn:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
