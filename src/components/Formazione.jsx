@@ -27,14 +27,19 @@ const Formazione = () => {
           </Col>
           <Col xs={4}>
             <div className="d-flex justify-content-end align-items-center">
-              <PlusLg className="me-3" onClick={() => experiencesHandleShow(dispatch)} />
+              <PlusLg
+                className="me-3"
+                onClick={() => experiencesHandleShow(dispatch)}
+              />
             </div>
           </Col>
         </Row>
         <Row>
           {experiences &&
             experiences.map(elem => (
-              <Col xs={12} key={elem.id}>
+              <Col
+                xs={12}
+                key={elem.id}>
                 <SingleExp elem={elem} />
               </Col>
             ))}

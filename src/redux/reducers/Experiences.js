@@ -1,20 +1,25 @@
-import { ADD_EXPERIENCES, IS_DELETED } from "../action";
+import { ADD_EXPERIENCES, ADD_EXPERIENCES_NEW, IS_DELETED } from "../action";
 import { EDIT_EXP } from "../action";
 
 const initialState = {
-  data: [],
+  data: []
 };
 const addExp = (state = initialState, action) => {
   switch (action.type) {
     case ADD_EXPERIENCES:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload
+      };
+    case ADD_EXPERIENCES_NEW:
+      return {
+        ...state,
+        data: [...state.data, action.payload]
       };
     case IS_DELETED:
       return {
         ...state,
-        data: [...state.data.filter((elem) => elem._id !== action.payload._id)],
+        data: [...state.data.filter(elem => elem._id !== action.payload)]
       };
     case EDIT_EXP: {
       let app = null;
@@ -25,7 +30,7 @@ const addExp = (state = initialState, action) => {
       }
       return {
         ...state,
-        data: [...state.data.filter((elem) => elem._id !== action.payload.id), ...app],
+        data: [...state.data.filter(elem => elem._id !== action.payload.id), ...app]
       };
     }
     default:
