@@ -110,7 +110,7 @@ const Suggested = () => {
                       aperte.
                     </Card.Text>
                     <Button className="btn rounded-pill border border-dark fw-bold fs-5 opacity-50" variant="light">
-                      Aggingi una competenza
+                      Aggiungi una competenza
                     </Button>
                   </Card.Body>
                 </Card>
