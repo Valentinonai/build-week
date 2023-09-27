@@ -10,11 +10,11 @@ import ExperiencesModal from "./ExperiencesModal";
 const Formazione = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const experiences = useSelector(state => state.addExps.data);
-  const isLoading = useSelector(state => state.currentUser.isLoading);
-  const user = useSelector(state => state.currentUser.userData);
+  const experiences = useSelector((state) => state.addExps.data);
+  const isLoading = useSelector((state) => state.currentUser.isLoading);
+  const user = useSelector((state) => state.currentUser.userData);
   useEffect(() => {
-    dispatch(fetchExperiencies(user._id));
+    user && dispatch(fetchExperiencies(params.id === "me" ? user._id : params.id));
   }, []);
   return (
     !isLoading && (

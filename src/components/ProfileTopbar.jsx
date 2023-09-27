@@ -19,10 +19,7 @@ const ProfileTopbar = ({ profile }) => {
         </Col>
       </Row>
       <Row className="px-4">
-        <Link
-          className="btn btn-outline-primary rounded-pill py-1 my-2 "
-          to={profile ? `profile/${profile._id}` : "profile/me"}
-        >
+        <Link className="btn btn-outline-primary rounded-pill py-1 my-2 " to={"profile/me"}>
           <span className=" fw-bold"> Visualizza profilo</span>
         </Link>
       </Row>
