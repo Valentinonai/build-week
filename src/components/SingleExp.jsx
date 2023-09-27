@@ -1,7 +1,7 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { fetchDelete } from "../redux/action";
+import { EXPERIENCES_PROPS, experiencesHandleShow, experiencesPropAction, fetchDelete } from "../redux/action";
 
 const SingleExp = props => {
   const dispatch = useDispatch();
@@ -22,10 +22,16 @@ const SingleExp = props => {
           <h6>{props.elem.role}</h6>
           <p>{props.elem.description}</p>
         </Col>
-        {console.log(props.elem, "GUARDAME")}
+
         <Col xs={2}>
           <div className="d-flex justify-content-end">
-            <Pencil className="mx-2" />
+            <Pencil
+              onClick={() => {
+                dispatch(experiencesPropAction(props.elem));
+                experiencesHandleShow(dispatch);
+              }}
+              className="mx-2"
+            />
             <Trash
               className="mx-2"
               onClick={() => {

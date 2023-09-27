@@ -60,6 +60,7 @@ const Modale = () => {
                 }}
               />
             </Form.Group>
+
             <Form.Group className="mb-3">
               <Form.Label>Posizione</Form.Label>
               <Form.Control

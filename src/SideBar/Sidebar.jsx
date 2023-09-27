@@ -7,10 +7,9 @@ import linkedinLogo from "./img/linkedin-logo.png";
 import imgVideo1 from "./img/vid1.png";
 import imgVideo2 from "./img/vid2.png";
 import imgVideo3 from "./img/vid3.png";
-import imgPromosso1 from "./img/promosso1.png";
-import imgPromosso2 from "./img/promosso2.png";
-import imgPromosso3 from "./img/promosso3.png";
+
 import { Link } from "react-bootstrap-icons";
+import PromoCard from "./PromoCard";
 
 const Sidebar = () => {
   return (
@@ -88,39 +87,7 @@ const Sidebar = () => {
           </Link>
         </div>
       </div>
-      <div className='card  mt-3 p-3 text-start'>
-        <div className='d-flex justify-content-between align-items-center'>
-          <p>Promosso</p>
-          <BsThreeDots />
-        </div>
-        <div className='d-flex mt-2'>
-          <img src={imgPromosso1} className='img-fluid me-1' alt='video' width={70} height={70} />
-          <div className='p-1'>
-            <Link to={"/"} className='d-block text-black'>
-              L'Ai per il business
-            </Link>
-            <span>sfrutta il potenziale della Generative AI per la tua azienda.</span>
-          </div>
-        </div>
-        <div className='d-flex mt-2'>
-          <img src={imgPromosso2} className='img-fluid me-1' alt='video' width={70} height={70} />
-          <div className='p-1'>
-            <Link to={"/"} className='d-block text-black'>
-              Start automating today
-            </Link>
-            <span>Zapier connects the apps you use every day. Try it free.</span>
-          </div>
-        </div>
-        <div className='d-flex mt-2'>
-          <img src={imgPromosso3} className='img-fluid me-1' alt='video' width={70} height={70} />
-          <div className='p-1'>
-            <Link to={"/"} className='d-block text-black'>
-              X500 - Testing Powerhouse
-            </Link>
-            <span>Time-correlated captures of Bluetooth (BR/EDR/LE) WiFi (5/6/6E) in one box!</span>
-          </div>
-        </div>
-      </div>
+      <PromoCard />
     </>
   );
 };

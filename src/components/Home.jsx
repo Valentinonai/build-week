@@ -31,7 +31,6 @@ const Home = () => {
       });
       if (resp.ok) {
         const data = await resp.json();
-
         setProfile(data);
       } else {
         dispatch(hasErrorTrueAction());
@@ -84,7 +83,7 @@ const Home = () => {
     <Container fluid="lg">
       <Row>
         <Col xs={2}></Col>
-        <Col xs={8}>
+        <Col xs={7}>
           <FormHome
             profile={profile}
             handleClose={handleClose}
@@ -131,7 +130,9 @@ const Home = () => {
               )
           )}
         </Col>
-        <Col xs={2}></Col>
+        <Col xs={3}>
+          <NewsSidebar />
+        </Col>
       </Row>
     </Container>
   );

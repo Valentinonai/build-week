@@ -17,6 +17,8 @@ export const MODAL_OFF = "MODAL_OFF";
 export const MODAL_ON = "MODAL_ON";
 export const EXPERIENCES_MODAL_ON = "EXPERIENCES_MODAL_ON";
 export const EXPERIENCES_MODAL_OFF = "EXPERIENCES_MODAL_OFF";
+export const EXPERIENCES_PROPS = "EXPERIENCES_PROPS";
+export const EXPERIENCES_RESET_PROPS = "EXPERIENCES_RESET_PROPS";
 
 export const ADD_POSTS = "ADD_POSTS";
 export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
@@ -33,6 +35,8 @@ export const experiencesModalOnAction = () => ({ type: EXPERIENCES_MODAL_ON, pay
 export const experiencesModalOffAction = () => ({ type: EXPERIENCES_MODAL_OFF, payload: false });
 export const experiencesHandleClose = (dispatch) => dispatch(experiencesModalOffAction());
 export const experiencesHandleShow = (dispatch) => dispatch(experiencesModalOnAction());
+export const experiencesPropAction = (elem) => ({ type: EXPERIENCES_PROPS, payload: elem });
+export const experiencesResetPropAction = () => ({ type: EXPERIENCES_RESET_PROPS, payload: null });
 
 export const addPosts = (data) => ({ type: ADD_POSTS, payload: data });
 export const addExperiences = (data) => ({ type: ADD_EXPERIENCES, payload: data });
@@ -78,7 +82,6 @@ export const fetchProfileData = (param) => {
   return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
-      console.log(param);
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${param}`, {
         headers: {
           Authorization:
@@ -105,7 +108,6 @@ export const fetchProfileData = (param) => {
 export const fetchEditImage = (objChanges, id) => {
   return async (dispatch) => {
     try {
-      console.log("here");
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/picture`, {
         method: "POST",
         body: objChanges,
@@ -117,7 +119,6 @@ export const fetchEditImage = (objChanges, id) => {
 
       if (resp.ok) {
         const dataChanges = await resp.json();
-        console.log(dataChanges, "datachanges");
         dispatch(addCurrentUserDataAction(dataChanges));
       } else {
         throw new Error(resp.status);
@@ -143,7 +144,6 @@ export const fetchEditUser = (objChanges, id) => {
 
       if (resp.ok) {
         const dataChanges = await resp.json();
-        console.log(dataChanges, "datachanges");
 
         dispatch(addCurrentUserDataAction(dataChanges));
       } else {
@@ -159,7 +159,6 @@ export const fetchExperiencies = (id) => {
   return async (dispatch) => {
     dispatch(isLoadingTrueAction());
     try {
-      console.log(id);
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`, {
         headers: {
           Authorization:
@@ -198,7 +197,6 @@ export const fetchAddExp = (expObj, userId) => {
 
       if (resp.ok) {
         const data = await resp.json();
-        console.log(data, "LEGGGIIiii");
         dispatch(addExperiencesAction(data));
       } else {
         dispatch(hasErrorTrueAction());
@@ -270,11 +268,13 @@ export const fetchDelete = (idUser, idExp) => {
 
 //!------------Modifica experience----------------------
 
-export const editExperience = (obj, id) => {
+export const editExperience = (obj, userId, id, fn) => {
   return async (dispatch) => {
     try {
       dispatch(isLoadingTrueAction());
-      const risp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/${id}`, {
+      const risp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(obj),
         headers: {
           "content-type": "application/json",
           Authorization:
@@ -283,7 +283,9 @@ export const editExperience = (obj, id) => {
       });
       if (risp.ok) {
         const data = await risp.json();
-        dispatch(editExp(data));
+        console.log(data);
+        dispatch(editExp(obj, id));
+        fn(data);
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);
