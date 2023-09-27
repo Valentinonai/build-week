@@ -156,7 +156,7 @@ const Topbar = () => {
               Notifiche
             </div>
 
-            <div className="d-flex flex-column align-items-center px-0">
+            <div className="d-flex flex-column justify-content-between align-items-between px-0">
               <div className="d-flex justify-content-center">
                 <img
                   src={
@@ -171,9 +171,11 @@ const Topbar = () => {
                 />
               </div>
               <div className="d-flex align-items-baseline ">
-                <p>Tu</p>
-                <NavDropdown className="" align={{ sx: "start" }}>
-                  <ProfileTopbar profile={profile} />
+                <p className="mb-0">Tu</p>
+                <NavDropdown className="" align={{ sx: "start", paddingBlock: "0" }}>
+                  <NavDropdown.Item>
+                    <ProfileTopbar profile={profile} />
+                  </NavDropdown.Item>
                 </NavDropdown>
               </div>
             </div>
