@@ -6,8 +6,8 @@ import { editExperience, experiencesHandleClose, experiencesResetPropAction, fet
 import { Plus } from "react-bootstrap-icons";
 
 const ExperiencesModal = () => {
-  const experiencesShow = useSelector(state => state.modal.experiencesIsShowing);
-  const propExp = useSelector(state => state.modal.propelem);
+  const experiencesShow = useSelector((state) => state.modal.experiencesIsShowing);
+  const propExp = useSelector((state) => state.modal.propelem);
   const [Title, setTitle] = useState("");
   const [Employment, setEmployment] = useState("");
 
@@ -22,10 +22,10 @@ const ExperiencesModal = () => {
   const [Description, setDescription] = useState("");
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.currentUser.userData._id);
-  const experiences = useSelector(state => state.addExps.data);
+  const userId = useSelector((state) => state.currentUser.userData._id);
+  const experiences = useSelector((state) => state.addExps.data);
 
-  const handleObj = e => {
+  const handleObj = (e) => {
     dispatch(
       editExperience(
         {
@@ -43,7 +43,7 @@ const ExperiencesModal = () => {
     );
   };
 
-  const reRender = data => {
+  const reRender = (data) => {
     setEmployment(data.role);
     setCompanyName(data.company);
     setStartDate(data.startDate);
@@ -65,7 +65,7 @@ const ExperiencesModal = () => {
           <Modal.Title>Aggiungi Esperienza</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
             if (propExp) {
               console.log(e);
@@ -96,8 +96,8 @@ const ExperiencesModal = () => {
                 type="text"
                 placeholder="Titolo dell' esperienza"
                 required
-                defaultValue={propExp ? propExp.role : ""}
-                onChange={e => {
+                defaultValue={Employment ? Employment : ""}
+                onChange={(e) => {
                   setEmployment(e.target.value);
                 }}
               />
@@ -107,7 +107,7 @@ const ExperiencesModal = () => {
               <Form.Control
                 type="text"
                 placeholder="es. full-time"
-                onChange={e => {
+                onChange={(e) => {
                   setDescription(e.target.value);
                 }}
               />
@@ -121,7 +121,7 @@ const ExperiencesModal = () => {
                 type="text"
                 placeholder="es. EPICODE"
                 defaultValue={propExp ? propExp.company : ""}
-                onChange={e => {
+                onChange={(e) => {
                   setCompanyName(e.target.value);
                 }}
               />
@@ -132,7 +132,7 @@ const ExperiencesModal = () => {
                 type="text"
                 placeholder="es. Milano"
                 defaultValue={propExp ? propExp.area : ""}
-                onChange={e => {
+                onChange={(e) => {
                   setLocation(e.target.value);
                 }}
               />
@@ -142,7 +142,7 @@ const ExperiencesModal = () => {
               <Form.Control
                 type="text"
                 placeholder="es. remoto, in ufficio"
-                onChange={e => {
+                onChange={(e) => {
                   setLocationType(e.target.value);
                 }}
               />
@@ -163,7 +163,7 @@ const ExperiencesModal = () => {
               <Form.Label>Data di inizio</Form.Label>
               <Form.Control
                 type="date"
-                onChange={e => {
+                onChange={(e) => {
                   setStartDate(e.target.value);
                 }}
               />
@@ -172,7 +172,7 @@ const ExperiencesModal = () => {
               <Form.Label>Data di termine</Form.Label>
               <Form.Control
                 type="date"
-                onChange={e => {
+                onChange={(e) => {
                   setEndDate(e.target.value);
                 }}
               />
@@ -188,7 +188,7 @@ const ExperiencesModal = () => {
               <Form.Control
                 type="text"
                 placeholder="es. Software Development"
-                onChange={e => {
+                onChange={(e) => {
                   setIndustry(e.target.value);
                 }}
               />
@@ -199,7 +199,7 @@ const ExperiencesModal = () => {
                 type="text"
                 placeholder="..."
                 defaultValue={propExp ? propExp.description : ""}
-                onChange={e => {
+                onChange={(e) => {
                   setDescription(e.target.value);
                 }}
               />
