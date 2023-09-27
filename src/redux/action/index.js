@@ -17,6 +17,10 @@ export const MODAL_OFF = "MODAL_OFF";
 export const MODAL_ON = "MODAL_ON";
 export const EXPERIENCES_MODAL_ON = "EXPERIENCES_MODAL_ON";
 export const EXPERIENCES_MODAL_OFF = "EXPERIENCES_MODAL_OFF";
+
+export const USERSLIST_MODAL_ON = "USERSLIST_MODAL_ON";
+export const USERSLIST_MODAL_OFF = "USERSLIST_MODAL_OFF";
+
 export const EXPERIENCES_PROPS = "EXPERIENCES_PROPS";
 export const EXPERIENCES_RESET_PROPS = "EXPERIENCES_RESET_PROPS";
 
@@ -37,6 +41,11 @@ export const experiencesHandleClose = (dispatch) => dispatch(experiencesModalOff
 export const experiencesHandleShow = (dispatch) => dispatch(experiencesModalOnAction());
 export const experiencesPropAction = (elem) => ({ type: EXPERIENCES_PROPS, payload: elem });
 export const experiencesResetPropAction = () => ({ type: EXPERIENCES_RESET_PROPS, payload: null });
+
+export const userslistModalOnAction = () => ({ type: USERSLIST_MODAL_ON, payload: true });
+export const userslistModalOffAction = () => ({ type: USERSLIST_MODAL_OFF, payload: false });
+export const usersListHandleShow = (dispatch) => dispatch(userslistModalOnAction());
+export const usersListHandleClose = (dispatch) => dispatch(userslistModalOffAction());
 
 export const addPosts = (data) => ({ type: ADD_POSTS, payload: data });
 export const addExperiences = (data) => ({ type: ADD_EXPERIENCES, payload: data });
