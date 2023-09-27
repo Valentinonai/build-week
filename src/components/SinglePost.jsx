@@ -3,6 +3,33 @@ import { PlusLg, Trash } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 
 const SinglePost = ({ elem, cancella, profile }) => {
+  const calcolaData = () => {
+    const createdate = new Date(elem.createdAt);
+    const createMin = createdate.getMinutes();
+    const createOre = createdate.getHours();
+    const createGiorni = createdate.getDay();
+    const createMesi = createdate.getMonth();
+    const createAnno = createdate.getFullYear();
+    const actualedate = new Date();
+    const actualeMin = actualedate.getMinutes();
+    const actualeOre = actualedate.getHours();
+    const actualeGiorni = actualedate.getDay();
+    const actualeMesi = actualedate.getMonth();
+    const actualeAnno = actualedate.getFullYear();
+
+    if (actualeAnno === createAnno) {
+      if (actualeMesi === createMesi) {
+        if (actualeGiorni === createGiorni) {
+          if (actualeOre === createOre) {
+            if (actualeMin === createMin) {
+              return "adesso";
+            } else return `${actualeMin - createMin} ${actualeMin - createMin === 1 ? "minuto fa" : "minuti fa"}`;
+          } else return `${actualeOre - createOre} ${actualeOre - createOre === 1 ? "ora fa" : "ore fa"}`;
+        } else
+          return `${actualeGiorni - createGiorni} ${actualeGiorni - createGiorni === 1 ? "giorno fa" : "giorni fa"}`;
+      } else return `${actualeMesi - createMesi} ${actualeMesi - createMesi === 1 ? "mese fa" : "mesi fa"}`;
+    } else return `${actualeAnno - createAnno} ${actualeAnno - createAnno === 1 ? "anno fa" : "anni fa"}`;
+  };
   return (
     elem &&
     profile && (
@@ -23,11 +50,12 @@ const SinglePost = ({ elem, cancella, profile }) => {
                 {elem.user.name} {elem.user.surname}
               </h6>
               <p
-                className="w-100"
+                className="w-100 mb-0"
                 style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", fontSize: "14px" }}
               >
                 {elem.user.bio}
               </p>
+              <p style={{ fontWeight: "300", fontSize: "12px" }}> {calcolaData()}</p>
             </div>
           </Col>
           <Col xs={12} sm={3} className="text-primary text-end ">
