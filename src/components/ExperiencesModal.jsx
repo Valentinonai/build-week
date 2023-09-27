@@ -2,54 +2,64 @@ import { useEffect, useState } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { editExperience, experiencesHandleClose, experiencesResetPropAction, fetchAddExp } from "../redux/action";
+import {
+  editExperience,
+  experiencesHandleClose,
+  experiencesResetPropAction,
+  fetchAddExp,
+  fetchEditImageExp
+} from "../redux/action";
 import { Plus } from "react-bootstrap-icons";
+import Dropzone from "react-dropzone";
 
-const ExperiencesModal = () => {
-  const experiencesShow = useSelector((state) => state.modal.experiencesIsShowing);
-  const propExp = useSelector((state) => state.modal.propelem);
-  const [Title, setTitle] = useState("");
-  const [Employment, setEmployment] = useState("");
-
-  const [CompanyName, setCompanyName] = useState("");
-
-  const [Location, setLocation] = useState("");
-  const [LocationType, setLocationType] = useState("");
-  const [Currentlyworking, setCurrentlyWorking] = useState(false);
-  const [StartDate, setStartDate] = useState(Date);
-  const [EndDate, setEndDate] = useState(Date);
-  const [Industry, setIndustry] = useState("");
-  const [Description, setDescription] = useState("");
-
+const ExperiencesModal = ({ image, setImage }) => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.currentUser.userData._id);
-  const experiences = useSelector((state) => state.addExps.data);
+  const user = useSelector(state => state.currentUser.userData);
+  const experiencesShow = useSelector(state => state.modal.experiencesIsShowing);
+  const propExp = useSelector(state => state.modal.propelem);
 
-  const handleObj = (e) => {
+  const [employment, setEmployment] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [location, setLocation] = useState("");
+  const [startDate, setStartDate] = useState(Date);
+  const [endDate, setEndDate] = useState(Date);
+  const [description, setDescription] = useState("");
+
+  const handleObj = e => {
     dispatch(
       editExperience(
         {
-          role: Employment,
-          company: CompanyName,
-          startDate: StartDate,
-          endDate: EndDate,
-          description: Description,
-          area: Location,
+          role: employment,
+          company: companyName,
+          startDate: startDate,
+          endDate: endDate,
+          description: description,
+          area: location
         },
-        userId,
+        user._id,
         propExp._id,
         reRender
       )
     );
   };
 
-  const reRender = (data) => {
+  const handleImage = x => {
+    if (x) {
+      const formImg = new FormData();
+      formImg.append("experience", x);
+      console.log(formImg, "Questoqui");
+      dispatch(fetchEditImageExp(formImg, user._id, propExp._id, reRender));
+    }
+  };
+
+  const reRender = data => {
     setEmployment(data.role);
     setCompanyName(data.company);
     setStartDate(data.startDate);
     setEndDate(data.endDate);
     setDescription(data.description);
     setLocation(data.area);
+    setImage(data.image);
   };
 
   return (
@@ -59,58 +69,55 @@ const ExperiencesModal = () => {
         onHide={() => {
           dispatch(experiencesResetPropAction());
           experiencesHandleClose(dispatch);
-        }}
-      >
+        }}>
         <Modal.Header closeButton>
-          <Modal.Title>Aggiungi Esperienza</Modal.Title>
+          <Modal.Title>{propExp ? "Modifica esperienza" : "Aggiungi nuova esperienza"}</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
             if (propExp) {
-              console.log(e);
-
+              console.log("QUEST?");
               handleObj(e);
+              handleImage(image);
             } else {
               dispatch(
                 fetchAddExp(
                   {
-                    role: Employment,
-                    company: CompanyName,
-                    startDate: StartDate,
-                    endDate: EndDate, // could be null
-                    description: Description,
-                    area: Location,
+                    role: employment,
+                    company: companyName,
+                    startDate: startDate,
+                    endDate: endDate, // could be null
+                    description: description,
+                    area: location
                   },
-                  userId
+                  user._Id
                 )
               );
             }
             dispatch(experiencesResetPropAction());
-          }}
-        >
+          }}>
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Titolo</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Titolo dell' esperienza"
+                placeholder="es. Programmatore"
                 required
-                defaultValue={Employment ? Employment : ""}
-                onChange={(e) => {
+                defaultValue={employment ? employment : ""}
+                onChange={e => {
                   setEmployment(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Tipo di Esperienza </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="es. full-time"
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-              />
+              <Form.Select aria-label="Default select example">
+                <option>Full-time</option>
+                <option value="1">Part-time</option>
+                <option value="2">Remote</option>
+                <option value="3">OnTheBeach</option>
+              </Form.Select>
               <Form.Text className="text-muted">
                 Apprendi di piu' sui <span variant="primary">tipi di lavoro</span>
               </Form.Text>
@@ -120,8 +127,8 @@ const ExperiencesModal = () => {
               <Form.Control
                 type="text"
                 placeholder="es. EPICODE"
-                defaultValue={propExp ? propExp.company : ""}
-                onChange={(e) => {
+                defaultValue={companyName ? companyName : ""}
+                onChange={e => {
                   setCompanyName(e.target.value);
                 }}
               />
@@ -131,8 +138,8 @@ const ExperiencesModal = () => {
               <Form.Control
                 type="text"
                 placeholder="es. Milano"
-                defaultValue={propExp ? propExp.area : ""}
-                onChange={(e) => {
+                defaultValue={location ? location : ""}
+                onChange={e => {
                   setLocation(e.target.value);
                 }}
               />
@@ -142,28 +149,19 @@ const ExperiencesModal = () => {
               <Form.Control
                 type="text"
                 placeholder="es. remoto, in ufficio"
-                onChange={(e) => {
-                  setLocationType(e.target.value);
-                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Check
                 type="checkbox"
                 label={`in questo momento e' il mio impiego`}
-                onChange={() => {
-                  if (Currentlyworking === true) setCurrentlyWorking(false);
-                  else {
-                    setCurrentlyWorking(true);
-                  }
-                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Data di inizio</Form.Label>
               <Form.Control
                 type="date"
-                onChange={(e) => {
+                onChange={e => {
                   setStartDate(e.target.value);
                 }}
               />
@@ -172,41 +170,48 @@ const ExperiencesModal = () => {
               <Form.Label>Data di termine</Form.Label>
               <Form.Control
                 type="date"
-                onChange={(e) => {
+                onChange={e => {
                   setEndDate(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label={`termina l'impiego corrente`} />
+              <Form.Check
+                type="checkbox"
+                label={`termina l'impiego corrente`}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label={`termina la posizione corrente`} />
+              <Form.Check
+                type="checkbox"
+                label={`termina la posizione corrente`}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Settore</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="es. Software Development"
-                onChange={(e) => {
-                  setIndustry(e.target.value);
-                }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Descrizione</Form.Label>
               <Form.Control
-                type="text"
+                as="textarea"
+                rows={3}
                 placeholder="..."
-                defaultValue={propExp ? propExp.description : ""}
-                onChange={(e) => {
+                defaultValue={description ? description : ""}
+                onChange={e => {
                   setDescription(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Headlines del profilo</Form.Label>
-              <Form.Control placeholder="qui appariranno le tue headline" disabled />
+              <Form.Control
+                placeholder="qui appariranno le tue headline"
+                disabled
+              />
               <Form.Text className="text-muted">Appariranno sotto il tuo nome in cima al tuo profilo</Form.Text>
             </Form.Group>
             <h4 className="fw-bold">Skills</h4>
@@ -219,9 +224,25 @@ const ExperiencesModal = () => {
               Aggiungi media come immagini, documenti, siti o presentazioni, apprendi di piu' in merito ai{" "}
               <span variant="primary">media supportati</span>
             </p>
-            <Button className="btn btn-light text-primary border-3 border-primary fw-bold rounded-pill fs-5">
+            {/* <Button className="btn btn-light text-primary border-3 border-primary fw-bold rounded-pill fs-5">
               <Plus /> Add media
-            </Button>
+            </Button> */}
+            <Form.Group className="mb-3">
+              <Dropzone>
+                {({ getRootProps, getInputProps, acceptedFiles }) => (
+                  <>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p className="btn btn-light text-primary border-3 border-primary fw-bold rounded-pill fs-5">
+                        <Plus />
+                        {acceptedFiles[0] ? acceptedFiles[0].path : "Add Media"}
+                      </p>
+                      {setImage(acceptedFiles[0])}
+                    </div>
+                  </>
+                )}
+              </Dropzone>
+            </Form.Group>
           </Modal.Body>
           <Modal.Footer>
             <Button
@@ -229,8 +250,7 @@ const ExperiencesModal = () => {
               onClick={() => {
                 dispatch(experiencesResetPropAction());
                 experiencesHandleClose(dispatch);
-              }}
-            >
+              }}>
               Close
             </Button>
             <Button
@@ -238,8 +258,7 @@ const ExperiencesModal = () => {
               type="submit"
               onClick={() => {
                 experiencesHandleClose(dispatch);
-              }}
-            >
+              }}>
               {propExp ? "Save Changes" : "Add Experience"}
             </Button>
           </Modal.Footer>
