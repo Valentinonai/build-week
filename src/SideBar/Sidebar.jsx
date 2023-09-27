@@ -71,7 +71,7 @@ const Sidebar = () => {
             <img src={userImg ? userImg : user} alt='user img' className='img-fluid object-fit-cover rounded-circle' />
             <img src={logoCompany} alt='company img' className='img-fluid object-fit-cover w-100' />
           </div>
-          <p className='mb-2'>Vasil, scopri le opportunità offerte da Wyser</p>
+          <p className='mb-2'>Vasil, scopri le opportunità offerte da Wyser!</p>
           <Button variant='outline-primary' className='rounded-4 py-1'>
             Segui
           </Button>
