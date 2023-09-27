@@ -2,9 +2,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const ProfileTopbar = () => {
-  const profile = useSelector((state) => state.currentUser.userData);
-
+const ProfileTopbar = ({ profile }) => {
   return (
     <Container fluid className="px-2">
       <Col className="bg-white rounded-3 border">
