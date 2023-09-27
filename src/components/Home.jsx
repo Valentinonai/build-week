@@ -10,6 +10,7 @@ import {
 } from "../redux/action";
 import SinglePost from "./SinglePost";
 import FormHome from "./FormHome";
+import NewsSidebar from "../SideBar/NewsSidebar";
 
 const Home = () => {
   const posts = useSelector((state) => state.post.data);
