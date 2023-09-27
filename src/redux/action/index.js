@@ -283,7 +283,8 @@ export const editExperience = (obj, userId, id) => {
       });
       if (risp.ok) {
         const data = await risp.json();
-        dispatch(editExp(data, id));
+        console.log(data);
+        dispatch(editExp(obj, id));
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);

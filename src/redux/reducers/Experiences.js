@@ -23,11 +23,9 @@ const addExp = (state = initialState, action) => {
       };
     case EDIT_EXP: {
       let app = null;
-      console.log("siamo in CASE");
+
       for (let i = 0; i < state.data.length; i++) {
-        console.log("siamo in FOR");
         if (state.data[i]._id === action.payload.id) {
-          console.log("siamo in IF");
           app = { ...state.data[i], ...action.payload.data };
           break;
         }

@@ -24,6 +24,29 @@ const ExperiencesModal = () => {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.currentUser.userData._id);
 
+  const handleObj = e => {
+    setEmployment(e.target[0].value);
+    setCompanyName(e.target[2].value);
+    setStartDate(e.target[6].value);
+    setEndDate(e.target[7].value);
+    setDescription(e.target[11].value);
+    setLocation(e.target[3].value);
+    dispatch(
+      editExperience(
+        {
+          role: Employment,
+          company: CompanyName,
+          startDate: StartDate,
+          endDate: EndDate,
+          description: Description,
+          area: Location,
+        },
+        userId,
+        propExp._id
+      )
+    );
+  };
+
   return (
     <>
       <Modal
@@ -40,26 +63,8 @@ const ExperiencesModal = () => {
           onSubmit={e => {
             e.preventDefault();
             if (propExp) {
-              setEmployment(e.target[0].value);
-              setCompanyName(e.target[2].value);
-              setStartDate(e.target[6].value);
-              setEndDate(e.target[7].value);
-              setDescription(e.target[11].value);
-              setLocation(e.target[3].value);
-              dispatch(
-                editExperience(
-                  {
-                    role: Employment,
-                    company: CompanyName,
-                    startDate: StartDate,
-                    endDate: EndDate, // could be null
-                    description: Description,
-                    area: Location,
-                  },
-                  userId,
-                  propExp._id
-                )
-              );
+              console.log(e);
+              handleObj(e);
             } else {
               dispatch(
                 fetchAddExp(
