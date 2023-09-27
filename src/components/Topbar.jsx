@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Col, Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import ProfileTopbar from "./ProfileTopbar";
 
 const Topbar = () => {
@@ -156,11 +155,14 @@ const Topbar = () => {
                   height="24"
                 />
               </div>
-              <NavDropdown>
-                <DropdownItem className="p-0">
+              <div className="d-flex align-items-baseline ">
+                <p>Tu</p>
+                <NavDropdown
+                  className=""
+                  align={{ sx: "start" }}>
                   <ProfileTopbar />
-                </DropdownItem>
-              </NavDropdown>
+                </NavDropdown>
+              </div>
             </div>
             <div className="d-flex flex-column align-items-center border-start">
               <svg

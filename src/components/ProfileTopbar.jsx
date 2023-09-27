@@ -8,7 +8,7 @@ const ProfileTopbar = () => {
   return (
     <Container
       fluid
-      className="px-2">
+      className="px-2 ">
       <Col className="bg-white rounded-3 border">
         <Row className="d-flex">
           <Col
