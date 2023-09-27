@@ -28,7 +28,32 @@ const Home = () => {
       });
       if (resp.ok) {
         const data = await resp.json();
+
         setProfile(data);
+      } else {
+        dispatch(hasErrorTrueAction());
+        throw new Error(resp.status);
+      }
+    } catch (error) {
+      dispatch(addErrorMessageAction(error.message));
+      console.log("si e' verificato un errore", error.message);
+    } finally {
+      dispatch(isLoadingFalseAction());
+    }
+  };
+  const delPost = async (postId) => {
+    try {
+      console.log("cancella");
+      dispatch(isLoadingTrueAction());
+      const resp = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (resp.ok) {
+        dispatch(fetchPost());
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(resp.status);
@@ -44,6 +69,7 @@ const Home = () => {
     dispatch(fetchPost());
     fetchUser();
   }, []);
+
   return isLoading ? (
     <Spinner animation="border" role="status">
       <span className="visually-hidden">Loading...</span>
@@ -57,9 +83,11 @@ const Home = () => {
           {posts
             .filter((elem) => elem.user._id === profile._id)
             .map((elem, i) => (
-              <SinglePost elem={elem} key={`post${i}`} />
+              <SinglePost elem={elem} key={`post${i}`} cancella={delPost} profile={profile} />
             ))}
-          {posts.map((elem, i) => i < 5 && <SinglePost elem={elem} key={`post${i}`} />)}
+          {posts.map(
+            (elem, i) => i < 5 && <SinglePost elem={elem} key={`post${i}`} cancella={delPost} profile={profile} />
+          )}
         </Col>
         <Col xs={2}></Col>
       </Row>

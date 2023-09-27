@@ -1,7 +1,13 @@
 import { Button, Image, Modal } from "react-bootstrap";
 import { ImageFill, Calendar3, ThreeDots, PatchPlusFill } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { addErrorMessageAction, hasErrorTrueAction, isLoadingFalseAction, isLoadingTrueAction } from "../redux/action";
+import {
+  addErrorMessageAction,
+  fetchPost,
+  hasErrorTrueAction,
+  isLoadingFalseAction,
+  isLoadingTrueAction,
+} from "../redux/action";
 import { useState } from "react";
 
 const ModaleAddPost = ({ handleClose, show, profile }) => {
@@ -22,6 +28,7 @@ const ModaleAddPost = ({ handleClose, show, profile }) => {
       });
       if (risp.ok) {
         setPostText("");
+        dispatch(fetchPost());
       } else {
         dispatch(hasErrorTrueAction());
         throw new Error(risp.status);
