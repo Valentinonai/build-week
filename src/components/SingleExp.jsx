@@ -1,19 +1,19 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { experiencesHandleShow, fetchDelete } from "../redux/action";
+import { fetchDelete } from "../redux/action";
 
-const SingleExp = (props) => {
+const SingleExp = props => {
   const dispatch = useDispatch();
   return (
-    <Card className='p-2'>
+    <Card className="p-2">
       <Row>
         <Col xs={4}>
           <div>
             <img
-              src='https://www.venetoformazione.it/wp-content/uploads/2022/02/ottimizzare-immagini-display-retina.jpg'
-              alt='img'
-              width='100%'
+              src="https://www.venetoformazione.it/wp-content/uploads/2022/02/ottimizzare-immagini-display-retina.jpg"
+              alt="img"
+              width="100%"
             />
           </div>
         </Col>
@@ -22,16 +22,12 @@ const SingleExp = (props) => {
           <h6>{props.elem.role}</h6>
           <p>{props.elem.description}</p>
         </Col>
+        {console.log(props.elem, "GUARDAME")}
         <Col xs={2}>
-          <div className='d-flex justify-content-end'>
-            <Pencil
-              className='mx-2'
-              onClick={() => {
-                experiencesHandleShow(dispatch);
-              }}
-            />
+          <div className="d-flex justify-content-end">
+            <Pencil className="mx-2" />
             <Trash
-              className='mx-2'
+              className="mx-2"
               onClick={() => {
                 dispatch(fetchDelete(props.elem.user, props.elem._id));
               }}
