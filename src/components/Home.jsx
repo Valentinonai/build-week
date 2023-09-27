@@ -117,23 +117,25 @@ const Home = () => {
                   setIdPost={setIdPost}
                 />
               ))}
-          {posts.map(
-            (elem, i) =>
-              i < 5 && (
-                <SinglePost
-                  elem={elem}
-                  key={`post${i}`}
-                  cancella={delPost}
-                  profile={profile}
-                  handleClose={handleClose}
-                  handleShow={handleShow}
-                  show={show}
-                  setPostText={setPostText}
-                  setModifica={setModifica}
-                  setIdPost={setIdPost}
-                />
-              )
-          )}
+          {posts
+            .reverse()
+            .map(
+              (elem, i) =>
+                i < 5 && (
+                  <SinglePost
+                    elem={elem}
+                    key={`post${i}`}
+                    cancella={delPost}
+                    profile={profile}
+                    handleClose={handleClose}
+                    handleShow={handleShow}
+                    show={show}
+                    setPostText={setPostText}
+                    setModifica={setModifica}
+                    setIdPost={setIdPost}
+                  />
+                )
+            )}
         </Col>
         <Col xs={12} lg={3}>
           <NewsSidebar />
