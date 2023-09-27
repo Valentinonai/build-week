@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import { EXPERIENCES_PROPS, experiencesHandleShow, experiencesPropAction, fetchDelete } from "../redux/action";
 
 const SingleExp = props => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(props);
   return (
     <Card className="p-2">
       <Row>
         <Col xs={4}>
           <div>
             <img
-              src="https://www.venetoformazione.it/wp-content/uploads/2022/02/ottimizzare-immagini-display-retina.jpg"
+              src={props.elem.image}
               alt="img"
               width="100%"
             />

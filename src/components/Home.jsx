@@ -6,7 +6,7 @@ import {
   fetchPost,
   hasErrorTrueAction,
   isLoadingFalseAction,
-  isLoadingTrueAction,
+  isLoadingTrueAction
 } from "../redux/action";
 import SinglePost from "./SinglePost";
 import FormHome from "./FormHome";
@@ -15,8 +15,8 @@ import PromoCard from "../SideBar/PromoCard";
 import SidebarFooter from "../SideBar/SidebarFooter";
 
 const Home = () => {
-  const posts = useSelector((state) => state.post.data);
-  const isLoading = useSelector((state) => state.currentUser.isLoading);
+  const posts = useSelector(state => state.post.data);
+  const isLoading = useSelector(state => state.currentUser.isLoading);
   const dispatch = useDispatch();
   const [profile, setProfile] = useState(null);
   const [postText, setPostText] = useState();
@@ -29,8 +29,8 @@ const Home = () => {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+        }
       });
       if (resp.ok) {
         const data = await resp.json();
@@ -46,7 +46,7 @@ const Home = () => {
       dispatch(isLoadingFalseAction());
     }
   };
-  const delPost = async (postId) => {
+  const delPost = async postId => {
     try {
       console.log("cancella");
       dispatch(isLoadingTrueAction());
@@ -54,8 +54,8 @@ const Home = () => {
         method: "DELETE",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+        }
       });
       if (resp.ok) {
         dispatch(fetchPost());
@@ -79,14 +79,22 @@ const Home = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return isLoading ? (
-    <Spinner animation="border" role="status">
+    <Spinner
+      animation="border"
+      role="status">
       <span className="visually-hidden">Loading...</span>
     </Spinner>
   ) : (
     <Container fluid="lg">
       <Row>
-        <Col xs={12} md={2} lg={2}></Col>
-        <Col xs={12} md={10} lg={7}>
+        <Col
+          xs={12}
+          md={2}
+          lg={2}></Col>
+        <Col
+          xs={12}
+          md={10}
+          lg={7}>
           <FormHome
             profile={profile}
             handleClose={handleClose}
@@ -99,7 +107,7 @@ const Home = () => {
             idPost={idPost}
           />
           {posts
-            .filter((elem) => elem.user._id === profile._id)
+            .filter(elem => elem.user._id === profile._id)
             .reverse()
             .map((elem, i) => (
               <SinglePost
@@ -133,7 +141,9 @@ const Home = () => {
               )
           )}
         </Col>
-        <Col xs={12} lg={3}>
+        <Col
+          xs={12}
+          lg={3}>
           <NewsSidebar />
           <div style={{ position: "sticky", top: "100px" }}>
             <PromoCard />
