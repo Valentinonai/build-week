@@ -11,9 +11,12 @@ import imgVideo3 from "./img/vid3.png";
 import { Link } from "react-bootstrap-icons";
 import PromoCard from "./PromoCard";
 import { useEffect, useState } from "react";
+import { usersListHandleShow } from "../redux/action";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
   const [userImg, setUserImg] = useState("");
+  const dispatch = useDispatch();
 
   const fetchUser = async () => {
     try {
@@ -80,12 +83,11 @@ const Sidebar = () => {
 
       <div className='card-users p-3 text-start'>
         <p className='mb-2'>Persone che potresti conoscere</p>
-
-        <UserCards />
+        <UserCards userMax={5} />
         <div className='d-flex justify-content-center '>
-          <Link to={"/"} className='text-secondary'>
+          <Button className='bg-transparent text-black border-0' onClick={() => usersListHandleShow(dispatch)}>
             Mostra tutto
-          </Link>
+          </Button>
         </div>
       </div>
 

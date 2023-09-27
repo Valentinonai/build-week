@@ -14,7 +14,8 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(fetchProfileData(params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params.id]);
+  // aggiunta dipendenza in modo che venga ripètuta la fetch in base al cambio del id nel url.
   return (
     currentUser && (
       <Container fluid='lg'>
