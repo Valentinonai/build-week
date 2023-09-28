@@ -49,7 +49,6 @@ const Sidebar = () => {
             <span>Lingua del profilo</span>
             <p>italiano</p>
           </div>
-          <BsPencil />
         </div>
 
         <hr className='p-0' />
@@ -59,7 +58,6 @@ const Sidebar = () => {
             <span>Public profile & URL</span>
             <p>www.linkedin.com</p>
           </div>
-          <BsPencil />
         </div>
       </div>
 

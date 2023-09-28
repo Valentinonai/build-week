@@ -18,3 +18,14 @@
   border: none;
   outline: none;
 }
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown-toggle {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}

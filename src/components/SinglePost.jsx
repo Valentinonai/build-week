@@ -1,5 +1,7 @@
 import { Col, Image, Row } from "react-bootstrap";
-import { PlusLg, Trash, PencilFill } from "react-bootstrap-icons";
+import { PlusLg, Trash, PencilFill, DashLg } from "react-bootstrap-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addFriendAction, deleteFriendAction } from "../redux/action/listFriendsAction";
 
 const SinglePost = ({
   elem,
@@ -12,6 +14,8 @@ const SinglePost = ({
   setModifica,
   setIdPost,
 }) => {
+  const list = useSelector((state) => state.listFriends.list);
+  const dispatch = useDispatch();
   const calcolaData = () => {
     const createdate = new Date(elem.createdAt);
     const createMin = createdate.getMinutes();
@@ -68,12 +72,30 @@ const SinglePost = ({
             </div>
           </Col>
           <Col xs={12} sm={3} className="text-primary text-end ">
-            {profile._id !== elem.user._id && (
-              <>
-                <PlusLg className="me-2" style={{ cursor: "pointer" }} />
-                <span className="d-none d-sm-inline-block">SEGUI</span>
-              </>
-            )}
+            {profile._id !== elem.user._id &&
+              (list.find((x) => x._id === elem.user._id) ? (
+                <>
+                  <DashLg
+                    className="me-2"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      dispatch(deleteFriendAction(elem.user._id));
+                    }}
+                  />
+                  <span className="d-none d-sm-inline-block">SEGUI GIA'</span>
+                </>
+              ) : (
+                <>
+                  <PlusLg
+                    className="me-2"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      dispatch(addFriendAction(elem.user));
+                    }}
+                  />
+                  <span className="d-none d-sm-inline-block">SEGUI</span>
+                </>
+              ))}
             {profile._id === elem.user._id && (
               <>
                 <PencilFill

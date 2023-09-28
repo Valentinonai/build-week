@@ -14,13 +14,30 @@ const Formazione = () => {
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const user = useSelector((state) => state.currentUser.userData);
   const [image, setImage] = useState(user.image);
+  const loggedId = useSelector((state) => state.currentUser.idLoggedUser);
+
+  const [employment, setEmployment] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [location, setLocation] = useState("");
+  const [startDate, setStartDate] = useState(Date);
+  const [endDate, setEndDate] = useState(Date);
+  const [description, setDescription] = useState("");
+  const reRender = (data) => {
+    setEmployment(data.role);
+    setCompanyName(data.company);
+    setStartDate(data.startDate);
+    setEndDate(data.endDate);
+    setDescription(data.description);
+    setLocation(data.area);
+    setImage(data.image);
+  };
   useEffect(() => {
-    user && dispatch(fetchExperiencies(params.id === "me" ? user._id : params.id));
+    dispatch(fetchExperiencies(params.id === "me" ? loggedId : params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
   return (
     !isLoading && (
-      <div className='border border-1 rounded mt-2 p-2'>
+      <div className="border border-1 rounded mt-2 p-2">
         <Row>
           <Col xs={8}>
             <div>
@@ -28,20 +45,42 @@ const Formazione = () => {
             </div>
           </Col>
           <Col xs={4}>
-            <div className='d-flex justify-content-end align-items-center'>
-              <PlusLg className='me-3' onClick={() => experiencesHandleShow(dispatch)} />
-            </div>
+            {(params.id === loggedId || params.id === "me") && (
+              <div className="d-flex justify-content-end align-items-center">
+                <PlusLg className="me-3" onClick={() => experiencesHandleShow(dispatch)} />
+              </div>
+            )}
           </Col>
         </Row>
         <Row>
           {experiences &&
             experiences.map((elem, i) => (
               <Col xs={12} key={i}>
-                <SingleExp elem={elem} />
+                <SingleExp elem={elem} reRender={reRender} />
               </Col>
             ))}
         </Row>
-        <ExperiencesModal image={image} setImage={setImage} />
+        <ExperiencesModal
+          image={image}
+          setImage={setImage}
+          objAdd={{
+            employment: employment,
+            companyName: companyName,
+            location: location,
+            startDate: startDate,
+            endDate: endDate,
+            description: description,
+          }}
+          setObjAdd={{
+            setEmployment: setEmployment,
+            setCompanyName: setCompanyName,
+            setLocation: setLocation,
+            setStartDate: setStartDate,
+            setEndDate: setEndDate,
+            setDescription: setDescription,
+          }}
+          reRender={reRender}
+        />
       </div>
     )
   );

@@ -1,8 +1,11 @@
 import { Button, Col, Row } from "react-bootstrap";
 import { PencilFill, ArrowRightShort } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 const Resources = () => {
+  const param = useParams();
+  const isLoggedId = useSelector((state) => state.currentUser.isLoggedUser);
   return (
     <div className="border border-1 rounded mt-2">
       <Row className="p-2">
@@ -23,12 +26,14 @@ const Resources = () => {
           </p>
         </Col>
         <Col xs={4}>
-          <div className="d-flex justify-content-end align-items-center">
-            <Button variant="outline-primary" style={{ borderRadius: "20px" }} className="me-2 py-1">
-              Crea un post
-            </Button>
-            <PencilFill />
-          </div>
+          {(param.id === isLoggedId || param.id === "me") && (
+            <div className="d-flex justify-content-end align-items-center">
+              <Button variant="outline-primary" style={{ borderRadius: "20px" }} className="me-2 py-1">
+                Crea un post
+              </Button>
+              <PencilFill />
+            </div>
+          )}
         </Col>
       </Row>
       <div
