@@ -4,12 +4,12 @@ import SidebarRete from "./SidebarRete";
 
 const Rete = () => {
   return (
-    <Container fluid="lg">
+    <Container fluid='lg'>
       <Row>
-        <Col xs={12} md={4}>
+        <Col xs={12} md={3}>
           <SidebarRete />
         </Col>
-        <Col xs={12} md={8}>
+        <Col xs={12} md={9}>
           <ReteFav />
         </Col>
       </Row>

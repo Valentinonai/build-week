@@ -13,21 +13,21 @@ import JobsMainPage from "./components/JobsMainPage";
 import Rete from "./components/Rete";
 
 function App() {
-  const error = useSelector(state => state.currentUser.hasError);
-  const errorMsg = useSelector(state => state.currentUser.errorMessage);
+  const error = useSelector((state) => state.currentUser.hasError);
+  const errorMsg = useSelector((state) => state.currentUser.errorMessage);
   return (
-    <div className="App">
+    <div className='App'>
       {error ? (
-        <Alert variant="danger">{errorMsg}</Alert>
+        <Alert variant='danger'>{errorMsg}</Alert>
       ) : (
         <BrowserRouter>
           <Topbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="profile/:id" element={<ProfilePage />} />
-            <Route path="lavoro/" element={<JobsMainPage />} />
-            <Route path="/rete" element={<Rete />} />
-            <Route path="favoritesJobs" element={<FavoritesJobs />} />
+            <Route path='/' element={<Home />} />
+            <Route path='profile/:id' element={<ProfilePage />} />
+            <Route path='lavoro/' element={<JobsMainPage />} />
+            <Route path='/rete' element={<Rete />} />
+            <Route path='favoritesJobs' element={<FavoritesJobs />} />
           </Routes>
           <Message />
           <Footer></Footer>
