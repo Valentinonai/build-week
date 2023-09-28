@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { PlusLg, PencilFill } from "react-bootstrap-icons";
+import { PlusLg } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { experiencesHandleShow, fetchExperiencies } from "../redux/action";
 import { useParams } from "react-router-dom";
