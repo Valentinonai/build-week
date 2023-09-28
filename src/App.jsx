@@ -8,6 +8,7 @@ import Topbar from "./components/Topbar";
 import Home from "./components/Home";
 import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
+import FavoritesJobs from "./components/FavoritesJobs";
 
 function App() {
   const error = useSelector((state) => state.currentUser.hasError);
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='profile/:id' element={<ProfilePage />} />
+            <Route path='favoritesJobs' element={<FavoritesJobs />} />
           </Routes>
           <Message />
           <Footer></Footer>
