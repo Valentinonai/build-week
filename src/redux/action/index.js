@@ -77,7 +77,7 @@ export const addCurrentUserDataAction = (dataUser) => ({
 
 //------------------FETCH SECTION------------------------
 
-//!---------------FETCH PROFILi---------------------
+//!---------------FETCH PROFILI---------------------
 export const fetchProfileData = (param) => {
   return async (dispatch) => {
     dispatch(isLoadingTrueAction());
@@ -266,7 +266,7 @@ export const fetchDelete = (idUser, idExp) => {
   };
 };
 
-//!------------Modifica experience----------------------
+//!------------MODIFICA EXPERIENCE----------------------
 
 export const editExperience = (obj, userId, id, fn) => {
   return async (dispatch) => {
@@ -295,6 +295,28 @@ export const editExperience = (obj, userId, id, fn) => {
       console.log("si e' verificato un errore", error.message);
     } finally {
       dispatch(isLoadingFalseAction());
+    }
+  };
+};
+
+//!------------FETCH JOB----------------------
+
+export const searchJobAction = (search) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=${search}", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (response.ok) {
+        const jobs = await response.json();
+        dispatch({ type: JOBS, payload: jobs.data });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };
