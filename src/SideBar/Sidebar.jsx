@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { BsPencil, BsThreeDots } from "react-icons/bs";
 import user from "./img/user.png";
 import logoCompany from "./img/logoComp.png";
@@ -81,7 +81,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className='card-users p-3 text-start'>
+      <Card className='card-users p-3 text-start'>
         <p className='mb-2'>Persone che potresti conoscere</p>
         <UserCards userMax={5} />
         <div className='d-flex justify-content-center '>
@@ -89,7 +89,7 @@ const Sidebar = () => {
             Mostra tutto
           </Button>
         </div>
-      </div>
+      </Card>
 
       <div className='card p-3 text-start'>
         <div className='d-flex align-items-center'>
