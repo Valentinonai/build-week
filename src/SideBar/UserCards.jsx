@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { BsPersonAdd } from "react-icons/bs";
+import { usersListHandleClose } from "../redux/action";
+import { useDispatch } from "react-redux";
 
 const UserCards = (props) => {
   const [users, setusers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -33,6 +36,7 @@ const UserCards = (props) => {
 
   const goToUser = (userId) => {
     navigate("/profile/" + userId);
+    usersListHandleClose(dispatch);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
