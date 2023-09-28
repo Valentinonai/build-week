@@ -8,6 +8,7 @@ const UserCards = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
   const fetchUsers = async () => {
     try {
       const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
@@ -32,6 +33,7 @@ const UserCards = (props) => {
 
   const goToUser = (userId) => {
     navigate("/profile/" + userId);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
