@@ -95,8 +95,11 @@ const SinglePost = ({
               </>
             )}
           </Col>
+          <p className="">{elem.text}</p>
+          <Col xs={12}>
+            <Image src={elem.image ? elem.image : ""} width="100%" className="rounded-4 shadow" />
+          </Col>
         </Row>
-        <p className="">{elem.text}</p>
       </div>
     )
   );

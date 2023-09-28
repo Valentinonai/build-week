@@ -8,10 +8,11 @@ import Topbar from "./components/Topbar";
 import Home from "./components/Home";
 import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
+import JobsMainPage from "./components/JobsMainPage";
 
 function App() {
-  const error = useSelector((state) => state.currentUser.hasError);
-  const errorMsg = useSelector((state) => state.currentUser.errorMessage);
+  const error = useSelector(state => state.currentUser.hasError);
+  const errorMsg = useSelector(state => state.currentUser.errorMessage);
   return (
     <div className="App">
       {error ? (
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="profile/:id" element={<ProfilePage />} />
+            <Route path="jobs/" element={<JobsMainPage />} />
           </Routes>
           <Message />
           <Footer></Footer>
