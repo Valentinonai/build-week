@@ -46,7 +46,6 @@ const ExperiencesModal = ({ image, setImage, objAdd, reRender, setObjAdd }) => {
       formImg.append("experience", x);
       console.log(formImg, "Questoqui");
       dispatch(fetchEditImageExp(formImg, user._id, propExp._id, reRender));
-      dispatch(fetchExperiencies(params.id === "me" ? user._id : params.id));
     }
   };
 
