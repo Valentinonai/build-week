@@ -12,9 +12,9 @@ const SinglePost = ({
   show,
   setPostText,
   setModifica,
-  setIdPost
+  setIdPost,
 }) => {
-  const list = useSelector(state => state.listFriends.list);
+  const list = useSelector((state) => state.listFriends.list);
   const dispatch = useDispatch();
   const calcolaData = () => {
     const createdate = new Date(elem.createdAt);
@@ -57,28 +57,23 @@ const SinglePost = ({
               roundedCircle
             />
           </Col>
-          <Col
-            sm={5}
-            lg={7}
-            className=" order-5 order-sm-0">
+          <Col sm={5} lg={7} className=" order-5 order-sm-0">
             <div className="d-flex flex-column">
               <h6>
                 {elem.user.name} {elem.user.surname}
               </h6>
               <p
                 className="w-100 mb-0"
-                style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", fontSize: "14px" }}>
+                style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", fontSize: "14px" }}
+              >
                 {elem.user.bio}
               </p>
               <p style={{ fontWeight: "300", fontSize: "12px" }}> {calcolaData()}</p>
             </div>
           </Col>
-          <Col
-            xs={12}
-            sm={3}
-            className="text-primary text-end ">
+          <Col xs={12} sm={3} className="text-primary text-end ">
             {profile._id !== elem.user._id &&
-              (list.find(x => x._id === elem.user._id) ? (
+              (list.find((x) => x._id === elem.user._id) ? (
                 <>
                   <DashLg
                     className="me-2"
@@ -87,7 +82,7 @@ const SinglePost = ({
                       dispatch(deleteFriendAction(elem.user._id));
                     }}
                   />
-                  <span className="d-none d-sm-inline-block">SEGUI GIA</span>
+                  <span className="d-none d-sm-inline-block">SEGUI GIA'</span>
                 </>
               ) : (
                 <>
@@ -124,11 +119,7 @@ const SinglePost = ({
           </Col>
           <p className="">{elem.text}</p>
           <Col xs={12}>
-            <Image
-              src={elem.image ? elem.image : ""}
-              width="100%"
-              className="rounded-4 shadow"
-            />
+            <Image src={elem.image ? elem.image : ""} width="100%" className="rounded-4 shadow" />
           </Col>
         </Row>
       </div>

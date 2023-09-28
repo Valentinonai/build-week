@@ -5,8 +5,8 @@ const Rete = () => {
   return (
     <Container fluid="lg">
       <Row>
-        <Col xs={12} md={4}></Col>
-        <Col xs={12} md={8}>
+        <Col xs={12} md={3}></Col>
+        <Col xs={12} md={9}>
           <ReteFav />
         </Col>
       </Row>
