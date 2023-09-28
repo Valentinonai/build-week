@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFriendAction, deleteFriendAction } from "../redux/action/listFriendsAction";
 import { BsPersonAdd } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ReteFav = () => {
   const fav = useSelector((state) => state.listFriends.list);
   const dispatch = useDispatch();
   const [users, setusers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const fetchUsers = async () => {
     try {
       const resp = await fetch("https://striveschool-api.herokuapp.com/api/profile/", {
@@ -63,7 +65,13 @@ const ReteFav = () => {
                   />
                 </div>
                 <Card.Body className="text-center mt-5">
-                  <Card.Title>
+                  <Card.Title
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      navigate(`/profile/${elem._id}`);
+                      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                    }}
+                  >
                     {elem.name} {elem.surname}
                   </Card.Title>
                   <Card.Text>{elem.title}</Card.Text>
@@ -114,7 +122,13 @@ const ReteFav = () => {
                       />
                     </div>
                     <Card.Body className="text-center mt-5">
-                      <Card.Title>
+                      <Card.Title
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          navigate(`/profile/${elem._id}`);
+                          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                        }}
+                      >
                         {elem.name} {elem.surname}
                       </Card.Title>
                       <Card.Text>{elem.title}</Card.Text>
