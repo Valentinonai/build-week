@@ -35,21 +35,24 @@ const Resources = () => {
               {post
                 .filter((elem) => elem.user._id === currentUser._id)
                 .map((elem, i) => (
-                  <div key={`attività${i}`} className="my-2 d-flex">
-                    <Image src={elem.user.image} width="80px" height="80px" roundedCircle />
-                    <div className="ms-4 pt-3">
-                      <h6
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          navigate(`/profile/${elem._id}`);
-                          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-                        }}
-                      >
-                        {elem.user.name} {elem.user.surname}
-                      </h6>
-                      <p>{elem.text}</p>
+                  <>
+                    <div key={`attività${i}`} className="my-2 d-flex">
+                      <Image src={elem.user.image} width="80px" height="80px" roundedCircle />
+                      <div className="ms-4 pt-3">
+                        <h6
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            navigate(`/profile/${elem._id}`);
+                            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                          }}
+                        >
+                          {elem.user.name} {elem.user.surname}
+                        </h6>
+                        <p>{elem.text}</p>
+                      </div>
                     </div>
-                  </div>
+                    <hr />
+                  </>
                 ))}
             </div>
           ) : (
