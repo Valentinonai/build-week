@@ -83,9 +83,11 @@ const Home = () => {
   const [page, setPage] = useState(1);
 
   return isLoading ? (
-    <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>
+    <div className="mt-5 d-flex justify-content-center">
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    </div>
   ) : (
     <Container fluid="lg">
       <Row>
@@ -124,6 +126,7 @@ const Home = () => {
                   setIdPost={setIdPost}
                 />
               ))}
+          <hr />
           <h3>Altri Post</h3>
           {posts
             .reverse()
