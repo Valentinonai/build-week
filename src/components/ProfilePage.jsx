@@ -15,15 +15,9 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(fetchProfileData(params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [params.id]);
   // aggiunta dipendenza in modo che venga ripètuta la fetch in base al cambio del id nel url.
-  return isLoading ? (
-    <div className="mt-5 d-flex justify-content-center">
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    </div>
-  ) : (
+  return (
     currentUser && (
       <Container fluid="lg">
         <Row>
