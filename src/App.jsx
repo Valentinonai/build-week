@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
 import JobsMainPage from "./components/JobsMainPage";
+import Rete from "./components/Rete";
 
 function App() {
   const error = useSelector(state => state.currentUser.hasError);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="profile/:id" element={<ProfilePage />} />
             <Route path="jobs/" element={<JobsMainPage />} />
+            <Route path="/rete" element={<Rete />} />
           </Routes>
           <Message />
           <Footer></Footer>

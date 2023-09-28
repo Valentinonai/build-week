@@ -7,25 +7,22 @@ import {
   experiencesHandleClose,
   experiencesResetPropAction,
   fetchAddExp,
-  fetchEditImageExp
+  fetchEditImageExp,
+  fetchExperiencies,
 } from "../redux/action";
 import { Plus } from "react-bootstrap-icons";
 import Dropzone from "react-dropzone";
+import { useParams } from "react-router-dom";
 
-const ExperiencesModal = ({ image, setImage }) => {
+const ExperiencesModal = ({ image, setImage, objAdd, reRender, setObjAdd }) => {
+  const { employment, companyName, location, startDate, endDate, description } = objAdd;
+  const { setEmployment, setCompanyName, setLocation, setStartDate, setEndDate, setDescription } = setObjAdd;
   const dispatch = useDispatch();
-  const user = useSelector(state => state.currentUser.userData);
-  const experiencesShow = useSelector(state => state.modal.experiencesIsShowing);
-  const propExp = useSelector(state => state.modal.propelem);
-
-  const [employment, setEmployment] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [location, setLocation] = useState("");
-  const [startDate, setStartDate] = useState(Date);
-  const [endDate, setEndDate] = useState(Date);
-  const [description, setDescription] = useState("");
-
-  const handleObj = e => {
+  const user = useSelector((state) => state.currentUser.userData);
+  const experiencesShow = useSelector((state) => state.modal.experiencesIsShowing);
+  const propExp = useSelector((state) => state.modal.propelem);
+  const params = useParams();
+  const handleObj = (e) => {
     dispatch(
       editExperience(
         {
@@ -34,7 +31,7 @@ const ExperiencesModal = ({ image, setImage }) => {
           startDate: startDate,
           endDate: endDate,
           description: description,
-          area: location
+          area: location,
         },
         user._id,
         propExp._id,
@@ -43,7 +40,7 @@ const ExperiencesModal = ({ image, setImage }) => {
     );
   };
 
-  const handleImage = x => {
+  const handleImage = (x) => {
     if (x) {
       const formImg = new FormData();
       formImg.append("experience", x);
@@ -52,30 +49,27 @@ const ExperiencesModal = ({ image, setImage }) => {
     }
   };
 
-  const reRender = data => {
-    setEmployment(data.role);
-    setCompanyName(data.company);
-    setStartDate(data.startDate);
-    setEndDate(data.endDate);
-    setDescription(data.description);
-    setLocation(data.area);
-    setImage(data.image);
-  };
+  useEffect(() => {
+    if (propExp) reRender(propExp);
+  }, [propExp, params.id]);
 
   return (
     <>
+      {console.log(employment)}
       <Modal
         show={experiencesShow}
         onHide={() => {
           dispatch(experiencesResetPropAction());
           experiencesHandleClose(dispatch);
-        }}>
+        }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>{propExp ? "Modifica esperienza" : "Aggiungi nuova esperienza"}</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault();
+
             if (propExp) {
               console.log("QUEST?");
               handleObj(e);
@@ -89,14 +83,15 @@ const ExperiencesModal = ({ image, setImage }) => {
                     startDate: startDate,
                     endDate: endDate, // could be null
                     description: description,
-                    area: location
+                    area: location,
                   },
                   user._Id
                 )
               );
             }
             dispatch(experiencesResetPropAction());
-          }}>
+          }}
+        >
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Titolo</Form.Label>
@@ -104,8 +99,8 @@ const ExperiencesModal = ({ image, setImage }) => {
                 type="text"
                 placeholder="es. Programmatore"
                 required
-                defaultValue={employment ? employment : ""}
-                onChange={e => {
+                value={employment ? employment : ""}
+                onChange={(e) => {
                   setEmployment(e.target.value);
                 }}
               />
@@ -127,8 +122,8 @@ const ExperiencesModal = ({ image, setImage }) => {
               <Form.Control
                 type="text"
                 placeholder="es. EPICODE"
-                defaultValue={companyName ? companyName : ""}
-                onChange={e => {
+                value={companyName ? companyName : ""}
+                onChange={(e) => {
                   setCompanyName(e.target.value);
                 }}
               />
@@ -138,30 +133,24 @@ const ExperiencesModal = ({ image, setImage }) => {
               <Form.Control
                 type="text"
                 placeholder="es. Milano"
-                defaultValue={location ? location : ""}
-                onChange={e => {
+                value={location ? location : ""}
+                onChange={(e) => {
                   setLocation(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Tipo di Lavoro</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="es. remoto, in ufficio"
-              />
+              <Form.Control type="text" placeholder="es. remoto, in ufficio" />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label={`in questo momento e' il mio impiego`}
-              />
+              <Form.Check type="checkbox" label={`in questo momento e' il mio impiego`} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Data di inizio</Form.Label>
               <Form.Control
                 type="date"
-                onChange={e => {
+                onChange={(e) => {
                   setStartDate(e.target.value);
                 }}
               />
@@ -170,29 +159,20 @@ const ExperiencesModal = ({ image, setImage }) => {
               <Form.Label>Data di termine</Form.Label>
               <Form.Control
                 type="date"
-                onChange={e => {
+                onChange={(e) => {
                   setEndDate(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label={`termina l'impiego corrente`}
-              />
+              <Form.Check type="checkbox" label={`termina l'impiego corrente`} />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label={`termina la posizione corrente`}
-              />
+              <Form.Check type="checkbox" label={`termina la posizione corrente`} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Settore</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="es. Software Development"
-              />
+              <Form.Control type="text" placeholder="es. Software Development" />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Descrizione</Form.Label>
@@ -200,18 +180,15 @@ const ExperiencesModal = ({ image, setImage }) => {
                 as="textarea"
                 rows={3}
                 placeholder="..."
-                defaultValue={description ? description : ""}
-                onChange={e => {
+                value={description ? description : ""}
+                onChange={(e) => {
                   setDescription(e.target.value);
                 }}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Headlines del profilo</Form.Label>
-              <Form.Control
-                placeholder="qui appariranno le tue headline"
-                disabled
-              />
+              <Form.Control placeholder="qui appariranno le tue headline" disabled />
               <Form.Text className="text-muted">Appariranno sotto il tuo nome in cima al tuo profilo</Form.Text>
             </Form.Group>
             <h4 className="fw-bold">Skills</h4>
@@ -250,7 +227,8 @@ const ExperiencesModal = ({ image, setImage }) => {
               onClick={() => {
                 dispatch(experiencesResetPropAction());
                 experiencesHandleClose(dispatch);
-              }}>
+              }}
+            >
               Close
             </Button>
             <Button
@@ -258,7 +236,8 @@ const ExperiencesModal = ({ image, setImage }) => {
               type="submit"
               onClick={() => {
                 experiencesHandleClose(dispatch);
-              }}>
+              }}
+            >
               {propExp ? "Save Changes" : "Add Experience"}
             </Button>
           </Modal.Footer>

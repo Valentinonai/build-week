@@ -1,4 +1,4 @@
-import { Button, Image, Modal } from "react-bootstrap";
+import { Alert, Button, Image, Modal } from "react-bootstrap";
 import { ImageFill, Calendar3, ThreeDots, PatchPlusFill, Check2 } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
 import {
@@ -16,30 +16,38 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
   const [image, setImage] = useState();
 
   const fetchNewPost = async () => {
-    try {
-      dispatch(isLoadingTrueAction());
-      const risp = await fetch(`https://striveschool-api.herokuapp.com/api/posts/`, {
-        method: "POST",
-        body: JSON.stringify({ text: postText }),
-        headers: {
-          "content-type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
-      });
-      if (risp.ok) {
-        setPostText("");
-        dispatch(fetchPost());
-        handleClose(false);
-      } else {
-        dispatch(hasErrorTrueAction());
-        throw new Error(risp.status);
+    if (postText) {
+      try {
+        dispatch(isLoadingTrueAction());
+        const risp = await fetch(`https://striveschool-api.herokuapp.com/api/posts/`, {
+          method: "POST",
+          body: JSON.stringify({ text: postText }),
+          headers: {
+            "content-type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+          },
+        });
+        if (risp.ok) {
+          const data = await risp.json();
+          setPostText("");
+          dispatch(fetchPost());
+          handleClose(false);
+          console.log(data);
+          image && handleImage(data._id);
+        } else {
+          dispatch(hasErrorTrueAction());
+          throw new Error(risp.status);
+        }
+      } catch (error) {
+        dispatch(addErrorMessageAction(error.message));
+        console.log("si e' verificato un errore", error.message);
+      } finally {
+        dispatch(isLoadingFalseAction());
       }
-    } catch (error) {
-      dispatch(addErrorMessageAction(error.message));
-      console.log("si e' verificato un errore", error.message);
-    } finally {
-      dispatch(isLoadingFalseAction());
+    } else {
+      window.alert("Inserisci il testo per creare un post");
+      setImage("");
     }
   };
   const fetchEditPost = async () => {
@@ -69,20 +77,23 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
       dispatch(isLoadingFalseAction());
     }
   };
-  const handleImage = async () => {
+  const handleImage = async (...parametro) => {
     const formImage = new FormData();
     formImage.append("post", image);
     console.log(formImage.get("post"));
     try {
       dispatch(isLoadingTrueAction());
-      const risp = await fetch(`https://striveschool-api.herokuapp.com/api/posts/${idPost}`, {
-        method: "POST",
-        body: formImage,
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
-      });
+      const risp = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${parametro[0] ? parametro[0] : idPost}`,
+        {
+          method: "POST",
+          body: formImage,
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+          },
+        }
+      );
       if (risp.ok) {
         setImage(null);
         dispatch(fetchPost());
@@ -128,7 +139,7 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
               }}
             ></textarea>
             <div className="mt-3">
-              {modifica && (
+              {
                 <Button className="btn btn-light rounded-circle  text-secondary" style={{ position: "relative" }}>
                   <Dropzone>
                     {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -142,11 +153,8 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
                   </Dropzone>
                   {image ? <Check2 /> : <ImageFill />}
                 </Button>
-              )}
+              }
 
-              {/* <Button className="rounded-circle  text-secondary" variant="light">
-                <ImageFill />
-              </Button> */}
               <Button className="rounded-circle ms-2 text-secondary" variant="light">
                 <Calendar3 />
               </Button>
@@ -163,7 +171,9 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
             <Button
               className="text-secondary rounded-5"
               variant="light"
-              onClick={(handleClose, modifica ? fetchEditPost : fetchNewPost, postText && handleImage)}
+              onClick={() => (
+                handleClose(), modifica ? fetchEditPost() : fetchNewPost(), image && modifica && handleImage()
+              )}
             >
               {modifica ? "Modifica" : "Pubblica"}
             </Button>
