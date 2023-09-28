@@ -7,6 +7,7 @@ import profileReducer from "../reducers/profileReducer";
 import modalReducer from "../reducers/modalReducer";
 import postReducers from "../reducers/postReducers";
 import addExp from "../reducers/Experiences";
+import mainReducer from "../reducers/JobsReducer";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   post: postReducers,
   addExps: addExp,
+  linkedin: mainReducer,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);

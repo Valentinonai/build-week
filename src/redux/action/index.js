@@ -30,6 +30,10 @@ export const ADD_EXPERIENCES_NEW = "ADD_EXPERIENCES_NEW";
 export const IS_DELETED = "IS_DELETED";
 export const EDIT_EXP = "EDIT_EXP";
 
+export const ADD_FAVOURITE_JOBS = "ADD_FAVOURITE_JOBS";
+export const REMOVE_FAVOURITE_JOBS = "REMOVE_FAVOURITE_JOBS";
+export const GET_LIST_WORKS = "GET_LIST_WORKS";
+
 export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
 export const handleClose = (dispatch) => dispatch(modalOffAction());
@@ -338,22 +342,73 @@ export const editExperience = (obj, userId, id, fn) => {
 
 //!------------FETCH JOB----------------------
 
-export const searchJobAction = (search) => {
-  return async (dispatch) => {
+//!-----------ADD & REMOVE JOBS---------------
+
+export const addJobs = (props) => ({
+  type: ADD_FAVOURITE_JOBS,
+  payload: props,
+});
+
+export const removeJobs = (props) => ({
+  type: REMOVE_FAVOURITE_JOBS,
+  payload: props,
+});
+
+export const getListWorkAction = (query) => {
+  return async (dispatch, getState) => {
     try {
-      const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=${search}", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
-      });
-      if (response.ok) {
-        const jobs = await response.json();
-        dispatch({ type: JOBS, payload: jobs.data });
+      let res = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=" + query + "&limit=20");
+
+      if (res.ok) {
+        let works = await res.json();
+        dispatch({
+          type: GET_LIST_WORKS,
+          payload: works,
+        });
       }
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+// export const searchJobAction = (search) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=${search}", {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization:
+//             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+//         },
+//       });
+//       if (response.ok) {
+//         const jobs = await response.json();
+//         dispatch({ type: JOBS, payload: jobs.data });
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
+
+// export const searchJob = () => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs", {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization:
+//             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+//         },
+//       });
+//       if (response.ok) {
+//         const jobs = await response.json();
+//         console.log(jobs, "guardami");
+//         dispatch({ type: JOBS, payload: jobs.data });
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
