@@ -11,11 +11,13 @@ import { Alert } from "react-bootstrap";
 import FavoritesJobs from "./components/FavoritesJobs";
 import JobsMainPage from "./components/JobsMainPage";
 import Rete from "./components/Rete";
+import { useState } from "react";
 
 function App() {
   const error = useSelector((state) => state.currentUser.hasError);
   const errorMsg = useSelector((state) => state.currentUser.errorMessage);
-  console.log(window.location.pathname);
+  const [percorso, setPercorso] = useState(window.location.pathname);
+
   return (
     <div className="App">
       {error ? (
@@ -31,7 +33,6 @@ function App() {
             <Route path="favoritesJobs" element={<FavoritesJobs />} />
           </Routes>
           <Message />
-          {window.location.pathname !== "/lavoro" && window.location.pathname !== "/rete" && <Footer></Footer>}
         </BrowserRouter>
       )}
     </div>

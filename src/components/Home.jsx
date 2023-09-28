@@ -89,7 +89,7 @@ const Home = () => {
       </Spinner>
     </div>
   ) : (
-    <Container fluid="lg">
+    <Container fluid="lg" className="mb-5">
       <Row>
         <Col xs={12} md={2} lg={2}>
           <Sidebar profile={profile} />
