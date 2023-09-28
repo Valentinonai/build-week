@@ -1,5 +1,5 @@
 import { hover } from "@testing-library/user-event/dist/hover";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,11 +7,13 @@ const ProfileTopbar = ({ profile }) => {
   return (
     <Container fluid className="px-2 ">
       <Row className="d-flex">
-        <Col xs={4} className="mt-2 ms-2">
-          <img
+        <Col xs={4} className="">
+          <Image
             src={profile ? profile.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
             alt="profile-img"
-            className="img-profile-dropnav img-fluid rounded-circle  "
+            roundedCircle
+            width="100%"
+            height="88.02px"
           />
         </Col>
         <Col className=" d-flex justify-content-start flex-column ps-0 pt-2">
@@ -19,7 +21,15 @@ const ProfileTopbar = ({ profile }) => {
         </Col>
       </Row>
       <Row className="px-4">
-        <Link className="btn btn-outline-primary rounded-pill py-1 my-2 " to={"profile/me"}>
+        <Link
+          className="btn btn-outline-primary rounded-pill py-1 my-2 "
+          to={"profile/me"}
+          onClick={() => {
+            {
+              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <span className=" fw-bold"> Visualizza profilo</span>
         </Link>
       </Row>
