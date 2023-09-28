@@ -4,7 +4,7 @@ import SidebarFooter from "../SideBar/SidebarFooter";
 
 const SidebarRete = () => {
   return (
-    <Card className="p-3">
+    <Card className="p-3 sticky-top " style={{ top: "100px", zIndex: "-1" }}>
       <h6>Gestisci la tua rete</h6>
       <div className="d-flex opacity-75 ps-3">
         <PeopleFill className="me-2 align-self-center" size={20} />
