@@ -8,22 +8,24 @@ import Topbar from "./components/Topbar";
 import Home from "./components/Home";
 import { useSelector } from "react-redux";
 import { Alert } from "react-bootstrap";
+import FavoritesJobs from "./components/FavoritesJobs";
 import JobsMainPage from "./components/JobsMainPage";
 
 function App() {
-  const error = useSelector(state => state.currentUser.hasError);
-  const errorMsg = useSelector(state => state.currentUser.errorMessage);
+  const error = useSelector((state) => state.currentUser.hasError);
+  const errorMsg = useSelector((state) => state.currentUser.errorMessage);
   return (
-    <div className="App">
+    <div className='App'>
       {error ? (
-        <Alert variant="danger">{errorMsg}</Alert>
+        <Alert variant='danger'>{errorMsg}</Alert>
       ) : (
         <BrowserRouter>
           <Topbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="profile/:id" element={<ProfilePage />} />
-            <Route path="jobs/" element={<JobsMainPage />} />
+            <Route path='/' element={<Home />} />
+            <Route path='profile/:id' element={<ProfilePage />} />
+            <Route path='jobs/' element={<JobsMainPage />} />
+            <Route path='favoritesJobs' element={<FavoritesJobs />} />
           </Routes>
           <Message />
           <Footer></Footer>

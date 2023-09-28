@@ -118,3 +118,56 @@
     text-decoration: none;
     color: #666666;
 }
+
+.card h2 {
+    font-size: 1rem;
+
+}
+
+.card h1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.favorite {
+    border-bottom: 1px solid#D2D2D2;
+}
+
+.favorite img {
+    width: 100px;
+    height: 100px;
+}
+
+.favorite span {
+    font-size: 0.9rem;
+    color: #0A66C2;
+
+}
+
+.favorite span {
+    font-size: 0.9rem;
+    color: #0A66C2;
+
+}
+
+.favorite button {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.jobs h4 {
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.jobs p {
+    font-size: 0.9rem
+}
+
+.jobs span {
+    color: #818181;
+}
+
+.jobs span:last-of-type {
+    font-size: 0.8rem
+}
