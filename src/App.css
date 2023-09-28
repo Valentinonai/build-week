@@ -29,3 +29,8 @@
   display: flex;
   justify-content: center;
 }
+
+#accordion-button button:focus {
+  box-shadow: none;
+  background-color: white;
+}

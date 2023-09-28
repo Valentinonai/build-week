@@ -1,39 +1,54 @@
-import { Card, Dropdown, Image } from "react-bootstrap";
+import { Accordion, Button, Card, Dropdown, Image, useAccordionButton } from "react-bootstrap";
 import { Calendar3, CardList, Hash, PeopleFill, PersonFill, Postcard } from "react-bootstrap-icons";
 import SidebarFooter from "../SideBar/SidebarFooter";
 
 const SidebarRete = () => {
   return (
     <Card className="p-3">
-      <div className="d-flex">
-        <PeopleFill className="me-2 align-self-center" size={35} />
-        <p className="fw-bold mb-0">Collegamenti</p>
+      <h6>Gestisci la tua rete</h6>
+      <div className="d-flex opacity-75 ps-3">
+        <PeopleFill className="me-2 align-self-center" size={20} />
+        <p className="mb-2" style={{ fontSize: "0.8rem" }}>
+          Collegamenti
+        </p>
       </div>
-      <Dropdown>
-        <Dropdown.Toggle>Vedi altro</Dropdown.Toggle>
-        <Dropdown.Menu>
-          <div className="d-flex">
-            <PersonFill className="me-2 align-self-center" size={30} />
-            <p className="fw-bold pt-3">Persone che segui e follower</p>
+      <Accordion defaultActiveKey="0" flush>
+        <Accordion.Body>
+          <div className="d-flex opacity-75">
+            <PersonFill className="me-2 align-self-center" size={20} />
+            <p className="mb-2" style={{ fontSize: "0.8rem" }}>
+              Persone che segui e follower
+            </p>
           </div>
-          <div className="d-flex mb-2">
-            <Calendar3 className="me-2 align-self-center" size={35} />
-            <p className="fw-bold mb-0">Eventi</p>
+          <div className="d-flex mb-2 opacity-75">
+            <Calendar3 className="me-2 align-self-center" size={20} />
+            <p className="pt-3 mb-1" style={{ fontSize: "0.8rem" }}>
+              Eventi
+            </p>
           </div>
-          <div className="d-flex mb-2">
-            <CardList className="me-2 align-self-center" size={35} />
-            <p className="fw-bold mb-0">Pagine</p>
+          <div className="d-flex mb-2 opacity-75">
+            <CardList className="me-2 align-self-center" size={20} />
+            <p className="pt-2 mb-1" style={{ fontSize: "0.8rem" }}>
+              Pagine
+            </p>
           </div>
-          <div className="d-flex">
-            <Postcard className="me-2 align-self-center" size={35} />
-            <p className="fw-bold mb-0">Newsletter</p>
+          <div className="d-flex opacity-75">
+            <Postcard className="me-2 align-self-center" size={20} />
+            <p className="pt-2 mb-2" style={{ fontSize: "0.8rem" }}>
+              Newsletter
+            </p>
           </div>
-          <div className="d-flex">
-            <Hash className="me-2 align-self-center" size={35} />
-            <p className="fw-bold mb-0">Hashtag</p>
+          <div className="d-flex opacity-75">
+            <Hash className="me-2 align-self-center" size={20} />
+            <p className="pt-2 mb-1" style={{ fontSize: "0.8rem" }}>
+              Hashtag
+            </p>
           </div>
-        </Dropdown.Menu>
-      </Dropdown>
+        </Accordion.Body>
+        <Accordion.Header id="accordion-button" style={{ backgroundColor: "white" }}>
+          Dettagli
+        </Accordion.Header>
+      </Accordion>
       <Image fluid src="https://media.licdn.com/media/AAYQAgTPAAgAAQAAAAAAADVuOvKzTF-3RD6j-qFPqhubBQ.png" />
 
       <SidebarFooter />
