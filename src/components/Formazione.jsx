@@ -45,9 +45,11 @@ const Formazione = () => {
             </div>
           </Col>
           <Col xs={4}>
-            <div className="d-flex justify-content-end align-items-center">
-              <PlusLg className="me-3" onClick={() => experiencesHandleShow(dispatch)} />
-            </div>
+            {(params.id === loggedId || params.id === "me") && (
+              <div className="d-flex justify-content-end align-items-center">
+                <PlusLg className="me-3" onClick={() => experiencesHandleShow(dispatch)} />
+              </div>
+            )}
           </Col>
         </Row>
         <Row>
