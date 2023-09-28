@@ -25,6 +25,7 @@ const Topbar = () => {
       });
       if (resp.ok) {
         const data = await resp.json();
+        dispatch({ type: "ADD_LOGGED_ID", payload: data._id });
         setProfile(data);
       } else {
         dispatch(hasErrorTrueAction());

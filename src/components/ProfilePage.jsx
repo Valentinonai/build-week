@@ -2,7 +2,7 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import MainProfile from "./MainProfile";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProfileData } from "../redux/action";
+import { addCurrentUserDataAction, fetchProfileData } from "../redux/action";
 import { useParams } from "react-router-dom";
 import Sidebar from "../SideBar/Sidebar";
 import "../SideBar/Sidebar.css";

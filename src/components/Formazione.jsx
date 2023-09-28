@@ -14,6 +14,7 @@ const Formazione = () => {
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const user = useSelector((state) => state.currentUser.userData);
   const [image, setImage] = useState(user.image);
+  const loggedId = useSelector((state) => state.currentUser.idLoggedUser);
 
   const [employment, setEmployment] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -31,7 +32,7 @@ const Formazione = () => {
     setImage(data.image);
   };
   useEffect(() => {
-    user && dispatch(fetchExperiencies(params.id === "me" ? user._id : params.id));
+    dispatch(fetchExperiencies(params.id === "me" ? loggedId : params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
   return (

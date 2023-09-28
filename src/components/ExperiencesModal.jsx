@@ -51,7 +51,7 @@ const ExperiencesModal = ({ image, setImage, objAdd, reRender, setObjAdd }) => {
 
   useEffect(() => {
     if (propExp) reRender(propExp);
-  }, [propExp]);
+  }, [propExp, params.id]);
 
   return (
     <>
