@@ -11,7 +11,7 @@ const Topbar = () => {
   const [profile, setProfile] = useState(null);
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     // dispatch(searchJobAction(search));
   };
@@ -63,7 +63,7 @@ const Topbar = () => {
             <Form.Control
               type="search"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={e => setSearch(e.target.value)}
               placeholder="🔍 Search"
               className="input-search me-2 border-0 rounded"
               aria-label="Search"
@@ -105,7 +105,7 @@ const Topbar = () => {
               Rete
             </div>
 
-            <NavLink to={"/"} className="text-decoration-none text-black">
+            <NavLink to={"jobs/"} className="text-decoration-none text-black">
               <div className="d-flex flex-column align-items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
