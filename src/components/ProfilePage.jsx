@@ -6,6 +6,7 @@ import { addCurrentUserDataAction, fetchProfileData } from "../redux/action";
 import { useParams } from "react-router-dom";
 import Sidebar from "../SideBar/Sidebar";
 import "../SideBar/Sidebar.css";
+import Footer from "./Footer";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -19,16 +20,19 @@ const ProfilePage = () => {
   // aggiunta dipendenza in modo che venga ripètuta la fetch in base al cambio del id nel url.
   return (
     currentUser && (
-      <Container fluid="lg">
-        <Row>
-          <Col xs={12} xl={9}>
-            <MainProfile />
-          </Col>
-          <Col xs={12} xl={3} id="sidebar">
-            <Sidebar />
-          </Col>
-        </Row>
-      </Container>
+      <>
+        <Container fluid="lg">
+          <Row>
+            <Col xs={12} xl={9}>
+              <MainProfile />
+            </Col>
+            <Col xs={12} xl={3} id="sidebar">
+              <Sidebar />
+            </Col>
+          </Row>
+        </Container>
+        <Footer />
+      </>
     )
   );
 };

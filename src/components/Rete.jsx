@@ -4,7 +4,7 @@ import SidebarRete from "./SidebarRete";
 
 const Rete = () => {
   return (
-    <Container fluid='lg'>
+    <Container fluid="lg" className="mb-5">
       <Row>
         <Col xs={12} md={3}>
           <SidebarRete />

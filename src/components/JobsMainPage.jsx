@@ -6,7 +6,7 @@ const { Row, Col, Card, Button, Container } = require("react-bootstrap");
 
 const JobsMainPage = () => {
   return (
-    <Container fluid="lg">
+    <Container fluid="lg" className="mb-5">
       <Row className="pt-3">
         <Col xs={2}>
           <JobsSideBar />
