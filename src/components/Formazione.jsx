@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { PlusLg, PencilFill } from "react-bootstrap-icons";
+import { PlusLg } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { experiencesHandleShow, fetchExperiencies } from "../redux/action";
 import { useParams } from "react-router-dom";
@@ -13,12 +13,14 @@ const Formazione = () => {
   const experiences = useSelector((state) => state.addExps.data);
   const isLoading = useSelector((state) => state.currentUser.isLoading);
   const user = useSelector((state) => state.currentUser.userData);
+  const [image, setImage] = useState(user.image);
   useEffect(() => {
     user && dispatch(fetchExperiencies(params.id === "me" ? user._id : params.id));
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.id]);
   return (
     !isLoading && (
-      <div className="border border-1 rounded mt-2 p-2">
+      <div className='border border-1 rounded mt-2 p-2'>
         <Row>
           <Col xs={8}>
             <div>
@@ -26,8 +28,8 @@ const Formazione = () => {
             </div>
           </Col>
           <Col xs={4}>
-            <div className="d-flex justify-content-end align-items-center">
-              <PlusLg className="me-3" onClick={() => experiencesHandleShow(dispatch)} />
+            <div className='d-flex justify-content-end align-items-center'>
+              <PlusLg className='me-3' onClick={() => experiencesHandleShow(dispatch)} />
             </div>
           </Col>
         </Row>
@@ -39,7 +41,7 @@ const Formazione = () => {
               </Col>
             ))}
         </Row>
-        <ExperiencesModal />
+        <ExperiencesModal image={image} setImage={setImage} />
       </div>
     )
   );

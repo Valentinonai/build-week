@@ -5,11 +5,14 @@ import {
   EXPERIENCES_RESET_PROPS,
   MODAL_OFF,
   MODAL_ON,
+  USERSLIST_MODAL_OFF,
+  USERSLIST_MODAL_ON,
 } from "../action";
 
 const initialState = {
   isShowing: false,
   experiencesIsShowing: false,
+  usersListIsShowing: false,
   propelem: null,
 };
 
@@ -45,6 +48,17 @@ const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         propelem: action.payload,
+      };
+
+    case USERSLIST_MODAL_OFF:
+      return {
+        ...state,
+        usersListIsShowing: action.payload,
+      };
+    case USERSLIST_MODAL_ON:
+      return {
+        ...state,
+        usersListIsShowing: action.payload,
       };
 
     default:

@@ -13,6 +13,10 @@
     margin-bottom: 20px;
 }
 
+.user-card p:hover {
+    cursor: pointer;
+}
+
 #sidebar .video-card {
     padding-bottom: 20px;
     border-bottom: 1px solid rgb(238, 236, 236);
