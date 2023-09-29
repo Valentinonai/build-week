@@ -12,6 +12,7 @@ import FavoritesJobs from "./components/FavoritesJobs";
 import JobsMainPage from "./components/JobsMainPage";
 import Rete from "./components/Rete";
 import { useState } from "react";
+import ModalJobs from "./components/modalJobs";
 
 function App() {
   const error = useSelector((state) => state.currentUser.hasError);
@@ -31,6 +32,7 @@ function App() {
             <Route path="lavoro" element={<JobsMainPage />} />
             <Route path="rete" element={<Rete />} />
             <Route path="favoritesJobs" element={<FavoritesJobs />} />
+            <Route path="lavoro/dettaglio" element={<ModalJobs />} />
           </Routes>
           <Message />
         </BrowserRouter>

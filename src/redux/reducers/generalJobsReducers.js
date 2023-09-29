@@ -2,6 +2,7 @@ import { GENERAL_JOBS_LIST, GENERAL_JOBS_LIST_CATEGORY, GENERAL_JOBS_LIST_COMPAN
 
 const initialState = {
   jobsList: [],
+  description: "",
 };
 const generalJobsReducers = (state = initialState, action) => {
   switch (action.type) {
@@ -19,6 +20,11 @@ const generalJobsReducers = (state = initialState, action) => {
       return {
         ...state,
         jobsList: action.payload,
+      };
+    case "EDIT_DESCRIPTION":
+      return {
+        ...state,
+        description: action.payload,
       };
 
     default:
