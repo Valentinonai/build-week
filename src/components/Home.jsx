@@ -6,7 +6,7 @@ import {
   fetchPost,
   hasErrorTrueAction,
   isLoadingFalseAction,
-  isLoadingTrueAction,
+  isLoadingTrueAction
 } from "../redux/action";
 import SinglePost from "./SinglePost";
 import FormHome from "./FormHome";
@@ -16,8 +16,8 @@ import SidebarFooter from "../SideBar/SidebarFooter";
 import Sidebar from "./Sidebar";
 
 const Home = () => {
-  const posts = useSelector((state) => state.post.data);
-  const isLoading = useSelector((state) => state.currentUser.isLoading);
+  const posts = useSelector(state => state.post.data);
+  const isLoading = useSelector(state => state.currentUser.isLoading);
   const dispatch = useDispatch();
   const [profile, setProfile] = useState("");
   const [postText, setPostText] = useState();
@@ -30,8 +30,8 @@ const Home = () => {
       const resp = await fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+        }
       });
       if (resp.ok) {
         const data = await resp.json();
@@ -47,7 +47,7 @@ const Home = () => {
       dispatch(isLoadingFalseAction());
     }
   };
-  const delPost = async (postId) => {
+  const delPost = async postId => {
     try {
       console.log("cancella");
       dispatch(isLoadingTrueAction());
@@ -55,8 +55,8 @@ const Home = () => {
         method: "DELETE",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+        }
       });
       if (resp.ok) {
         dispatch(fetchPost());
@@ -84,17 +84,27 @@ const Home = () => {
 
   return isLoading ? (
     <div className="mt-5 d-flex justify-content-center">
-      <Spinner animation="border" role="status">
+      <Spinner
+        animation="border"
+        role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     </div>
   ) : (
-    <Container fluid="lg" className="mb-5">
+    <Container
+      fluid="lg"
+      className="mb-5">
       <Row>
-        <Col xs={12} md={2} lg={2}>
+        <Col
+          xs={12}
+          md={2}
+          lg={2}>
           <Sidebar profile={profile} />
         </Col>
-        <Col xs={12} md={10} lg={7}>
+        <Col
+          xs={12}
+          md={10}
+          lg={7}>
           <FormHome
             profile={profile}
             handleClose={handleClose}
@@ -110,8 +120,8 @@ const Home = () => {
           {posts &&
             profile &&
             posts
-              .filter((elem) => elem.user._id === profile._id)
-              .reverse()
+              .filter(elem => elem.user._id === profile._id)
+              .toReversed()
               .map((elem, i) => (
                 <SinglePost
                   elem={elem}
@@ -128,112 +138,103 @@ const Home = () => {
               ))}
           <hr />
           <h3>Altri Post</h3>
-          {posts
-            .reverse()
-            .map(
-              (elem, i) =>
-                i >= page * 5 - 5 &&
-                i < page * 5 && (
-                  <SinglePost
-                    elem={elem}
-                    key={`post${i}`}
-                    cancella={delPost}
-                    profile={profile}
-                    handleClose={handleClose}
-                    handleShow={handleShow}
-                    show={show}
-                    setPostText={setPostText}
-                    setModifica={setModifica}
-                    setIdPost={setIdPost}
-                  />
-                )
-            )}
+          {console.log(posts, "LEG")}
+          {posts.toReversed().map(
+            (elem, i) =>
+              i >= page * 5 - 5 &&
+              i < page * 5 && (
+                <SinglePost
+                  elem={elem}
+                  key={`post${i}`}
+                  cancella={delPost}
+                  profile={profile}
+                  handleClose={handleClose}
+                  handleShow={handleShow}
+                  show={show}
+                  setPostText={setPostText}
+                  setModifica={setModifica}
+                  setIdPost={setIdPost}
+                />
+              )
+          )}
           <div className="d-flex justify-content-center">
             <Pagination>
               <Pagination.Item
                 active={page === 1}
                 onClick={() => {
                   setPage(1);
-                }}
-              >
+                }}>
                 {1}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 2}
                 onClick={() => {
                   setPage(2);
-                }}
-              >
+                }}>
                 {2}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 3}
                 onClick={() => {
                   setPage(3);
-                }}
-              >
+                }}>
                 {3}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 4}
                 onClick={() => {
                   setPage(4);
-                }}
-              >
+                }}>
                 {4}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 5}
                 onClick={() => {
                   setPage(5);
-                }}
-              >
+                }}>
                 {5}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 6}
                 onClick={() => {
                   setPage(6);
-                }}
-              >
+                }}>
                 {6}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 7}
                 onClick={() => {
                   setPage(7);
-                }}
-              >
+                }}>
                 {7}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 8}
                 onClick={() => {
                   setPage(8);
-                }}
-              >
+                }}>
                 {8}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 9}
                 onClick={() => {
                   setPage(9);
-                }}
-              >
+                }}>
                 {9}
               </Pagination.Item>
               <Pagination.Item
                 active={page === 10}
                 onClick={() => {
                   setPage(10);
-                }}
-              >
+                }}>
                 {10}
               </Pagination.Item>
             </Pagination>
           </div>
         </Col>
-        <Col xs={12} lg={3}>
+        <Col
+          xs={12}
+          lg={3}>
           <NewsSidebar />
           <div style={{ position: "sticky", top: "100px" }}>
             <PromoCard />
