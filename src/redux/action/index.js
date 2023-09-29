@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const ADD_CURRENT_USER_DATA = "ADD_CURRENT_USER_DATA";
 export const IS_LOADING_TRUE = "IS_LOADING_TRUE";
 export const IS_LOADING_FALSE = "IS_LOADING_FALSE";
@@ -5,7 +7,8 @@ export const HAS_ERROR_TRUE = "HAS_ERROR_TRUE";
 export const HAS_ERROR_FALSE = "HAS_ERROR_FALSE";
 export const ADD_ERROR_MESSAGE = "ADD_ERROR_MESSAGE";
 
-export const JOBS = "JOBS";
+export const SEARCH = "SEARCH";
+export const COMPANY = "COMPANY";
 export const PROFILE = "PROFILE";
 export const ALL_EXPERIENCES = "ALL_EXPERIENCES";
 export const CHANGE_EXP = "CHANGE_EXP";
@@ -29,10 +32,6 @@ export const ADD_EXPERIENCES = "ADD_EXPERIENCES";
 export const ADD_EXPERIENCES_NEW = "ADD_EXPERIENCES_NEW";
 export const IS_DELETED = "IS_DELETED";
 export const EDIT_EXP = "EDIT_EXP";
-
-export const ADD_FAVOURITE_JOBS = "ADD_FAVOURITE_JOBS";
-export const REMOVE_FAVOURITE_JOBS = "REMOVE_FAVOURITE_JOBS";
-export const GET_LIST_WORKS = "GET_LIST_WORKS";
 
 export const modalOffAction = () => ({ type: MODAL_OFF, payload: false });
 export const modalOnAction = () => ({ type: MODAL_ON, payload: true });
@@ -342,73 +341,22 @@ export const editExperience = (obj, userId, id, fn) => {
 
 //!------------FETCH JOB----------------------
 
-//!-----------ADD & REMOVE JOBS---------------
-
-export const addJobs = (props) => ({
-  type: ADD_FAVOURITE_JOBS,
-  payload: props,
-});
-
-export const removeJobs = (props) => ({
-  type: REMOVE_FAVOURITE_JOBS,
-  payload: props,
-});
-
-export const getListWorkAction = (query) => {
-  return async (dispatch, getState) => {
+export const fetchSearch = (searchQuery) => {
+  return async (dispatch) => {
     try {
-      let res = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=" + query + "&limit=20");
-
-      if (res.ok) {
-        let works = await res.json();
-        dispatch({
-          type: GET_LIST_WORKS,
-          payload: works,
-        });
+      const resp = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=" + searchQuery + "&limit=10", {
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
+        },
+      });
+      if (resp.ok) {
+        const jobs = await resp.json();
+        dispatch({ type: SEARCH, payload: jobs.data });
       }
     } catch (error) {
       console.log(error);
     }
   };
 };
-
-// export const searchJobAction = (search) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs?search=${search}", {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization:
-//             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-//         },
-//       });
-//       if (response.ok) {
-//         const jobs = await response.json();
-//         dispatch({ type: JOBS, payload: jobs.data });
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const searchJob = () => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await fetch("https://strive-benchmark.herokuapp.com/api/jobs", {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization:
-//             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-//         },
-//       });
-//       if (response.ok) {
-//         const jobs = await response.json();
-//         console.log(jobs, "guardami");
-//         dispatch({ type: JOBS, payload: jobs.data });
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };

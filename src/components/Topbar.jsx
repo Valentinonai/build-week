@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 import ProfileTopbar from "./ProfileTopbar";
-import { addErrorMessageAction, hasErrorTrueAction, isLoadingFalseAction } from "../redux/action";
+import { addErrorMessageAction, fetchSearch, hasErrorTrueAction, isLoadingFalseAction } from "../redux/action";
 
 const Topbar = () => {
   const [search, setSearch] = useState("");
@@ -13,7 +13,7 @@ const Topbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(searchJobAction(search));
+    dispatch(fetchSearch(search));
   };
   const fetchUser = async () => {
     try {

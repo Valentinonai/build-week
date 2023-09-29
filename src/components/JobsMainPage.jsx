@@ -1,7 +1,7 @@
 import JobsSideBar from "./JobsSideBar";
 import SidebarFooter from "../SideBar/SidebarFooter";
 import { ArrowRight, Search } from "react-bootstrap-icons";
-import { WorkSection } from "./WorkSection";
+import Jobs from "./Jobs";
 
 const { Row, Col, Card, Button, Container } = require("react-bootstrap");
 
@@ -66,7 +66,7 @@ const JobsMainPage = () => {
               Sulla base del tuo profilo e della tua cronologia delle ricerche
             </p>
           </Card>
-          <WorkSection />
+          <Jobs />
           <Card className="rounded-0 rounded-bottom-2 text-center p-2">
             <h6 className="opacity-50 fw-bold">
               Mostra tutto <ArrowRight />

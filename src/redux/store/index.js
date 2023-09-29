@@ -8,6 +8,7 @@ import modalReducer from "../reducers/modalReducer";
 import postReducers from "../reducers/postReducers";
 import addExp from "../reducers/Experiences";
 import friendsReducers from "../reducers/friendsReducers";
+import searchJobsReducer from "../reducers/searchJobsReducer";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   post: postReducers,
   addExps: addExp,
   listFriends: friendsReducers,
+  searchJobs: searchJobsReducer,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
