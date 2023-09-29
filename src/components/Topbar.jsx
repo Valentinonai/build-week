@@ -80,7 +80,10 @@ const Topbar = () => {
             </NavDropdown.Item>
           </NavDropdown>
         </div>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle
+          aria-controls="navbarScroll"
+          className="fs-6"
+        />
         <Navbar.Collapse className="mt-2">
           <Form
             onSubmit={handleSubmit}
