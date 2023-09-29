@@ -10,11 +10,11 @@ import ExperiencesModal from "./ExperiencesModal";
 const Formazione = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const experiences = useSelector((state) => state.addExps.data);
-  const isLoading = useSelector((state) => state.currentUser.isLoading);
-  const user = useSelector((state) => state.currentUser.userData);
+  const experiences = useSelector(state => state.addExps.data);
+  const isLoading = useSelector(state => state.currentUser.isLoading);
+  const user = useSelector(state => state.currentUser.userData);
   const [image, setImage] = useState(user.image);
-  const loggedId = useSelector((state) => state.currentUser.idLoggedUser);
+  const loggedId = useSelector(state => state.currentUser.idLoggedUser);
 
   const [employment, setEmployment] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -22,7 +22,7 @@ const Formazione = () => {
   const [startDate, setStartDate] = useState(Date);
   const [endDate, setEndDate] = useState(Date);
   const [description, setDescription] = useState("");
-  const reRender = (data) => {
+  const reRender = data => {
     setEmployment(data.role);
     setCompanyName(data.company);
     setStartDate(data.startDate);
@@ -37,7 +37,7 @@ const Formazione = () => {
   }, [params.id]);
   return (
     !isLoading && (
-      <div className="border border-1 rounded mt-2 p-2">
+      <div className="border border-1 rounded mt-2 p-2 bg-light">
         <Row>
           <Col xs={8}>
             <div>
@@ -47,7 +47,10 @@ const Formazione = () => {
           <Col xs={4}>
             {(params.id === loggedId || params.id === "me") && (
               <div className="d-flex justify-content-end align-items-center">
-                <PlusLg className="me-3" onClick={() => experiencesHandleShow(dispatch)} />
+                <PlusLg
+                  className="me-3"
+                  onClick={() => experiencesHandleShow(dispatch)}
+                />
               </div>
             )}
           </Col>
@@ -55,8 +58,13 @@ const Formazione = () => {
         <Row>
           {experiences &&
             experiences.map((elem, i) => (
-              <Col xs={12} key={i}>
-                <SingleExp elem={elem} reRender={reRender} />
+              <Col
+                xs={12}
+                key={i}>
+                <SingleExp
+                  elem={elem}
+                  reRender={reRender}
+                />
               </Col>
             ))}
         </Row>
@@ -69,7 +77,7 @@ const Formazione = () => {
             location: location,
             startDate: startDate,
             endDate: endDate,
-            description: description,
+            description: description
           }}
           setObjAdd={{
             setEmployment: setEmployment,
@@ -77,7 +85,7 @@ const Formazione = () => {
             setLocation: setLocation,
             setStartDate: setStartDate,
             setEndDate: setEndDate,
-            setDescription: setDescription,
+            setDescription: setDescription
           }}
           reRender={reRender}
         />

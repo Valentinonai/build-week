@@ -31,9 +31,15 @@ const SingleExp = props => {
           )}
         </Col>
         <Col xs={6}>
-          <h3>{props.elem.company}</h3>
-          <h6>{props.elem.role}</h6>
-          <p>{props.elem.description}</p>
+          <div>
+            <h3>{props.elem.company}</h3>
+            <h6>{props.elem.role}</h6>
+            <p>{props.elem.description}</p>
+          </div>
+          <div>
+            <p>Iniziato: {props.elem.startDate.substring(0, 10)}</p>
+            <p>Terminato:{props.elem.endDate.substring(0, 10)}</p>
+          </div>
         </Col>
 
         <Col xs={2}>

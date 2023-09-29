@@ -1,19 +1,19 @@
 import { useState } from "react";
-
+import { CloudUpload } from "react-bootstrap-icons";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEditImage, fetchEditUser, handleClose } from "../redux/action";
 import Dropzone from "react-dropzone";
 
 const Modale = () => {
-  const show = useSelector((state) => state.modal.isShowing);
-  const user = useSelector((state) => state.currentUser.userData);
+  const show = useSelector(state => state.modal.isShowing);
+  const user = useSelector(state => state.currentUser.userData);
   const [nome, setNome] = useState(user.name);
   const [cognome, setCognome] = useState(user.surname);
   const [area, setArea] = useState(user.area);
   const [image, setImage] = useState(user.image);
   const dispatch = useDispatch();
-  const handleImage = (x) => {
+  const handleImage = x => {
     if (x) {
       const formImg = new FormData();
       formImg.append("profile", x);
@@ -22,17 +22,18 @@ const Modale = () => {
   };
   return (
     <>
-      <Modal show={show} onHide={() => handleClose(dispatch)}>
+      <Modal
+        show={show}
+        onHide={() => handleClose(dispatch)}>
         <Modal.Header closeButton>
           <Modal.Title>Modifica Presentazione</Modal.Title>
         </Modal.Header>
         <Form
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault();
             handleImage(image);
             dispatch(fetchEditUser({ name: nome, surname: cognome, area: area }, user._id));
-          }}
-        >
+          }}>
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Nome:</Form.Label>
@@ -42,7 +43,7 @@ const Modale = () => {
                 autoFocus
                 required
                 value={nome}
-                onChange={(e) => {
+                onChange={e => {
                   setNome(e.target.value);
                 }}
               />
@@ -55,7 +56,7 @@ const Modale = () => {
                 placeholder="Scrivi qui..."
                 required
                 value={cognome}
-                onChange={(e) => {
+                onChange={e => {
                   setCognome(e.target.value);
                 }}
               />
@@ -68,35 +69,43 @@ const Modale = () => {
                 rows={1}
                 value={area}
                 placeholder="Scrivi qui..."
-                onChange={(e) => {
+                onChange={e => {
                   setArea(e.target.value);
                 }}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Curriculm</Form.Label>
-              <Dropzone>
-                {({ getRootProps, getInputProps, acceptedFiles }) => (
-                  <>
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <p>
-                        {acceptedFiles[0]
-                          ? acceptedFiles[0].path
-                          : "Trascina il una immagina oppure clicca per inserirla."}
-                      </p>
-                      {setImage(acceptedFiles[0])}
-                    </div>
-                  </>
-                )}
-              </Dropzone>
+            <Form.Group className="d-flex justify-content-center">
+              <div className="dropZoneModale">
+                <Dropzone>
+                  {({ getRootProps, getInputProps, acceptedFiles }) => (
+                    <>
+                      <div {...getRootProps()}>
+                        <input
+                          {...getInputProps()}
+                          id="dropZoneModale"
+                        />
+                        <p className="pDropZone">
+                          {acceptedFiles[0] ? acceptedFiles[0].path : <CloudUpload className="fs-1" />}
+                        </p>
+                        <p className="pDropZone">Trascina un immagine</p>
+                        {setImage(acceptedFiles[0])}
+                      </div>
+                    </>
+                  )}
+                </Dropzone>
+              </div>
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => handleClose(dispatch)}>
+            <Button
+              variant="secondary"
+              onClick={() => handleClose(dispatch)}>
               Close
             </Button>
-            <Button variant="primary" type="submit" onClick={() => handleClose(dispatch)}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={() => handleClose(dispatch)}>
               Save Changes
             </Button>
           </Modal.Footer>
