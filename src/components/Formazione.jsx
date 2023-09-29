@@ -60,7 +60,8 @@ const Formazione = () => {
             experiences.map((elem, i) => (
               <Col
                 xs={12}
-                key={i}>
+                key={i}
+                className="mb-3">
                 <SingleExp
                   elem={elem}
                   reRender={reRender}
