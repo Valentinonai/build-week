@@ -1,13 +1,10 @@
 import { useEffect } from "react";
-import { Button, Col, Image, Row } from "react-bootstrap";
-import { PencilFill, ArrowRightShort } from "react-bootstrap-icons";
+import { Col, Image, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchPost } from "../redux/action";
 
 const Resources = () => {
-  const param = useParams();
-  const isLoggedId = useSelector(state => state.currentUser.isLoggedUser);
   const currentUser = useSelector(state => state.currentUser.userData);
   const post = useSelector(state => state.post.data);
   const dispatch = useDispatch();

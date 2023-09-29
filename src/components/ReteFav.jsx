@@ -1,5 +1,4 @@
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
-import { DashLg, PlusLg } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addFriendAction, deleteFriendAction } from "../redux/action/listFriendsAction";
 import { BsPersonAdd, BsXLg } from "react-icons/bs";

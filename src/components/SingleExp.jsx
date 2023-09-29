@@ -36,10 +36,6 @@ const SingleExp = props => {
             <h6>{props.elem.role}</h6>
             <p>{props.elem.description}</p>
           </div>
-          <div>
-            <p>Iniziato: {props.elem.startDate.substring(0, 10)}</p>
-            <p>Terminato:{props.elem.endDate.substring(0, 10)}</p>
-          </div>
         </Col>
 
         <Col xs={2}>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 import ProfileTopbar from "./ProfileTopbar";
