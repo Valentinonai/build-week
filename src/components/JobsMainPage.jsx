@@ -1,6 +1,6 @@
 import JobsSideBar from "./JobsSideBar";
 import SidebarFooter from "../SideBar/SidebarFooter";
-import { Heart, HeartFill, Search } from "react-bootstrap-icons";
+import { Heart, HeartFill, Search, CaretLeft, CaretRight } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchGeneralJobs } from "../redux/action/jobsAction";
@@ -30,10 +30,10 @@ const JobsMainPage = () => {
     <>
       <Container fluid="lg" className="mb-5">
         <Row className="pt-3">
-          <Col md={2}>
+          <Col lg={2}>
             <JobsSideBar />
           </Col>
-          <Col md={7}>
+          <Col lg={7}>
             <Card className="p-3">
               <h5 className="pb-2">Ricerche di offerte di lavoro suggerite</h5>
               <Row className="gy-2 gx-2">
@@ -140,21 +140,23 @@ const JobsMainPage = () => {
                     page > 1 && setPage(page - 1);
                   }}
                 >
-                  {"<-"}
+                  <CaretLeft />
                 </Pagination.Item>
+                <Pagination.Item disabled>{page - 1 === 0 ? "..." : page - 1}</Pagination.Item>
                 <Pagination.Item active={true}>{page}</Pagination.Item>
+                <Pagination.Item disabled>{page === jobsList.length / 5 ? "..." : page + 1}</Pagination.Item>
                 <Pagination.Item
                   onClick={() => {
                     console.log(jobsList.length);
                     page < jobsList.length / 5 && setPage(page + 1);
                   }}
                 >
-                  {"->"}
+                  <CaretRight />
                 </Pagination.Item>
               </Pagination>
             </Card>
           </Col>
-          <Col md={3}>
+          <Col lg={3}>
             <SidebarFooter />
           </Col>
         </Row>

@@ -87,46 +87,54 @@ const Topbar = () => {
         </div>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse className="mt-2 ">
-          <Form
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-            className="d-flex bg-light mb-2 align-items-center"
-          >
-            <Form.Control
-              disabled={loc.pathname !== "/lavoro"}
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="🔍 Search"
-              className="input-search me-2 border-0 rounded"
-              aria-label="Search"
-            />
-            <Form.Check
-              disabled={loc.pathname !== "/lavoro"}
-              defaultChecked="true"
-              type="radio"
-              label={`category`}
-              name="tipeOfSearch"
-              value="category"
-              onChange={() => {
-                setSearchType("category");
-              }}
-            />
-            <Form.Check
-              disabled={loc.pathname !== "/lavoro"}
-              type="radio"
-              label={`company`}
-              name="tipeOfSearch"
-              className="ms-3"
-              value="company"
-              onChange={() => {
-                setSearchType("company");
-              }}
-            />
-          </Form>
+          {loc.pathname === "/lavoro" && (
+            <>
+              <Form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+                className="d-flex bg-light mb-2 align-items-center flex-column flex-lg-row"
+              >
+                <Form.Control
+                  disabled={loc.pathname !== "/lavoro"}
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="🔍 Search"
+                  className="input-search me-2 border-0 rounded"
+                  aria-label="Search"
+                />
 
-          <Nav className="ms-auto gap-3">
+                <div className="my-2 my-lg-0 d-flex">
+                  <Form.Check
+                    disabled={loc.pathname !== "/lavoro"}
+                    defaultChecked="true"
+                    type="radio"
+                    label={`category`}
+                    name="tipeOfSearch"
+                    value="category"
+                    className="ms-2"
+                    onChange={() => {
+                      setSearchType("category");
+                    }}
+                  />
+                  <Form.Check
+                    disabled={loc.pathname !== "/lavoro"}
+                    type="radio"
+                    label={`company`}
+                    name="tipeOfSearch"
+                    className="ms-2"
+                    value="company"
+                    onChange={() => {
+                      setSearchType("company");
+                    }}
+                  />
+                </div>
+              </Form>
+            </>
+          )}
+
+          <Nav className="ms-auto gap-3 flex-wrap">
             <NavLink to={"/"} className="text-black text-decoration-none mx-2">
               <div
                 className="d-flex flex-column align-items-center"
@@ -264,7 +272,7 @@ const Topbar = () => {
                 </p>
               </div>
             </div>
-            <Link to={"/"} className="text-decoration-none ms-4 d-flex " style={{ fontSize: "14px" }}>
+            <Link to={"/"} className="text-decoration-none d-flex " style={{ fontSize: "14px" }}>
               Prova Premium gratis
             </Link>
           </Nav>
