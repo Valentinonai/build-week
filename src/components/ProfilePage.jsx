@@ -10,8 +10,8 @@ import Footer from "./Footer";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser.userData);
-  const isLoading = useSelector((state) => state.currentUser.isLoading);
+  const currentUser = useSelector(state => state.currentUser.userData);
+  const isLoading = useSelector(state => state.currentUser.isLoading);
   const params = useParams();
   useEffect(() => {
     dispatch(fetchProfileData(params.id));
@@ -23,10 +23,15 @@ const ProfilePage = () => {
       <>
         <Container fluid="lg">
           <Row>
-            <Col xs={12} xl={9}>
+            <Col
+              xs={12}
+              xl={9}>
               <MainProfile />
             </Col>
-            <Col xs={12} xl={3} id="sidebar">
+            <Col
+              xs={12}
+              xl={3}
+              id="sidebar">
               <Sidebar />
             </Col>
           </Row>
