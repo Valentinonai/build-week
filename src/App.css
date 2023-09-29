@@ -20,6 +20,13 @@ body {
   cursor: pointer;
 }
 
+#divTransparent {
+  color: unset !important;
+  color: transparent !important;
+  position: absolute;
+  top: -3px;
+  font-size: 2.5rem;
+}
 #dropZoneBtn:focus {
   box-shadow: none;
   border: none;

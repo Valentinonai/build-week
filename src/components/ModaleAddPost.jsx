@@ -6,7 +6,7 @@ import {
   fetchPost,
   hasErrorTrueAction,
   isLoadingFalseAction,
-  isLoadingTrueAction,
+  isLoadingTrueAction
 } from "../redux/action";
 import Dropzone from "react-dropzone";
 import { useState } from "react";
@@ -25,8 +25,8 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
           headers: {
             "content-type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+          }
         });
         if (risp.ok) {
           const data = await risp.json();
@@ -59,8 +59,8 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
         headers: {
           "content-type": "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-        },
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+        }
       });
       if (risp.ok) {
         setPostText("");
@@ -90,8 +90,8 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
           body: formImage,
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o",
-          },
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTExMzRiOTM3NTJhODAwMTQ1Njg3NWYiLCJpYXQiOjE2OTU2MjY0MjYsImV4cCI6MTY5NjgzNjAyNn0.NFk7YtejuOSYg3g46D2yj7_4nB-6W8xjVATN2MutM4o"
+          }
         }
       );
       if (risp.ok) {
@@ -112,7 +112,9 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
   return (
     profile && (
       <>
-        <Modal show={show} onHide={handleClose}>
+        <Modal
+          show={show}
+          onHide={handleClose}>
           <Modal.Header closeButton>
             <Image
               src={
@@ -122,6 +124,7 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
               width="60px"
               height="60px"
               roundedCircle
+              style={{ objectFit: "cover" }}
             />
             <Modal.Title className="ms-3">{`${profile.name} ${profile.surname}`}</Modal.Title>
           </Modal.Header>
@@ -134,18 +137,22 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
               cols="50"
               defaultValue={postText}
               placeholder="Inserisci il testo qui"
-              onChange={(e) => {
+              onChange={e => {
                 setPostText(e.target.value);
-              }}
-            ></textarea>
+              }}></textarea>
             <div className="mt-3">
               {
-                <Button className="btn btn-light rounded-circle  text-secondary" style={{ position: "relative" }}>
+                <Button
+                  className="btn btn-light rounded-circle  text-secondary"
+                  style={{ position: "relative" }}>
                   <Dropzone>
                     {({ getRootProps, getInputProps, acceptedFiles }) => (
                       <>
                         <div {...getRootProps()}>
-                          <input {...getInputProps} id="dropZoneBtn" />
+                          <input
+                            {...getInputProps}
+                            id="dropZoneBtn"
+                          />
                           {acceptedFiles[0] && setImage(acceptedFiles[0])}
                         </div>
                       </>
@@ -155,13 +162,19 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
                 </Button>
               }
 
-              <Button className="rounded-circle ms-2 text-secondary" variant="light">
+              <Button
+                className="rounded-circle ms-2 text-secondary"
+                variant="light">
                 <Calendar3 />
               </Button>
-              <Button className="rounded-circle ms-2 text-secondary" variant="light">
+              <Button
+                className="rounded-circle ms-2 text-secondary"
+                variant="light">
                 <PatchPlusFill />
               </Button>
-              <Button className="rounded-circle ms-2 text-secondary" variant="light">
+              <Button
+                className="rounded-circle ms-2 text-secondary"
+                variant="light">
                 <ThreeDots />
               </Button>
             </div>
@@ -173,8 +186,7 @@ const ModaleAddPost = ({ handleClose, show, profile, postText, setPostText, modi
               variant="light"
               onClick={() => (
                 handleClose(), modifica ? fetchEditPost() : fetchNewPost(), image && modifica && handleImage()
-              )}
-            >
+              )}>
               {modifica ? "Modifica" : "Pubblica"}
             </Button>
           </Modal.Footer>

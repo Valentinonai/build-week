@@ -20,6 +20,7 @@ const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postTex
                   width="60px"
                   height="60px"
                   roundedCircle
+                  style={{ objectFit: "cover" }}
                 />
               </Col>
               <Col>

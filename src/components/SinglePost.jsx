@@ -55,6 +55,7 @@ const SinglePost = ({
               width="60px"
               height="60px"
               roundedCircle
+              style={{ objectFit: "cover" }}
             />
           </Col>
           <Col
