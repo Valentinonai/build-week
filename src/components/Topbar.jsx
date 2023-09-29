@@ -13,7 +13,6 @@ const Topbar = () => {
   const loc = useLocation();
   const dispatch = useDispatch();
   const [searchType, setSearchType] = useState("category");
-  const loc = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
