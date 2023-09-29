@@ -4,17 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { EXPERIENCES_PROPS, experiencesHandleShow, experiencesPropAction, fetchDelete } from "../redux/action";
 import { useParams } from "react-router-dom";
 
-const SingleExp = (props) => {
+const SingleExp = props => {
   const dispatch = useDispatch(props);
   const param = useParams();
-  const isLoggedId = useSelector((state) => state.currentUser.isLoggedUser);
+  const isLoggedId = useSelector(state => state.currentUser.isLoggedUser);
   return (
     <Card className="p-2">
       <Row>
         <Col xs={4}>
-          <div>
-            <img src={props.elem.image} alt="img" width="100%" />
-          </div>
+          {props.elem.image ? (
+            <div>
+              <img
+                src={props.elem.image}
+                alt="img"
+                width="100%"
+              />
+            </div>
+          ) : (
+            <div>
+              <img
+                src="https://atlas-content-cdn.pixelsquid.com/stock-images/white-linkedin-chat-icon-logo-ywLAlaB-600.jpg"
+                alt="img"
+                width="100%"
+              />
+            </div>
+          )}
         </Col>
         <Col xs={6}>
           <h3>{props.elem.company}</h3>
