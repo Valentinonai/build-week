@@ -2,7 +2,7 @@ import { Col, Container, Row, Spinner } from "react-bootstrap";
 import MainProfile from "./MainProfile";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCurrentUserDataAction, fetchProfileData } from "../redux/action";
+import { fetchProfileData } from "../redux/action";
 import { useParams } from "react-router-dom";
 import Sidebar from "../SideBar/Sidebar";
 import "../SideBar/Sidebar.css";
@@ -11,13 +11,12 @@ import Footer from "./Footer";
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.currentUser.userData);
-  const isLoading = useSelector(state => state.currentUser.isLoading);
   const params = useParams();
   useEffect(() => {
     dispatch(fetchProfileData(params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
-  // aggiunta dipendenza in modo che venga ripètuta la fetch in base al cambio del id nel url.
+
   return (
     currentUser && (
       <>

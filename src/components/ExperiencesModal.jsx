@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Button, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,8 +7,7 @@ import {
   experiencesHandleClose,
   experiencesResetPropAction,
   fetchAddExp,
-  fetchEditImageExp,
-  fetchExperiencies
+  fetchEditImageExp
 } from "../redux/action";
 import { Plus } from "react-bootstrap-icons";
 import Dropzone from "react-dropzone";

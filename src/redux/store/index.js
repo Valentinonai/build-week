@@ -8,11 +8,13 @@ import modalReducer from "../reducers/modalReducer";
 import postReducers from "../reducers/postReducers";
 import addExp from "../reducers/Experiences";
 import friendsReducers from "../reducers/friendsReducers";
+import jobsReducers from "../reducers/jobsReducers";
+import generalJobsReducers from "../reducers/generalJobsReducers";
 
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["currenUser", "listFriends"]
+  whitelist: ["currenUser", "listFriends", "jobs"],
 };
 
 const rootReducer = combineReducers({
@@ -21,14 +23,16 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   post: postReducers,
   addExps: addExp,
-  listFriends: friendsReducers
+  listFriends: friendsReducers,
+  jobs: jobsReducers,
+  generalJobs: generalJobsReducers,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducers,
-  middleware: getDefaultMiddleware({ serializableCheck: false, immutableCheck: false })
+  middleware: getDefaultMiddleware({ serializableCheck: false, immutableCheck: false }),
 });
 
 export const persiStore = persistStore(store);

@@ -1,7 +1,6 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { QuestionCircleFill, Gear, ShieldShaded } from "react-bootstrap-icons";
 import "../style/footer.css";
-//import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (

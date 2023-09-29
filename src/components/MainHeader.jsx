@@ -18,10 +18,10 @@ const MainHeader = () => {
         <div style={{ position: "relative" }}>
           <Card.Img
             variant="top"
-            src="https://images.unsplash.com/photo-1521459467264-802e2ef3141f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60"
+            src="https://www.mediakey.tv/fileadmin/user_upload/EPICODE.png"
             width="100%"
             height="250px"
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "contain" }}
           />
 
           <img

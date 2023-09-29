@@ -1,24 +1,20 @@
 import { Card, Col, Row } from "react-bootstrap";
 import { Pencil, Trash } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { EXPERIENCES_PROPS, experiencesHandleShow, experiencesPropAction, fetchDelete } from "../redux/action";
+import { experiencesHandleShow, experiencesPropAction, fetchDelete } from "../redux/action";
 import { useParams } from "react-router-dom";
 
-const SingleExp = props => {
+const SingleExp = (props) => {
   const dispatch = useDispatch(props);
   const param = useParams();
-  const isLoggedId = useSelector(state => state.currentUser.isLoggedUser);
+  const isLoggedId = useSelector((state) => state.currentUser.isLoggedUser);
   return (
     <Card className="p-2">
-      <Row>
+      <Row className="">
         <Col xs={4}>
           {props.elem.image ? (
-            <div>
-              <img
-                src={props.elem.image}
-                alt="img"
-                width="100%"
-              />
+            <div className="">
+              <img src={props.elem.image} alt="img" width="100%" style={{ objectFit: "contein" }} />
             </div>
           ) : (
             <div>
@@ -31,14 +27,12 @@ const SingleExp = props => {
           )}
         </Col>
         <Col xs={6}>
-          <div>
-            <h3>{props.elem.company}</h3>
-            <h6>{props.elem.role}</h6>
-            <p>{props.elem.description}</p>
-          </div>
-          <div>
-            <p>Iniziato: {props.elem.startDate.substring(0, 10)}</p>
-            <p>Terminato:{props.elem.endDate.substring(0, 10)}</p>
+          <div className="d-flex flex-column">
+            <h4>
+              <small>Presso:</small> {props.elem.company}
+            </h4>
+            <h6>Ruolo: {props.elem.role}</h6>
+            <p>Descrizione: {props.elem.description}</p>
           </div>
         </Col>
 
@@ -47,6 +41,7 @@ const SingleExp = props => {
             {(param.id === isLoggedId || param.id === "me") && (
               <>
                 <Pencil
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     dispatch(experiencesPropAction(props.elem));
                     experiencesHandleShow(dispatch);
@@ -54,6 +49,7 @@ const SingleExp = props => {
                   className="mx-2"
                 />
                 <Trash
+                  style={{ cursor: "pointer" }}
                   className="mx-2"
                   onClick={() => {
                     dispatch(fetchDelete(props.elem.user, props.elem._id));

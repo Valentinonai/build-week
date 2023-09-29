@@ -1,6 +1,4 @@
-import { hover } from "@testing-library/user-event/dist/hover";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ProfileTopbar = ({ profile }) => {
@@ -30,9 +28,7 @@ const ProfileTopbar = ({ profile }) => {
           className="btn btn-outline-primary rounded-pill py-1 my-2 "
           to={"profile/me"}
           onClick={() => {
-            {
-              window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-            }
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
           }}>
           <span className=" fw-bold"> Visualizza profilo</span>
         </Link>
