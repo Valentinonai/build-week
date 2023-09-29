@@ -160,7 +160,7 @@ export const fetchEditImageExp = (objChanges, userId, expId, fn) => {
       if (resp.ok) {
         const dataChanges = await resp.json();
         fn(dataChanges);
-        //dispatch(addCurrentUserDataAction(dataChanges));
+        dispatch(fetchExperiencies(userId));
       } else {
         throw new Error(resp.status);
       }

@@ -7,12 +7,12 @@ import profileReducer from "../reducers/profileReducer";
 import modalReducer from "../reducers/modalReducer";
 import postReducers from "../reducers/postReducers";
 import addExp from "../reducers/Experiences";
-import mainReducer from "../reducers/JobsReducer";
+import friendsReducers from "../reducers/friendsReducers";
 
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["currenUser"],
+  whitelist: ["currenUser", "listFriends"],
 };
 
 const rootReducer = combineReducers({
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   post: postReducers,
   addExps: addExp,
-  linkedin: mainReducer,
+  listFriends: friendsReducers,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);

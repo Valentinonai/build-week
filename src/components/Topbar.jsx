@@ -11,7 +11,7 @@ const Topbar = () => {
   const [profile, setProfile] = useState(null);
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch(searchJobAction(search));
   };
@@ -25,6 +25,7 @@ const Topbar = () => {
       });
       if (resp.ok) {
         const data = await resp.json();
+        dispatch({ type: "ADD_LOGGED_ID", payload: data._id });
         setProfile(data);
       } else {
         dispatch(hasErrorTrueAction());
@@ -42,7 +43,7 @@ const Topbar = () => {
   }, []);
   return (
     <Navbar sticky="top" bg="light" expand="lg">
-      <Container fluid="lg" className="  ">
+      <Container fluid="xl">
         <Link to={"/"}>
           <Navbar.Brand className="d-inline-block">
             <svg
@@ -57,21 +58,42 @@ const Topbar = () => {
             </svg>
           </Navbar.Brand>
         </Link>
-        <Navbar.Toggle className="ms-auto" aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Form onSubmit={handleSubmit} className="d-flex bg-light">
+        <div className="d-flex flex-column justify-content-between align-items-between px-0 ms-auto me-4 d-lg-none">
+          <div className="d-flex justify-content-center">
+            <img
+              src={
+                profile ? profile.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+              }
+              alt="profile-img"
+              className="img-profile-nav rounded-circle"
+              width="24"
+              height="24"
+            />
+          </div>
+          <div className="d-flex align-items-baseline ">
+            <p className="mb-0">Tu</p>
+            <NavDropdown align={{ sx: "start", paddingBlock: "0" }}>
+              <NavDropdown.Item>
+                <ProfileTopbar profile={profile} />
+              </NavDropdown.Item>
+            </NavDropdown>
+          </div>
+        </div>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse className="mt-2 ">
+          <Form onSubmit={handleSubmit} className="d-flex bg-light mb-2">
             <Form.Control
               type="search"
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="🔍 Search"
               className="input-search me-2 border-0 rounded"
               aria-label="Search"
             />
           </Form>
 
-          <Nav className="ms-auto my-2 my-lg-0 gap-2 align-items-center" style={{ maxHeight: "100px" }} navbarScroll>
-            <NavLink to={"/"} className="text-black text-decoration-none">
+          <Nav className="ms-auto ">
+            <NavLink to={"/"} className="text-black text-decoration-none mx-2">
               <div className="d-flex flex-column align-items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,25 +110,8 @@ const Topbar = () => {
                 Home
               </div>
             </NavLink>
-
-            <div className="d-flex flex-column align-items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                data-supported-dps="24x24"
-                fill="currentColor"
-                className="mercado-match"
-                width="24"
-                height="24"
-                focusable="false"
-              >
-                <path d="M12 16v6H3v-6a3 3 0 013-3h3a3 3 0 013 3zm5.5-3A3.5 3.5 0 1014 9.5a3.5 3.5 0 003.5 3.5zm1 2h-2a2.5 2.5 0 00-2.5 2.5V22h7v-4.5a2.5 2.5 0 00-2.5-2.5zM7.5 2A4.5 4.5 0 1012 6.5 4.49 4.49 0 007.5 2z"></path>
-              </svg>
-              Rete
-            </div>
-
-            <NavLink to={"jobs/"} className="text-decoration-none text-black">
-              <div className="d-flex flex-column align-items-center">
+            <NavLink to={"/lavoro"} className="text-decoration-none text-black  mx-2">
+              <div className="d-flex flex-column align-items-center ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -123,8 +128,24 @@ const Topbar = () => {
                 Lavoro
               </div>
             </NavLink>
-
-            <div className="d-flex flex-column align-items-center">
+            <NavLink to={"/rete"} className="text-decoration-none text-black mx-2">
+              <div className="d-flex flex-column align-items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  data-supported-dps="24x24"
+                  fill="currentColor"
+                  className="mercado-match"
+                  width="24"
+                  height="24"
+                  focusable="false"
+                >
+                  <path d="M12 16v6H3v-6a3 3 0 013-3h3a3 3 0 013 3zm5.5-3A3.5 3.5 0 1014 9.5a3.5 3.5 0 003.5 3.5zm1 2h-2a2.5 2.5 0 00-2.5 2.5V22h7v-4.5a2.5 2.5 0 00-2.5-2.5zM7.5 2A4.5 4.5 0 1012 6.5 4.49 4.49 0 007.5 2z"></path>
+                </svg>
+                Rete
+              </div>
+            </NavLink>
+            <div className="d-flex flex-column align-items-center mx-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -140,7 +161,7 @@ const Topbar = () => {
               Messaggistica
             </div>
 
-            <div className="d-flex flex-column align-items-center">
+            <div className="d-flex flex-column align-items-center mx-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -155,8 +176,7 @@ const Topbar = () => {
               </svg>
               Notifiche
             </div>
-
-            <div className="d-flex flex-column justify-content-between align-items-between px-0">
+            <div className="d-lg-flex flex-column justify-content-between align-items-between px-0 mx-2 d-none">
               <div className="d-flex justify-content-center">
                 <img
                   src={
@@ -170,7 +190,7 @@ const Topbar = () => {
                   height="24"
                 />
               </div>
-              <div className="d-flex align-items-baseline ">
+              <div className="d-flex align-items-baseline mx-2">
                 <p className="mb-0">Tu</p>
                 <NavDropdown className="" align={{ sx: "start", paddingBlock: "0" }}>
                   <NavDropdown.Item>
@@ -179,7 +199,7 @@ const Topbar = () => {
                 </NavDropdown>
               </div>
             </div>
-            <div className="d-flex flex-column align-items-center border-start">
+            <div className="d-flex flex-column align-items-center mx-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -192,9 +212,9 @@ const Topbar = () => {
               >
                 <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
               </svg>
-              <NavDropdown title="Lavoro" className=""></NavDropdown>
+              <NavDropdown title="Lavoro" className="m-0"></NavDropdown>
             </div>
-            <Link to={"/"} className="text-gratis text-decoration-underline d-flex align-items-center">
+            <Link to={"/"} className="text-decoration-none ms-4 d-flex " style={{ fontSize: "14px" }}>
               Prova Premium gratis
             </Link>
           </Nav>

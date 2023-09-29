@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { BsPersonAdd } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { addFriendAction, deleteFriendAction } from "../redux/action/listFriendsAction";
+import { usersListHandleClose } from "../redux/action";
 
 const UserCards = (props) => {
+  const list = useSelector((state) => state.listFriends.list);
   const [users, setusers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -33,6 +38,7 @@ const UserCards = (props) => {
 
   const goToUser = (userId) => {
     navigate("/profile/" + userId);
+    usersListHandleClose(dispatch);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
@@ -45,33 +51,53 @@ const UserCards = (props) => {
   return (
     users &&
     users.map((user, i) => (
-      <div className='user-card' key={`user${i}`}>
-        <Row>
-          <Col xs='auto'>
-            <img
-              src={
-                user.image ? user.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-              }
-              alt='user img'
-              className='img-fluid object-fit-cover rounded-circle'
-              width={50}
-              onClick={() => goToUser(user._id)}
-            />
-          </Col>
-          <Col className='p-0 text-start'>
-            <p onClick={() => goToUser(user._id)}>
-              {user.name} {user.surname}
-            </p>
-            <span className='d-block' onClick={() => goToUser(user._id)}>
-              {user.title}
-            </span>
-
-            <Button variant='outline-secondary' className='rounded-4 py-1 mt-2 '>
-              <BsPersonAdd /> Segui
-            </Button>
-          </Col>
-        </Row>
-      </div>
+      <>
+        <Col xs={12} key={`user${i}`}>
+          <Row className='user py-3'>
+            <Col xs='auto'>
+              <img
+                src={
+                  user.image ? user.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                }
+                alt='user img'
+                className='img-fluid object-fit-cover rounded-circle'
+                width={50}
+                onClick={() => goToUser(user._id)}
+              />
+            </Col>
+            <Col className='p-0 text-start'>
+              <p onClick={() => goToUser(user._id)}>
+                {user.name} {user.surname}
+              </p>
+              <span className='d-block' onClick={() => goToUser(user._id)}>
+                {user.title}
+              </span>
+              {list.find((elem) => elem._id === user._id) ? (
+                <Button
+                  variant='primary'
+                  className='rounded-4 py-1 mt-2'
+                  onClick={() => {
+                    dispatch(deleteFriendAction(user._id));
+                  }}
+                >
+                  <BsPersonAdd /> Segui già
+                </Button>
+              ) : (
+                <Button
+                  variant='outline-secondary'
+                  className='rounded-4 py-1 mt-2'
+                  onClick={() => {
+                    dispatch(addFriendAction(user));
+                  }}
+                >
+                  <BsPersonAdd /> Segui
+                </Button>
+              )}
+            </Col>
+          </Row>
+        </Col>
+        <hr className='text-secondary m-0' />
+      </>
     ))
   );
 };

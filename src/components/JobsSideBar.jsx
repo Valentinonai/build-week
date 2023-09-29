@@ -4,7 +4,7 @@ import { BookmarkFill, Clipboard2Check, GearFill, ListUl, PencilSquare, PlayBtnF
 const JobsSideBar = () => {
   return (
     <>
-      <Card className="p-3">
+      <Card className="p-3 sticky-top " style={{ top: "100px", zIndex: "-1" }}>
         <div className="d-flex">
           <BookmarkFill className="me-2 align-self-center" size={35} />
           <p className="fw-bold mb-0">Le mie offerte di lavoro</p>
