@@ -1,6 +1,13 @@
+body {
+  background-color: rgb(243 240 235);
+}
+
 .dropdown-item:active {
   background-color: white !important;
   color: black;
+}
+.over:hover {
+  background-color: rgba(97, 97, 97, 0.107);
 }
 
 #dropZoneBtn {
@@ -13,6 +20,13 @@
   cursor: pointer;
 }
 
+#divTransparent {
+  color: unset !important;
+  color: transparent !important;
+  position: absolute;
+  top: -3px;
+  font-size: 2.5rem;
+}
 #dropZoneBtn:focus {
   box-shadow: none;
   border: none;

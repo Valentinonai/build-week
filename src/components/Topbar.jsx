@@ -10,6 +10,7 @@ import { fetchByCategory, fetchByCompany } from "../redux/action/jobsAction";
 const Topbar = () => {
   const [search, setSearch] = useState("");
   const [profile, setProfile] = useState(null);
+  const loc = useLocation();
   const dispatch = useDispatch();
   const [searchType, setSearchType] = useState("category");
   const loc = useLocation();
@@ -65,26 +66,25 @@ const Topbar = () => {
             </svg>
           </Navbar.Brand>
         </Link>
-        <div className="d-flex flex-column justify-content-between align-items-between px-0 ms-auto me-4 d-lg-none">
-          <div className="d-flex justify-content-center">
-            <img
-              src={
-                profile ? profile.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
-              }
-              alt="profile-img"
-              className="img-profile-nav rounded-circle"
-              width="24"
-              height="24"
-            />
-          </div>
-          <div className="d-flex align-items-baseline ">
-            <p className="mb-0">Tu</p>
-            <NavDropdown align={{ sx: "start", paddingBlock: "0" }}>
-              <NavDropdown.Item>
-                <ProfileTopbar profile={profile} />
-              </NavDropdown.Item>
-            </NavDropdown>
-          </div>
+        <div className="d-flex align-items-center px-0 ms-auto me-4 position-relative d-lg-none">
+          <img
+            src={profile ? profile.image : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"}
+            alt="profile-img"
+            className="img-profile-nav rounded-circle"
+            width="24"
+            height="24"
+            style={{ objectFit: "cover" }}
+          />
+
+          <NavDropdown
+            align={{ sx: "start", paddingBlock: "0" }}
+            className="position-absolute fs-1"
+            id="divTransparent"
+          >
+            <NavDropdown.Item>
+              <ProfileTopbar profile={profile} />
+            </NavDropdown.Item>
+          </NavDropdown>
         </div>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse className="mt-2 ">
@@ -127,15 +127,18 @@ const Topbar = () => {
             />
           </Form>
 
-          <Nav className="ms-auto ">
+          <Nav className="ms-auto gap-3">
             <NavLink to={"/"} className="text-black text-decoration-none mx-2">
-              <div className="d-flex flex-column align-items-center">
+              <div
+                className="d-flex flex-column align-items-center"
+                style={{ fontSize: "0.8rem", textDecoration: `${loc.pathname === "/" ? "underline" : "none"}` }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="mercado-match opacity-50"
                   width="24"
                   height="24"
                   focusable="false"
@@ -145,14 +148,17 @@ const Topbar = () => {
                 Home
               </div>
             </NavLink>
-            <NavLink to={"/lavoro"} className="text-decoration-none text-black  mx-2">
-              <div className="d-flex flex-column align-items-center ">
+            <NavLink to={"/lavoro"} style={{ fontSize: "0.8rem" }} className="text-decoration-none text-black  mx-2">
+              <div
+                className="d-flex flex-column align-items-center "
+                style={{ fontSize: "0.8rem", textDecoration: `${loc.pathname === "/lavoro" ? "underline" : "none"}` }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="mercado-match opacity-50"
                   width="24"
                   height="24"
                   focusable="false"
@@ -164,13 +170,16 @@ const Topbar = () => {
               </div>
             </NavLink>
             <NavLink to={"/rete"} className="text-decoration-none text-black mx-2">
-              <div className="d-flex flex-column align-items-center">
+              <div
+                className="d-flex flex-column align-items-center"
+                style={{ fontSize: "0.8rem", textDecoration: `${loc.pathname === "/rete" ? "underline" : "none"}` }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   data-supported-dps="24x24"
                   fill="currentColor"
-                  className="mercado-match"
+                  className="mercado-match opacity-50"
                   width="24"
                   height="24"
                   focusable="false"
@@ -180,13 +189,13 @@ const Topbar = () => {
                 Rete
               </div>
             </NavLink>
-            <div className="d-flex flex-column align-items-center mx-2">
+            <div className="d-flex flex-column align-items-center mx-2" style={{ fontSize: "0.8rem" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                className="mercado-match"
+                className="mercado-match opacity-50"
                 width="24"
                 height="24"
                 focusable="false"
@@ -196,13 +205,13 @@ const Topbar = () => {
               Messaggistica
             </div>
 
-            <div className="d-flex flex-column align-items-center mx-2">
+            <div className="d-flex flex-column align-items-center mx-2" style={{ fontSize: "0.8rem" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                className="mercado-match"
+                className="mercado-match opacity-50"
                 width="24"
                 height="24"
                 focusable="false"
@@ -223,10 +232,13 @@ const Topbar = () => {
                   className="img-profile-nav rounded-circle"
                   width="24"
                   height="24"
+                  style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="d-flex align-items-baseline mx-2">
-                <p className="mb-0">Tu</p>
+                <p className="mb-0" style={{ fontSize: "0.8rem" }}>
+                  Tu
+                </p>
                 <NavDropdown className="" align={{ sx: "start", paddingBlock: "0" }}>
                   <NavDropdown.Item>
                     <ProfileTopbar profile={profile} />
@@ -234,20 +246,24 @@ const Topbar = () => {
                 </NavDropdown>
               </div>
             </div>
-            <div className="d-flex flex-column align-items-center mx-2">
+            <div className="d-flex flex-column align-items-center justify-content-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                className="mercado-match"
+                className="mercado-match opacity-50"
                 width="24"
                 height="24"
                 focusable="false"
               >
                 <path d="M3 3h4v4H3zm7 4h4V3h-4zm7-4v4h4V3zM3 14h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4zM3 21h4v-4H3zm7 0h4v-4h-4zm7 0h4v-4h-4z"></path>
               </svg>
-              <NavDropdown title="Lavoro" className="m-0"></NavDropdown>
+              <div className="d-flex align-items-center ">
+                <p style={{ fontSize: "0.8rem" }} className="mb-0">
+                  Lavoro
+                </p>
+              </div>
             </div>
             <Link to={"/"} className="text-decoration-none ms-4 d-flex " style={{ fontSize: "14px" }}>
               Prova Premium gratis
