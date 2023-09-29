@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import ProfileTopbar from "./ProfileTopbar";
 import { addErrorMessageAction, hasErrorTrueAction, isLoadingFalseAction } from "../redux/action";
+import { fetchByCategory, fetchByCompany } from "../redux/action/jobsAction";
 
 const Topbar = () => {
   const [search, setSearch] = useState("");
   const [profile, setProfile] = useState(null);
   const dispatch = useDispatch();
+  const [searchType, setSearchType] = useState("category");
+  const loc = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(searchJobAction(search));
+    if (searchType === "company") {
+      dispatch(fetchByCompany(search));
+    } else {
+      dispatch(fetchByCategory(search));
+    }
   };
   const fetchUser = async () => {
     try {
@@ -81,14 +88,42 @@ const Topbar = () => {
         </div>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse className="mt-2 ">
-          <Form onSubmit={handleSubmit} className="d-flex bg-light mb-2">
+          <Form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+            className="d-flex bg-light mb-2 align-items-center"
+          >
             <Form.Control
+              disabled={loc.pathname !== "/lavoro"}
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="🔍 Search"
               className="input-search me-2 border-0 rounded"
               aria-label="Search"
+            />
+            <Form.Check
+              disabled={loc.pathname !== "/lavoro"}
+              defaultChecked="true"
+              type="radio"
+              label={`category`}
+              name="tipeOfSearch"
+              value="category"
+              onChange={() => {
+                setSearchType("category");
+              }}
+            />
+            <Form.Check
+              disabled={loc.pathname !== "/lavoro"}
+              type="radio"
+              label={`company`}
+              name="tipeOfSearch"
+              className="ms-3"
+              value="company"
+              onChange={() => {
+                setSearchType("company");
+              }}
             />
           </Form>
 
