@@ -93,7 +93,7 @@ const Home = () => {
   ) : (
     <Container
       fluid="lg"
-      className="mb-5">
+      className="my-3">
       <Row>
         <Col
           xs={12}
@@ -116,7 +116,7 @@ const Home = () => {
             setModifica={setModifica}
             idPost={idPost}
           />
-          <h3>I Tuoi Post</h3>
+
           {posts &&
             profile &&
             posts
@@ -137,7 +137,7 @@ const Home = () => {
                 />
               ))}
           <hr />
-          <h3>Altri Post</h3>
+
           {console.log(posts, "LEG")}
           {posts.toReversed().map(
             (elem, i) =>

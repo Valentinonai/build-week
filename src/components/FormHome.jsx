@@ -5,8 +5,8 @@ import ModaleAddPost from "./ModaleAddPost";
 const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postText, modifica, setModifica, idPost }) => {
   return (
     <>
-      <Container fluid="lg">
-        <Row className="border rounded-3 border-1 shadow my-3  gy-3">
+      <Container fluid="lg mt-3 ">
+        <Row className="border rounded-3 border-1 shadow mb-3 gy-3 bg-light">
           <Col className="">
             <Row>
               <Col xs="auto">
@@ -20,6 +20,7 @@ const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postTex
                   width="60px"
                   height="60px"
                   roundedCircle
+                  style={{ objectFit: "cover" }}
                 />
               </Col>
               <Col>
@@ -30,16 +31,19 @@ const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postTex
                   onClick={() => {
                     setModifica(false);
                     handleShow();
-                  }}
-                >
+                  }}>
                   Avvia un post
                 </Button>
               </Col>
             </Row>
           </Col>
-          <Col xs={12} className="">
+          <Col
+            xs={12}
+            className="">
             <Row>
-              <Col xs={12} md={5}>
+              <Col
+                xs={12}
+                md={5}>
                 <p>
                   <span className="text-primary me-2 ms-lg-3">
                     <ImageFill />
@@ -47,15 +51,21 @@ const FormHome = ({ profile, handleShow, handleClose, show, setPostText, postTex
                   <span style={{ color: "grey", fontSize: "14px" }}>Contenuti multimediali</span>
                 </p>
               </Col>
-              <Col xs={12} md={3}>
+              <Col
+                xs={12}
+                md={3}>
                 <p>
-                  <span style={{ color: "orange" }} className="me-2">
+                  <span
+                    style={{ color: "orange" }}
+                    className="me-2">
                     <Calendar3 />
                   </span>
                   <span style={{ color: "grey", fontSize: "14px" }}>Evento</span>
                 </p>
               </Col>
-              <Col xs={12} md={4}>
+              <Col
+                xs={12}
+                md={4}>
                 <p>
                   <span className="me-2 text-danger">
                     <BlockquoteLeft />
