@@ -3,8 +3,8 @@ import { BookmarkFill, Clipboard2Check, GearFill, ListUl, PencilSquare, PlayBtnF
 
 const JobsSideBar = () => {
   return (
-    <>
-      <Card className="p-3 sticky-top " style={{ top: "100px", zIndex: "-1" }}>
+    <div className=" ">
+      <Card className="p-3 ">
         <div className="d-flex">
           <BookmarkFill className="me-2 align-self-center" size={35} />
           <p className="fw-bold mb-0">Le mie offerte di lavoro</p>
@@ -26,7 +26,7 @@ const JobsSideBar = () => {
           <p className="fw-bold mb-0">Impostazioni candidatura</p>
         </div>
       </Card>
-      <Button variant="outline-primary rounded-5 mt-3" size="lg">
+      <Button variant="outline-primary rounded-5 mt-3 mb-5" size="lg">
         <div className="d-flex">
           <PencilSquare className="me-4 align-self-center" size={30} />
           <p className="mb-0 fw-bold" style={{ fontSize: "0.8rem" }}>
@@ -34,7 +34,7 @@ const JobsSideBar = () => {
           </p>
         </div>
       </Button>
-    </>
+    </div>
   );
 };
 
