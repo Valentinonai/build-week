@@ -69,7 +69,7 @@ const SinglePost = ({
               <p
                 className="w-100 mb-0"
                 style={{ whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden", fontSize: "14px" }}>
-                {elem.user.bio}
+                {elem.user.title}
               </p>
               <p style={{ fontWeight: "300", fontSize: "12px" }}> {calcolaData()}</p>
             </div>
